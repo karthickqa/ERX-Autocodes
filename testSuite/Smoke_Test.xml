@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Test-Suite" >
+<listeners>
+<listener class-name="com.telliant.core.web.Reporting"/>
+</listeners>
+   <test name="Smoke_Test" >
+       <classes> 
+          <class name="com.telliant.tests.SmokeTestCases" />
+       </classes>
+   </test>
+ </suite>

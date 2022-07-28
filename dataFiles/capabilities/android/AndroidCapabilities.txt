@@ -1,0 +1,5 @@
+platformName=Android
+platformVersion=8.1
+deviceName=192.168.199.101:5555
+automationName=UiAutomator2
+app=C:\Users\snarayanarao\Downloads\Arrow\Arrow\dataFiles\applicationFiles\android\apk-us-release.apk

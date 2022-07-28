@@ -1,0 +1,4 @@
+﻿S.No, businessName, loanNumber, noteNumber, lender, creditLimit, fundedBalance, availableBalance, maturityDate, arLastUploadDate, bbReviewStatus,
+1,Jamison Trucking, Inc.,5558411,1001,Bill McKeand,400000,235650.25,-232104,2023-04-01T00:00:00,2022-06-20T12:07:13.483,BB Needs Review
+2,Emerson Staffing, LLC,4449817,1002,Bill McKeand,250000,201478.21,-198634,2023-04-14T00:00:00,2022-05-02T19:11:45.56,BB Approved & Active
+3,Maripol Janitorial Services, Inc.,3336521,1001,John Stein,50000,52680.45,-52152,2023-04-20T00:00:00,2022-05-02T19:13:21.637,BB Approved & Active
