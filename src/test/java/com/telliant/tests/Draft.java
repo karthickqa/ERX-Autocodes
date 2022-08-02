@@ -32,8 +32,8 @@ public class Draft extends BaseClass implements ITestListener{
 		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
 		loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 8), ExcelMethods.getData("Sheet1", "Password", 8));
 		waitForPageGetsLoad();
-		homePage.clickOnServiceLevel1BusinessName();
-		softAssert.assertEquals(homePage.verifyServiceLevel1BusinessPageTitle(), true, "Selected Business Profile info page title do not displayed" );
+		homePage.clickOnServiceLevel3BusinessName();
+		softAssert.assertEquals(homePage.verifyServiceLevel3BusinessPageTitle(), true, "Selected Business Profile info page title do not displayed" );
 		homePage.clickTabLineStructure();
 		waitForPageGetsLoad();
 		softAssert.assertEquals(homePage.verifyAddInventoryIconIsDisplayed(), true, "Add Inventory Icon doesn't get displayed");

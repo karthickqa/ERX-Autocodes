@@ -686,9 +686,52 @@ public class HomePage extends WebDriverRoot {
 	public boolean verifyGivenDataIsDisplayedOnOtherCollateralSublimitText() {
 		return verifyTextContains(getElement("otherCollateralSubLimitTextBox").getAttribute("value"), config.getProperty("otherCollateralSublimitText"));
 	}
-	public void clickEditonLineStructure() {
+	public void clickEditonLineStructure() throws InterruptedException {
+		waitForElementVisible("Linestructure_Edit_Button");
+		waitForElementClickable("Linestructure_Edit_Button");
 		clickElement("Linestructure_Edit_Button");
 	}
 	
+	public void click_Manual_Borrowing_Base_Adjustments() throws InterruptedException {
+		Thread.sleep(5000);
+		
+		scrollToElement("Manual_Borrowing_Base_Adjustments_lable");
+		Thread.sleep(2000);
+		clickElement("Manual_Borrowing_Base_Adjustments");
+		waitForElementClickable("Manual_Borrowing_Base_Adjustments");
+		clearElement("Manual_Borrowing_Base_Adjustments");
+	}
 	
+	public void enterDataOn_Manual_Borrowing_Base_Adjustments() {
+		type(("Manual_Borrowing_Base_Adjustments"), config.getProperty("Manual_Borrowing_Base_Adjustments"));
+	}
+	public void click_Manual_Borrowing_Base_Adjustments_val() throws InterruptedException {
+		
+		Thread.sleep(2000);
+		clickElement("Manual_Borrowing_Base_Adjustments_Value");
+		waitForElementClickable("Manual_Borrowing_Base_Adjustments_Value");
+		clearElement("Manual_Borrowing_Base_Adjustments_Value");
+	}
+	
+	public void enterDataOn_Manual_Borrowing_Base_Adjustments_val() {
+		type(("Manual_Borrowing_Base_Adjustments_Value"), config.getProperty("Manual_Borrowing_Base_Adjustments_Value"));
+	}
+public void click_Open_credits_field() throws InterruptedException {
+		
+		Thread.sleep(2000);
+		clickElement("Open_credits_field");
+		waitForElementClickable("Open_credits_field");
+		clearElement("Open_credits_field");
+	}
+	
+	public void enterDataOn_Open_credits_field() {
+		type(("Open_credits_field"), config.getProperty("Open_credits_field"));
+	}
+	public boolean verifyGivenDataIsDispalyedOn_Manual_Borrowing_Base_Adjustments() {
+		scrollToElement("Manual_Borrowing_Base_Adjustments_lable");
+		return verifyTextContains(getElement("Manual_Borrowing_Base_Adjustments").getAttribute("value"), config.getProperty("Manual_Borrowing_Base_Adjustments"));
+	}
+	public void Navigate_to_HP() {
+		clickElement("Homepage_Link");
+	}
 }

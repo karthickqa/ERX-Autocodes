@@ -696,5 +696,8 @@ public class WebDriverRoot {
 			Thread.sleep(2000);
 		}
 
+	  public void waitForPageGetsLoad1() throws InterruptedException {
+			Thread.sleep(7000);
+		}
 
 }

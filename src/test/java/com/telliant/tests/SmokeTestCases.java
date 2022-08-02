@@ -433,8 +433,45 @@ public class SmokeTestCases extends BaseClass implements ITestListener{
 		homePage.clickTabLineStructure();
 		waitForPageGetsLoad();
 		homePage.clickEditonLineStructure();
+		homePage.click_Manual_Borrowing_Base_Adjustments();
+		homePage.enterDataOn_Manual_Borrowing_Base_Adjustments();
+		homePage.click_Manual_Borrowing_Base_Adjustments_val();
+		homePage.enterDataOn_Manual_Borrowing_Base_Adjustments_val();
+		homePage.click_Open_credits_field();
+		homePage.enterDataOn_Open_credits_field();
+		homePage.clickSaveButton();
+		homePage.Navigate_to_HP();
+		//Verify for service level 2 Business
 		
-		
+		homePage.clickOnServiceLevel2BusinessName();
+		softAssert.assertEquals(homePage.verifyServiceLevel2BusinessPageTitle(), true, "Selected Business Profile info page title do not displayed" );
+		homePage.clickTabLineStructure();
+		waitForPageGetsLoad();
+		homePage.clickEditonLineStructure();
+		homePage.click_Manual_Borrowing_Base_Adjustments();
+		homePage.enterDataOn_Manual_Borrowing_Base_Adjustments();
+		homePage.click_Manual_Borrowing_Base_Adjustments_val();
+		homePage.enterDataOn_Manual_Borrowing_Base_Adjustments_val();
+		homePage.click_Open_credits_field();
+		homePage.enterDataOn_Open_credits_field();
+		homePage.clickSaveButton();
+		homePage.Navigate_to_HP();
+
+		//Verify for service level 3 Business
+		homePage.clickOnServiceLevel3BusinessName();
+		softAssert.assertEquals(homePage.verifyServiceLevel3BusinessPageTitle(), true, "Selected Business Profile info page title do not displayed" );
+		homePage.clickTabLineStructure();
+		waitForPageGetsLoad();
+		homePage.clickEditonLineStructure();
+		homePage.click_Manual_Borrowing_Base_Adjustments();
+		homePage.enterDataOn_Manual_Borrowing_Base_Adjustments();
+		homePage.click_Manual_Borrowing_Base_Adjustments_val();
+		homePage.enterDataOn_Manual_Borrowing_Base_Adjustments_val();
+		homePage.click_Open_credits_field();
+		homePage.enterDataOn_Open_credits_field();
+		homePage.clickSaveButton();
+		waitForPageGetsLoad1();
+		loginPage.logout();
 	}
 		
 }
