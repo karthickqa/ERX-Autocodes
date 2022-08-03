@@ -474,4 +474,96 @@ public class SmokeTestCases extends BaseClass implements ITestListener{
 		loginPage.logout();
 	}
 		
+	@Test(testName = "TC_UC5_08", description =  "Verify_User_views_Edit_Button", priority = 14)
+	public void TC_14_Verify_User_views_Edit_Button() throws InterruptedException, AWTException{
+		launchURL(config.getProperty("url"));
+		String ValidateUrl=driver.getCurrentUrl();
+		ValidateUrl.equalsIgnoreCase(config.getProperty("url"));
+		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+		loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 8), ExcelMethods.getData("Sheet1", "Password", 8));
+		waitForPageGetsLoad();
+		homePage.clickOnServiceLevel1BusinessName();
+		softAssert.assertEquals(homePage.verifyServiceLevel1BusinessPageTitle(), true, "Selected Business Profile info page title do not displayed" );
+		homePage.clickTabLineStructure();
+		softAssert.assertEquals(homePage.verifyEditButtonIsDisplayed(), true, "Edit button don't get dispalyed on the LineStructures page");
+		homePage.clickEditButton();
+		softAssert.assertEquals(homePage.verifyServiceLevel1AccountReceivableTableEditableFields(), true, "Service Level1 Account Receivable Table fields are non-editable");
+		homePage.clickCancelButton();
+		waitForPageGetsLoad();
+		softAssert.assertEquals(homePage.verifyCancelModalDialogIsDisplayed(), true, "Cancel Modal dialog don't get displayed");
+		softAssert.assertEquals(homePage.verifyCancelModalDialogContent(), true, "Cancel Modal dialog content is not dispalyed as Expected");
+		homePage.clickYesButton();
+		softAssert.assertEquals(homePage.verifyEditButtonIsDisplayed(), true, "Edit button don't get displayed after cancelling the edit process");
+		homePage.clickEditButton();
+		homePage.clickCancelButton();
+		waitForPageGetsLoad();
+		homePage.clickServiceLevle1NoButton();
+		homePage.enterDataOnServiceLevel1AccountReceivableTableColumnTotal();
+		homePage.enterDataOnServiceLevel1AccountReceivableTableColumnExclusions();
+		homePage.enterDataOnServiceLevel1AccountReceivableTableColumnAdvanceRate();
+		homePage.clickSaveButton();
+		waitForPageGetsLoad();
+		softAssert.assertEquals(homePage.verifyAccountReceivableUpdateSavedSuccessfullyToastMessage(), true, "Success toast is not dispalying as AccountReceivable values saved successfully");
+		homePage.clickToastContainer();
+		waitForPageGetsLoad();
+		homePage.clickEditButton();
+		softAssert.assertEquals(homePage.verifyGivenDataIsDisplayedOnSL1ColumnTotal(), true, "Given Data don't get dispalyed on the column TOTAL");
+		softAssert.assertEquals(homePage.verifyGivenDataIsDisplayedOnSL1ColumnExclusions(), true, "Given Data don't get dispalyed on the column EXCLUSIONS");
+		softAssert.assertEquals(homePage.verifyGivenDataIsDisplayedOnSL1ColumnAdvanceRate(), true, "Given Data don't get dispalyed on the column ADVANCE RATE");
+		waitForPageGetsLoad();
+		homePage.clickAddInventoryIcon();
+		waitForPageGetsLoad();
+		homePage.clickInventoryNoButton();
+		softAssert.assertEquals(homePage.verifyCapLimitsDefaultText(), true, "CapLimits default text is not displaying as NA");
+		waitForPageGetsLoad();
+		homePage.enterDataOnInventoryDescription();
+		homePage.enterDataOnInventoryTotal();
+		Thread.sleep(1000);
+		waitForPageGetsLoad();
+		homePage.clickSaveButton();
+		waitForPageGetsLoad();
+		homePage.clickToastContainer();
+		homePage.clickEditButton();
+		homePage.enterDataOnCapsLimit();
+		homePage.clickSaveButton();
+		waitForPageGetsLoad();
+		homePage.clickToastContainer();
+		homePage.clickEditButton();
+		softAssert.assertEquals(homePage.verifyGivenDataIsDispalyedOnInventoryCapslimit(), true, "Given data don't get displayed on the Inventory Caplimit field");
+		homePage.clickOtherCollateralAddButon();
+		waitForPageGetsLoad();
+		softAssert.assertEquals(homePage.verifyOtherCollateralYesButton(), true, "Yes button don't get dispalyed on OtherCollateral dialog");
+		softAssert.assertEquals(homePage.verifyOtherCollateralNoButton(), true, "No button don't get dispalyed on OtherCollateral dialog");
+		homePage.click_OtherCollateralYesButton();
+		waitForPageGetsLoad();
+		homePage.enterDataOnOtherCollateralDescription();
+		homePage.enterDataOnOtherCollateralTotal();
+		homePage.enterDataOnOtherCollateralAdvanceRate();
+		homePage.enterDataOnOtherCollateralCapsLimit();
+		homePage.enterDataOnOtherCollateralSublimitTextBox();
+		homePage.clickSaveButton();
+		waitForPageGetsLoad();
+		homePage.clickToastContainer();
+		waitForPageGetsLoad();
+		homePage.clickToastContainer();
+		homePage.clickEditonLineStructure();
+		softAssert.assertEquals(homePage.verifyGivenDataIsDispalyedOnOtherCollateralCapslimit(), true, "Given data don't get displayed on the OtherCollateral Caplimit field");
+		softAssert.assertEquals(homePage.verifyGivenDataIsDispalyedOnOtherCollateralAdvanceRates(), true, "Given data don't get displayd on the OtherCollateral Advancec Rates field");
+		softAssert.assertEquals(homePage.verifyGivenDataIsDispalyedOnOtherCollateralDescription(), true, "Given data don't get displayd on the OtherCollateral Description field");
+		softAssert.assertEquals(homePage.verifyGivenDataIsDispalyedOnOtherCollateralTotal(), true, "Given data don't get displayd on the OtherCollateral Total field");
+		softAssert.assertEquals(homePage.verifyGivenDataIsDisplayedOnOtherCollateralSublimitText(), true, "Given data don't get displayd on the OtherCollateral Sublimit Text");
+		waitForPageGetsLoad();
+		homePage.click_Manual_Borrowing_Base_Adjustments();
+		homePage.enterDataOn_Manual_Borrowing_Base_Adjustments();
+		homePage.click_Manual_Borrowing_Base_Adjustments_val();
+		homePage.enterDataOn_Manual_Borrowing_Base_Adjustments_val();
+		homePage.click_Open_credits_field();
+		homePage.enterDataOn_Open_credits_field();
+		homePage.clickSaveButton();
+		homePage.clickToastContainer();
+		loginPage.logout();
+		softAssert.assertAll();
+	}
+		
+	
 }

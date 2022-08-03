@@ -535,9 +535,17 @@ public class HomePage extends WebDriverRoot {
 	
 	public void clickAddInventoryIcon() {
 		scrollToElement("addNewInventoryIcon");
-		JavascriptExecutor js= (JavascriptExecutor) driver;
-		js.executeScript("document.querySelector(\"table#InvenLSCollater>thead>tr>th:nth-of-type(6)>a\").click()");
-	}
+		try {
+			JavascriptExecutor js= (JavascriptExecutor) driver;
+			js.executeScript("document.querySelector(\"table#InvenLSCollater>thead>tr>th:nth-of-type(6)>a\").click()");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			clickElement("addNewInventoryIcon");
+		}
+		//JavascriptExecutor js= (JavascriptExecutor) driver;
+		//js.executeScript("document.querySelector(\"table#InvenLSCollater>thead>tr>th:nth-of-type(6)>a\").click()");
+		}
 	
 	public void clickInventoryNoButton() {
 		clickElement("inventoryNoButton");
@@ -687,9 +695,23 @@ public class HomePage extends WebDriverRoot {
 		return verifyTextContains(getElement("otherCollateralSubLimitTextBox").getAttribute("value"), config.getProperty("otherCollateralSublimitText"));
 	}
 	public void clickEditonLineStructure() throws InterruptedException {
-		waitForElementVisible("Linestructure_Edit_Button");
-		waitForElementClickable("Linestructure_Edit_Button");
-		clickElement("Linestructure_Edit_Button");
+		try {
+			scrollToElement("Linestructure_Edit_Button");
+			waitForElementVisible("Linestructure_Edit_Button");
+			waitForElementClickable("Linestructure_Edit_Button");
+			clickElement("Linestructure_Edit_Button");
+		} catch (Exception e) {
+			// TODO: handle exception
+			ScrollUp();
+			ScrollUp();
+			scrollToElement("Linestructure_Edit_Button");
+			ScrollUp();
+			waitForElementClickable("Linestructure_Edit_Button");
+			clickElement("Linestructure_Edit_Button");
+		}
+		//waitForElementVisible("Linestructure_Edit_Button");
+		//waitForElementClickable("Linestructure_Edit_Button");
+		//clickElement("Linestructure_Edit_Button");
 	}
 	
 	public void click_Manual_Borrowing_Base_Adjustments() throws InterruptedException {
@@ -733,5 +755,9 @@ public void click_Open_credits_field() throws InterruptedException {
 	}
 	public void Navigate_to_HP() {
 		clickElement("Homepage_Link");
+	}
+	
+	public void clickTabAgingDetail() {
+		clickElement("Aging_Detail_Tab");
 	}
 }
