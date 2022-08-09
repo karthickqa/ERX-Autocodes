@@ -760,4 +760,16 @@ public void click_Open_credits_field() throws InterruptedException {
 	public void clickTabAgingDetail() {
 		clickElement("Aging_Detail_Tab");
 	}
+	public boolean verifyLV_HP_Lable() {
+		return verifyDialogHeader(getElement("LV_Homepage_Text"), config.getProperty("LV_Homepage_Text"));
+	}
+	public void clickOnFI_Name_1() {
+		type("searchTextBox", config.getProperty("FI_Name_1"));
+		clickElement("businessNameList");
+	}
+	public boolean verifyLV_Business1_Lable() {
+		return verifyDialogHeader(getElement("LV_bus_Title_1"), config.getProperty("FI_Name_1"));
+		
+	}
 }
+
