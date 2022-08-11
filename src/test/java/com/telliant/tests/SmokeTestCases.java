@@ -563,6 +563,8 @@ public class SmokeTestCases extends BaseClass implements ITestListener{
 		homePage.clickToastContainer();
 		loginPage.logout();
 		softAssert.assertAll();
+
+		//softAssert.assertAll();
 	}
 		
 	
