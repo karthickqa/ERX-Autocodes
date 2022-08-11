@@ -565,7 +565,6 @@ public class SmokeTestCases extends BaseClass implements ITestListener{
 		softAssert.assertAll();
 
 		//softAssert.assertAll();
-		//Test
 	}
 		
 	
