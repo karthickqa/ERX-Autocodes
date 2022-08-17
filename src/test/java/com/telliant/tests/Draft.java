@@ -248,8 +248,6 @@ public class Draft extends BaseClass implements ITestListener{
 	
 	}
 	
-
-	
 	
 	@Test(testName = "TC_UC1_01", description =  "Verify User views Titile, Portfolio Summary in Lendovative Home Page", priority = 02)
 	public void TC_18_Verify_User_views_Titile_Portfolio_Summary_in_Lendovative_Home_Page() throws InterruptedException, AWTException{
@@ -258,7 +256,8 @@ public class Draft extends BaseClass implements ITestListener{
 		ValidateUrl.equalsIgnoreCase(config.getProperty("url"));
 		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
 		loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 2), ExcelMethods.getData("Sheet1", "Password", 2));
-		waitForPageGetsLoad();
+		waitForPageGetsLoad1();
+		homePage.clickDropdown_HP();
 		
 	}
 	
