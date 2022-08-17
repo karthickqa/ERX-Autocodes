@@ -17,6 +17,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.ClickAction;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -771,5 +772,17 @@ public void click_Open_credits_field() throws InterruptedException {
 		return verifyDialogHeader(getElement("LV_bus_Title_1"), config.getProperty("FI_Name_1"));
 		
 	}
+	
+	public void clickDropdown_HP() throws InterruptedException {
+		waitForElementVisible("LV_FilterBy_dropdown");
+		clickElement("LV_FilterBy_dropdown");
+		Thread.sleep(2000);
+		JavascriptExecutor js= (JavascriptExecutor) driver;
+		js.executeScript("document.querySelector(\"#mat-select-0-panel > div.mat-option.ng-tns-c57-1 > input\").click()");
+		
+	}
+	
+	
 }
+
 
