@@ -79,4 +79,32 @@ public class RegressionCases extends BaseClass implements ITestListener{
 		softAssert.assertAll();
 		
 	}
+	@Test(testName = "TC_UC17_05", description =  "Verify User views Titile, Portfolio Summary in Lendovative Home Page", priority = 02)
+	public void TC_18_Verify_User_views_Titile_Portfolio_Summary_in_Lendovative_Home_Page() throws InterruptedException, AWTException{
+		launchURL(config.getProperty("url"));
+		String ValidateUrl=driver.getCurrentUrl();
+		ValidateUrl.equalsIgnoreCase(config.getProperty("url"));
+		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+		loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 2), ExcelMethods.getData("Sheet1", "Password", 2));
+		waitForPageGetsLoad1();
+		homePage.clickDropdown_HP();
+		softAssert.assertEquals(homePage.verify_Active_Status(), true, "Active Status is not Displayed" );
+		softAssert.assertEquals(homePage.verify_Pending_Active_Status(), true, "Pending_Active_Status is not Displayed" );
+		softAssert.assertEquals(homePage.verify_License_Matured_Status(), true, "License_Matured_Status is not Displayed" );
+		softAssert.assertEquals(homePage.verify_Terminated_Status(), true, "Terminated_Status is not Displayed" );
+		homePage.click_Active_HP();
+		softAssert.assertEquals(homePage.verify_Active_Status(), true, "Active Status is not Displayed" );
+		softAssert.assertEquals(homePage.verify_Active_Status_Grid(), true, "Active Status is not Displayed" );
+		homePage.click_Pending_Active_HP();
+		softAssert.assertEquals(homePage.verify_Pending_Active_Status(), true, "Pending_Active_Status is not Displayed" );
+		softAssert.assertEquals(homePage.verify_Pending_Active_Status_Grid(), true, "Pending_Active_Status is not Displayed" );
+		homePage.click_License_Matured();
+		softAssert.assertEquals(homePage.verify_License_Matured_Status(), true, "License_Matured_Status is not Displayed" );
+		softAssert.assertEquals(homePage.verify_License_Matured_Status_Grid(), true, "License_Matured_Status is not Displayed" );
+		homePage.click_Terminated();
+		softAssert.assertEquals(homePage.verify_Terminated_Status(), true, "Terminated_Status is not Displayed" );
+		softAssert.assertEquals(homePage.verify_Terminated_Status_Grid(), true, "Terminated_Status is not Displayed" );
+		loginPage.logout();
+		softAssert.assertAll();	
+	}
 }

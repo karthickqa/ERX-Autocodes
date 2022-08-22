@@ -773,13 +773,78 @@ public void click_Open_credits_field() throws InterruptedException {
 		
 	}
 	
-	public void clickDropdown_HP() throws InterruptedException {
+	public void clickDropdown_HP() throws InterruptedException, AWTException {
 		waitForElementVisible("LV_FilterBy_dropdown");
 		clickElement("LV_FilterBy_dropdown");
 		Thread.sleep(2000);
 		JavascriptExecutor js= (JavascriptExecutor) driver;
 		js.executeScript("document.querySelector(\"#mat-select-0-panel > div.mat-option.ng-tns-c57-1 > input\").click()");
-		
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_ESCAPE);
+		robot.keyRelease(KeyEvent.VK_ESCAPE);
+	
+	}
+	public void click_Active_HP() throws InterruptedException, AWTException {
+		JavascriptExecutor js= (JavascriptExecutor) driver;
+		Robot robot = new Robot();
+		clickElement("LV_FilterBy_dropdown");
+		js.executeScript("document.querySelector(\"#mat-select-0-panel > div.mat-option.ng-tns-c57-1 > input\").click()");
+		js.executeScript("document.querySelector(\"#mat-option-0 > mat-pseudo-checkbox\").click()");
+		robot.keyPress(KeyEvent.VK_ESCAPE);
+		robot.keyRelease(KeyEvent.VK_ESCAPE);
+	}
+	public void click_Pending_Active_HP() throws InterruptedException, AWTException {
+		JavascriptExecutor js= (JavascriptExecutor) driver;
+		Robot robot = new Robot();
+		clickElement("LV_FilterBy_dropdown");
+		js.executeScript("document.querySelector(\"#mat-option-0 > mat-pseudo-checkbox\").click()");
+		js.executeScript("document.querySelector(\"#mat-option-1 > mat-pseudo-checkbox\").click()");
+		robot.keyPress(KeyEvent.VK_ESCAPE);
+		robot.keyRelease(KeyEvent.VK_ESCAPE);
+	}
+	public void click_License_Matured() throws InterruptedException, AWTException {
+		JavascriptExecutor js= (JavascriptExecutor) driver;
+		Robot robot = new Robot();
+		clickElement("LV_FilterBy_dropdown");
+		js.executeScript("document.querySelector(\"#mat-option-1 > mat-pseudo-checkbox\").click()");
+		js.executeScript("document.querySelector(\"#mat-option-2 > mat-pseudo-checkbox\").click()");
+		robot.keyPress(KeyEvent.VK_ESCAPE);
+		robot.keyRelease(KeyEvent.VK_ESCAPE);
+	}
+	public void click_Terminated() throws InterruptedException, AWTException {
+		JavascriptExecutor js= (JavascriptExecutor) driver;
+		Robot robot = new Robot();
+		clickElement("LV_FilterBy_dropdown");
+		js.executeScript("document.querySelector(\"#mat-option-2 > mat-pseudo-checkbox\").click()");
+		js.executeScript("document.querySelector(\"#mat-option-3 > mat-pseudo-checkbox\").click()");
+		robot.keyPress(KeyEvent.VK_ESCAPE);
+		robot.keyRelease(KeyEvent.VK_ESCAPE);
+	}
+	
+	public boolean verify_Active_Status() {
+		 return verifyDialogHeader(getElement("Active_Status"), config.getProperty("Active_Status"));
+	}
+	public boolean verify_Pending_Active_Status() {
+		 return verifyDialogHeader(getElement("PendingActive_Status"), config.getProperty("PendingActive_Status"));
+	}
+	public boolean verify_License_Matured_Status() {
+		 return verifyDialogHeader(getElement("License_Matured_Status"), config.getProperty("License_Matured_Status"));
+	}
+	public boolean verify_Terminated_Status() {
+		 return verifyDialogHeader(getElement("Terminated_Status"), config.getProperty("Terminated_Status"));
+	}
+	//```````````````````````````````````````````````````````````````````
+	public boolean verify_Active_Status_Grid() {
+		 return verifyDialogHeader(getElement("Grid_Status"), config.getProperty("Active_Status"));
+	}
+	public boolean verify_Pending_Active_Status_Grid() {
+		 return verifyDialogHeader(getElement("Grid_Status"), config.getProperty("PendingActive_Status"));
+	}
+	public boolean verify_License_Matured_Status_Grid() {
+		 return verifyDialogHeader(getElement("Grid_Status"), config.getProperty("License_Matured_Status"));
+	}
+	public boolean verify_Terminated_Status_Grid() {
+		 return verifyDialogHeader(getElement("Grid_Status"), config.getProperty("Terminated_Status"));
 	}
 	
 	
