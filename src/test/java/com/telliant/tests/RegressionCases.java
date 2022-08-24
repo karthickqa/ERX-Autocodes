@@ -107,4 +107,39 @@ public class RegressionCases extends BaseClass implements ITestListener{
 		loginPage.logout();
 		softAssert.assertAll();	
 	}
+	@Test(testName = "TC_UC20_07", description =  "Verify User views Add New User Flow ", priority = 03)
+	public void TC_20_Verify_User_views_Add_New_User_Flow() throws InterruptedException, AWTException,IOException {
+		launchURL(config.getProperty("url"));
+		String ValidateUrl=driver.getCurrentUrl();
+		ValidateUrl.equalsIgnoreCase(config.getProperty("url"));
+		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+		//Add_Admin_User
+		loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
+		waitForPageGetsLoad();
+		homePage.clickSidemenu_FI_Admin();
+		homePage.click_Edit_FI();
+		homePage.click_Add_Admin_User();
+		homePage.updateEmpmailIdInExcel();	
+		loginPage.logout();
+		BaseClass.refresh();
+		//Add_Portfolio_Manager_User
+		loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
+		waitForPageGetsLoad();
+		homePage.clickSidemenu_FI_Admin();
+		homePage.click_Edit_FI();
+		homePage.click_Add_Portfolio_Manager_User();
+		homePage.updateEmpmailIdInExcel();	
+		loginPage.logout(); 
+		BaseClass.refresh();
+		//Login as Restricted User
+		loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 27), ExcelMethods.getData("Sheet1", "Password", 27));
+		softAssert.assertEquals(loginPage.verifyErrorMessageIsDisplayedFor_Restricted_User(), true, "Error message don't get displayed for unregistered email account");
+		softAssert.assertAll();
+		//Login as unRestricted User
+		BaseClass.refresh();
+		loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
+		loginPage.logout(); 
+		
+	}
+		
 }

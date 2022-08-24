@@ -5,9 +5,15 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+
 
 
 import org.openqa.selenium.By;
@@ -22,6 +28,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.telliant.core.web.BaseClass;
 import com.telliant.core.web.ExcelMethods;
 import com.telliant.core.web.WebDriverRoot;
 import java.util.logging.Level; 
@@ -846,8 +853,92 @@ public void click_Open_credits_field() throws InterruptedException {
 	public boolean verify_Terminated_Status_Grid() {
 		 return verifyDialogHeader(getElement("Grid_Status"), config.getProperty("Terminated_Status"));
 	}
+	public void clickSidemenu_FI_Admin() {
+		clickElement("Sidemenu_FI_Admin");
+	}
+	public void click_Edit_FI() {
+		type("Search_FIname",config.getProperty("Search_FIname"));
+		clickElement("Edit_FI");
+	}
+	public void click_Add_Admin_User() {
+		clickElement("AddUser_Tab_FI");
+		type("First_Name_FI_TB",config.getProperty("First_Name_FI_TB"));
+		type("Last_Name_FI_TB", config.getProperty("Last_Name_FI_TB"));
+		type("Contact_Name_FI_TB", config.getProperty("Contact_Name_FI_TB"));
+		type("Contact_Number_FI_TB", config.getProperty("Contact_Number_FI_TB"));
+		type("Email_Address_FI_TB", ExcelMethods.getData("Sheet1", "emailID", 1));
+		type("Contact_Title_FI_TB", config.getProperty("Contact_Title_FI_TB"));
+		clickElement("Role_FI_TB");
+		clickElement("Administrator_FI_TB");
+		clickElement("isPrimaryAdmin_Dwn_FI_TB");
+		//clickElement("isPrimaryAdmin_Dwn_Yes_FI_TB");
+		clickElement("isPrimaryAdmin_Dwn_No_FI_TB");
+		clickElement("User_Status_FI_TB");
+		clickElement("Restricted_dwn_value_FI_TB");
+		clickElement("Save_Btn_FI_TB");
 	
-	
+	}
+	public void click_Add_Portfolio_Manager_User() {
+		clickElement("AddUser_Tab_FI");
+		type("First_Name_FI_TB",config.getProperty("First_Name_FI_TB"));
+		type("Last_Name_FI_TB", config.getProperty("Last_Name_FI_TB"));
+		type("Contact_Name_FI_TB", config.getProperty("Contact_Name_FI_TB"));
+		type("Contact_Number_FI_TB", config.getProperty("Contact_Number_FI_TB"));
+		type("Email_Address_FI_TB",ExcelMethods.getData("Sheet1", "emailID", 1));
+		type("Contact_Title_FI_TB", config.getProperty("Contact_Title_FI_TB"));
+		clickElement("Role_FI_TB");
+		clickElement("Portfolio_Manager_FI_TB");
+		clickElement("Fi_portfolio_dwn_FI_TB");
+		clickElement("Fi_portfolio_dwn_Val_FI_TB");
+		clickElement("User_Status_FI_TB");
+		clickElement("Restricted_dwn_value_FI_TB");
+		clickElement("Save_Btn_FI_TB");
+	}
+	public void updateEmpmailId() throws IOException { 
+		 
+		// Initializing String
+        String Str = new String(config.getProperty("Email_Address_FI_TB"));
+        System.out.println(Str);
+        String S =Str.substring(9, 12) ;
+        System.out.println(S);
+        //convert string to integer
+        int i = Integer.parseInt(S); 	
+        int j=i+1; 	
+        //convert integer to String 
+        String sj=String.valueOf(j);
+        String si=String.valueOf(i);
+        String s1=new String(config.getProperty("Email_Address_FI_TB")); 
+        String replaceString=s1.replaceAll(si,sj);  
+        System.out.println("Updated Employee mailid is :" +replaceString); 
+  
+         FileOutputStream out = new FileOutputStream("config.properties");
+	     FileInputStream in = new FileInputStream("config.properties");
+	     Properties props = new Properties();
+	     props.load(in);
+	     in.close();
+         props.setProperty("Email_Address_FI_TB",replaceString);
+         props.store(out,null);
+         out.close();
+       
+	}
+	public void updateEmpmailIdInExcel() { 
+        // Initializing String
+        String Str = new String(ExcelMethods.getData("Sheet1", "emailID", 1));
+        String S =Str.substring(10, 13) ;
+        //System.out.println(S);
+        logger.log(Level.INFO, S); 
+        //convert string to integer
+        int i = Integer.parseInt(S); 	
+        int j=i+1; 	
+        //convert integer to String 
+        String sj=String.valueOf(j);
+        String si=String.valueOf(i);
+        String s1=new String(ExcelMethods.getData("Sheet1", "emailID", 1)); 
+        String replaceString=s1.replaceAll(si,sj);  
+        System.out.println("Updated Employee mailid is :" +replaceString); 
+        ExcelMethods.putData("Sheet1", "emailID", 1, replaceString);    
+}
+
 }
 
 
