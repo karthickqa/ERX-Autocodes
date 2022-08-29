@@ -25,7 +25,4 @@ public class Draft extends BaseClass implements ITestListener{
 	HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 	
 	
-	
-	
-	
 }

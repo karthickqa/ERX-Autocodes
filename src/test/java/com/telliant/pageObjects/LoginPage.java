@@ -156,4 +156,14 @@ public class LoginPage extends BaseClass {
 			flag= true;
 		return flag;
 	}
+	public boolean verifyErrorMessageIsDisplayedFor_Restricted_User() throws InterruptedException {
+		waitForPageGetsLoad();
+		boolean flag= false;
+		String toastMessage= getElement("forgotPasswordResponseMessage").getText();
+		if(toastMessage.equalsIgnoreCase(config.getProperty("Restricted_User_AlertMessage"))) {
+			flag= true;
+		}
+		return flag;
+	}
+	
 }
