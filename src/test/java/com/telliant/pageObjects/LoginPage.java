@@ -46,12 +46,14 @@ public class LoginPage extends BaseClass {
 
 	public void logout() {
 		try {
+			scrollToElement("logoutDropdown");
 			waitForElementVisible("logoutDropdown");
 			waitForElementClickable("logoutDropdown");
 			clickElement("logoutDropdown");
 			waitForElementClickable("logoutButton");
 			clickElement("logoutButton");
 		}catch(ElementClickInterceptedException e) {
+			scrollToElement("logoutDropdown");
 			waitForElementVisible("logoutDropdown");
 			waitForElementClickable("logoutDropdown");
 			clickElement("logoutDropdown");
