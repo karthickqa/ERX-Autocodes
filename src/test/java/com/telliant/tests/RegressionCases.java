@@ -141,5 +141,29 @@ public class RegressionCases extends BaseClass implements ITestListener{
 		loginPage.logout(); 
 		
 	}
+	@Test(testName = "TC_UC20_08", description =  "Verify User views  Delete & Cancel Button Flow ", priority = 04)
+	public void TC_20_Verify_User_views_Delete_Cancel_Button_Flow() throws InterruptedException, AWTException,IOException {
+		launchURL(config.getProperty("url"));
+		String ValidateUrl=driver.getCurrentUrl();
+		ValidateUrl.equalsIgnoreCase(config.getProperty("url"));
+		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+		//Add_Admin_User
+		loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
+		waitForPageGetsLoad();
+		homePage.clickSidemenu_FI_Admin();
+		homePage.click_Edit_FI();
+		homePage.click_Delete_flow_FI_User();
+		waitForPageGetsLoad();
+		homePage.click_Edit_flow_FI_User();
+		waitForPageGetsLoad();
+		homePage.Verify_Edit_FI_User();
+		softAssert.assertEquals(homePage.verify_First_Name_FI_TB(), true, "Given data don't get displayed on the First_Name Field");
+		softAssert.assertEquals(homePage.verify_Last_Name_FI_TB(), true, "Given data don't get displayed on the Last_Name field");
+		softAssert.assertEquals(homePage.verify_Contact_Name_FI_TB(), true, "Given data don't get displayed on the Contact_Name field");
+		softAssert.assertEquals(homePage.verify_Contact_Number_FI_TB(), true, "Given data don't get displayed on the Contact_Number field");
+		softAssert.assertEquals(homePage.verify_Contact_Title_FI_TB(), true, "Given data don't get displayed on the Contact_Title field");
+		homePage.Cancel_btn();
+		softAssert.assertAll();		
+	}
 		
 }

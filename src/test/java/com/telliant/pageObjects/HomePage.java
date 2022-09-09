@@ -871,12 +871,20 @@ public void click_Open_credits_field() throws InterruptedException {
 		clickElement("Role_FI_TB");
 		clickElement("Administrator_FI_TB");
 		clickElement("isPrimaryAdmin_Dwn_FI_TB");
+		try {
+			clickElement("isPrimaryAdmin_Dwn_Yes_FI_TB");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			clickElement("isPrimaryAdmin_Dwn_No_FI_TB");
+		}
 		//clickElement("isPrimaryAdmin_Dwn_Yes_FI_TB");
-		clickElement("isPrimaryAdmin_Dwn_No_FI_TB");
+		//clickElement("isPrimaryAdmin_Dwn_No_FI_TB");
 		clickElement("User_Status_FI_TB");
 		clickElement("Restricted_dwn_value_FI_TB");
 		clickElement("Save_Btn_FI_TB");
-	
+		clickElement("Toast_Container");
+		clickElement("Toast_Container");
 	}
 	public void click_Add_Portfolio_Manager_User() {
 		clickElement("AddUser_Tab_FI");
@@ -893,6 +901,8 @@ public void click_Open_credits_field() throws InterruptedException {
 		clickElement("User_Status_FI_TB");
 		clickElement("Restricted_dwn_value_FI_TB");
 		clickElement("Save_Btn_FI_TB");
+		clickElement("Toast_Container");
+		clickElement("Toast_Container");
 	}
 	public void updateEmpmailId() throws IOException { 
 		 
@@ -938,7 +948,84 @@ public void click_Open_credits_field() throws InterruptedException {
         System.out.println("Updated Employee mailid is :" +replaceString); 
         ExcelMethods.putData("Sheet1", "emailID", 1, replaceString);    
 }
+	public void click_Delete_flow_FI_User() {
+		clickElement("AddUser_Tab_FI");
+		//type("Search_FIname",config.getProperty("User_delete"));
+		clickElement("Delete_icon_FI_User_TB");
+		clickElement("Toast_Container");
+		
+	}
+	public boolean verifyDeleted_FI_Notification() {
+		return verifyDialogHeader(getElement("Toast_Container"), config.getProperty("Toast_Container_delete"));
+	}
+	
+	public void click_Edit_flow_FI_User() {
+		clickElement("AddUser_Tab_FI");
+		clickElement("Edit_User_FI");
+		type("First_Name_FI_TB",config.getProperty("First_Name_FI_TB_Edit"));
+		type("Last_Name_FI_TB", config.getProperty("Last_Name_FI_TB_Edit"));
+		type("Contact_Name_FI_TB", config.getProperty("Contact_Name_FI_TB_Edit"));
+		type("Contact_Number_FI_TB", config.getProperty("Contact_Number_FI_TB_Edit"));
+		type("Contact_Title_FI_TB", config.getProperty("Contact_Title_FI_TB_Edit"));
+		clickElement("Save_Btn_FI_TB");
+		clickElement("Toast_Container");
+	}
 
-}
+	public void Verify_Edit_FI_User() {
+		clickElement("Edit_User_FI");
+	}
+	public void Cancel_btn() {
+		clickElement("Cancel_btn_Edit_User_FI");
+	}
+	public boolean verify_First_Name_FI_TB() {	
+		boolean flag = false;
+		String s1= getElement("First_Name_Check").getAttribute("value");
+		if(s1.equalsIgnoreCase(config.getProperty("First_Name_FI_TB_Edit"))){
+			flag =true;
+		}
+	return flag;
+	}
+	public boolean verify_Last_Name_FI_TB() {
+		
+		boolean flag = false;
+		String s1= getElement("Last_Name_FI_TB").getAttribute("value");
+		if(s1.equalsIgnoreCase(config.getProperty("Last_Name_FI_TB_Edit"))){
+			flag =true;
+		}
+	return flag;
+	}
+	public boolean verify_Contact_Name_FI_TB() {
+		boolean flag = false;
+		String s1= getElement("Contact_Name_FI_TB").getAttribute("value");
+		if(s1.equalsIgnoreCase(config.getProperty("Contact_Name_FI_TB_Edit"))){
+			flag =true;
+		}
+	return flag;
+		
+	}
+	public boolean verify_Contact_Number_FI_TB() {
+		
+		boolean flag = false;
+		String s1= getElement("Contact_Number_FI_TB").getAttribute("value");
+		if(s1.equalsIgnoreCase(config.getProperty("Contact_Number_FI_TB_Edit"))){
+			flag =true;
+		}
+	return flag;
+	}
+	public boolean verify_Contact_Title_FI_TB() {
+			
+		boolean flag = false;
+		String s1= getElement("Contact_Title_FI_TB").getAttribute("value");
+		if(s1.equalsIgnoreCase(config.getProperty("Contact_Title_FI_TB_Edit"))){
+			flag =true;
+		}
+	return flag;
+	}
+	
+	
+	
+	
+	}
+
 
 
