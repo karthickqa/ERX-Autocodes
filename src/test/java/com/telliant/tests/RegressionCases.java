@@ -165,5 +165,67 @@ public class RegressionCases extends BaseClass implements ITestListener{
 		homePage.Cancel_btn();
 		softAssert.assertAll();		
 	}
+	@Test(testName = "TC_UC20_01", description =  "Verify User views  Lendovative FI Admin Page", priority = 06)
+    public void TC_06_Verify_User_views_Lendovative_FI_Admin_Page() throws InterruptedException, AWTException{
+        launchURL(config.getProperty("url"));
+        String ValidateUrl=driver.getCurrentUrl();
+        ValidateUrl.equalsIgnoreCase(config.getProperty("url"));
+        driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+        //Login as LV Admin User
+        loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
+        waitForPageGetsLoad();
+        softAssert.assertEquals(homePage.verifyHomePageTitle(), true, "Title is not displaying as Lendovative Home Page");
+        homePage.clickFiAdmin();
+        waitForPageGetsLoad();
+        softAssert.assertEquals(homePage.verifyFiAdminPageTitle(), true, "FI Admin page title is not displaying as Lendovative Financial Institution Admin");
+        softAssert.assertEquals(homePage.verifyAddFinancialInstiutionButtonIsDisplayed(), true, "Add Financial Instiution button don't get displayed");
+        homePage.click_AddFinancialInstiutionButton();
+        waitForPageGetsLoad();
+        softAssert.assertEquals(homePage.verifyAddFinancialInstitutionPageTitle(), true, "Add Financial Institution page is not displayed");
+        softAssert.assertEquals(homePage.verifyCardHeadersOnAddFiPage(), true, "All Card Headers section don't get displayed on the Add FI page");
+        homePage.enterDataOn_FinancialInstiution();
+        homePage.enterDataOn_ServiceLevelFeeStrucure1();
+        homePage.enterDataOn_ServiceLevelFeeStrucure2();
+        homePage.enterDataOn_ServiceLevelFeeStrucure3();
+        loginPage.logout();
+        softAssert.assertAll();
+    }
+    
+    @Test(testName = "TC_UC20_05", description = "Verify User views Licensed & Other details", priority = 07)
+    public void TC_07_Verify_User_Views_Licensed_And_Otherdetails() throws InterruptedException{
+        loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
+        waitForPageGetsLoad();
+        softAssert.assertEquals(homePage.verifyHomePageTitle(), true, "Title is not displaying as Lendovative Home Page");
+        homePage.clickUserAdmin();
+        homePage.getAccountManagerList();
+        homePage.clickFiAdmin();
+        waitForPageGetsLoad();
+        softAssert.assertEquals(homePage.verifyFiAdminPageTitle(), true, "FI Admin page title is not displaying as Lendovative Financial Institution Admin");
+        softAssert.assertEquals(homePage.verifyAddFinancialInstiutionButtonIsDisplayed(), true, "Add Financial Instiution button don't get displayed");
+        homePage.click_AddFinancialInstiutionButton();
+        waitForPageGetsLoad();
+        softAssert.assertEquals(homePage.verifyAddFinancialInstitutionPageTitle(), true, "Add Financial Institution page is not displayed");
+        softAssert.assertEquals(homePage.verifyCardHeadersOnAddFiPage(), true, "All Card Headers section don't get displayed on the Add FI page");
+        homePage.enterDataOn_FinancialInstiution();
+        homePage.enterDataOn_ServiceLevelFeeStrucure1();
+        homePage.enterDataOn_ServiceLevelFeeStrucure2();
+        homePage.enterDataOn_ServiceLevelFeeStrucure3();
+        
+        homePage.enterDataOn_LicensedDate();
+        homePage.enterDataOn_LicenseRateCommission();
+        homePage.enterDataOn_LicensedMaturityDate();
+        softAssert.assertEquals(homePage.verifyLvAccountManagerDropDownList(), true, "LV Account Manager dropdown list don't get matches with the expected list");
+        homePage.selectFromLvAccountManagerDropDown();
+        homePage.selectFromFiStatusDropDown();
+        homePage.selectFromFiCoreSyncDropDown();
+        softAssert.assertEquals(homePage.verifyFiStatusDropDownList(), true, "FI Status dropdown list don't get matches with the expected list");
+        softAssert.assertEquals(homePage.verifyFiCoreSyncDropDownList(), true, "FI Core Sync dropdown list don't get matches with the expected list");
+        homePage.selectFromFiType();
+        softAssert.assertEquals(homePage.verifyFiTypeDropDownList(), true, "FI Type dropdown list don't get matches with the expected list");
+        homePage.enterDataOn_OtherDetaislAssestSize();
+        homePage.clickSaveButton();
+        softAssert.assertEquals(homePage.verifyUserCreationMessageIsDisplayed(), true, "Add Fi User creation message don't get displayed upon creatin new FI user");
+        softAssert.assertAll();
+    }
 		
 }

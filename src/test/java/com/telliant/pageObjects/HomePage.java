@@ -37,6 +37,7 @@ import java.util.logging.Logger;
 public class HomePage extends WebDriverRoot {
 	 JavascriptExecutor js = (JavascriptExecutor)driver;
 	 Logger logger = Logger.getLogger(HomePage.class.getSimpleName());
+	 ArrayList<String> arrayList= new ArrayList<String>();
 		
  /*#################################################################################################################*/	
 	public boolean verifyHomePageTitle() {
@@ -1021,7 +1022,222 @@ public void click_Open_credits_field() throws InterruptedException {
 		}
 	return flag;
 	}
+	public void clickFiAdmin() {
+		waitForElementClickable("toogleButton_FiAdmin");
+		clickElement("toogleButton_FiAdmin");
+		waitForElementClickable("sideMenu_FIAdmin");
+		clickElement("sideMenu_FIAdmin");
+	}
 	
+	public void clickUserAdmin() {
+		//waitForElementClickable("toogleButton_FiAdmin");
+		//clickElement("toogleButton_FiAdmin");
+		waitForElementClickable("sideMenu_UserAdmin");
+		clickElement("sideMenu_UserAdmin");
+	}
+	
+	public boolean verifyAddFinancialInstiutionButtonIsDisplayed() {
+		return getElement("button_AddFinancialInstiution").isDisplayed();
+	}
+	
+	public void click_AddFinancialInstiutionButton() {
+		waitForElementClickable("button_AddFinancialInstiution");
+		clickElement("button_AddFinancialInstiution");
+	}
+	
+	public boolean verifyAddFinancialInstitutionPageTitle() {
+		return verifyDialogHeader(getElement("homePage_Title"), config.getProperty("addFinancialInstitutePageTitle"));
+	}
+	
+	public ArrayList<String> getCardHeadersOnAddFiPage(){
+		ArrayList<String> headers= new ArrayList<>();
+		headers.add(config.getProperty("financialInstitutionInformation"));
+		headers.add(config.getProperty("serviceLevel"));
+		headers.add(config.getProperty("licensed"));
+		headers.add(config.getProperty("otherDetails"));
+		return headers;
+	}
+	
+	public boolean verifyCardHeadersOnAddFiPage() {
+		boolean flag= true;
+		ArrayList<String> headers= new ArrayList<>();
+		for(WebElement element: getElements("card_Header")) {
+			headers.add(element.getText());
+		}
+		for(int i=0; i<getCardHeadersOnAddFiPage().size(); i++) {
+			if(!(getCardHeadersOnAddFiPage().get(i).equalsIgnoreCase(headers.get(i)))){
+				System.out.println("Expected: "+getCardHeadersOnAddFiPage().get(i));
+				System.out.println("Actual: "+headers.get(i));
+				flag= false;
+				break;
+			}
+		}
+		return flag;	
+	}
+	
+	public void enterDataOn_FinancialInstiution() {
+		type(("addFi_FinancialInstiutionName"), config.getProperty("addFi_FinancialInstiutionName")+randStrGen("N", 3));
+		type(("addFi_Address1"), config.getProperty("addFi_Address1"));
+		type(("addFi_Address2"), config.getProperty("addFi_Address2"));
+		type(("addFi_City"), config.getProperty("addFi_City"));
+		type(("addFi_State"), config.getProperty("addFi_State"));
+		type(("addFi_ZipCode"), config.getProperty("addFi_ZipCode"));
+	}
+	
+	public void enterDataOn_ServiceLevelFeeStrucure1() {
+		type("addFi_SeriveLevel1_FIFeeDefault", config.getProperty("addFi_SeriveLevel1_FIFeeDefault")+randStrGen("N", 3));
+		type("addFi_SeriveLevel1_StartDate", config.getProperty("addFi_SeriveLevel1_StartDate"));
+		type("addFi_SeriveLevel1_EndDate", config.getProperty("addFi_SeriveLevel1_EndDate"));
+		type("addFi_SeriveLevel1_FieldOverrideApprovedDate", config.getProperty("addFi_SeriveLevel1_FieldOverrideApprovedDate"));
+	}
+	
+	public void enterDataOn_ServiceLevelFeeStrucure2() {
+		type("addFi_SeriveLevel2_FIFeeDefault", config.getProperty("addFi_SeriveLevel2_FIFeeDefault")+randStrGen("N", 3));
+		type("addFi_SeriveLevel2_StartDate", config.getProperty("addFi_SeriveLevel2_StartDate"));
+		type("addFi_SeriveLevel2_EndDate", config.getProperty("addFi_SeriveLevel2_EndDate"));
+		type("addFi_SeriveLevel2_FieldOverrideApprovedDate", config.getProperty("addFi_SeriveLevel2_FieldOverrideApprovedDate"));
+	}
+	
+	public void enterDataOn_ServiceLevelFeeStrucure3() {
+		type("addFi_SeriveLevel3_FIFeeDefault", config.getProperty("addFi_SeriveLevel3_FIFeeDefault")+randStrGen("N", 3));
+		type("addFi_SeriveLevel3_StartDate", config.getProperty("addFi_SeriveLevel3_StartDate"));
+		type("addFi_SeriveLevel3_EndDate", config.getProperty("addFi_SeriveLevel3_EndDate"));
+		type("addFi_SeriveLevel3_FieldOverrideApprovedDate", config.getProperty("addFi_SeriveLevel3_FieldOverrideApprovedDate"));
+	}
+	
+	public ArrayList<String> getFiStatusDropdownList(){
+		ArrayList<String> fiStatus= new ArrayList<String>();
+		fiStatus.add(config.getProperty("fiStatus_Active"));
+		fiStatus.add(config.getProperty("fiStatus_PendingActive"));
+		fiStatus.add(config.getProperty("fiStatus_LicenseMatured"));
+		fiStatus.add(config.getProperty("fiStatus_Terminated"));
+		return fiStatus;
+	}
+	
+	public ArrayList<String> getFiCoreSyncDropdownList(){
+		ArrayList<String> fiStatus= new ArrayList<String>();
+		fiStatus.add(config.getProperty("fiCoreSync_Manual"));
+		fiStatus.add(config.getProperty("fiCoreSync_Automated"));
+		return fiStatus;
+	}
+	
+	public ArrayList<String> getFiTypeyDropdownList(){
+		ArrayList<String> fiStatus= new ArrayList<String>();
+		fiStatus.add(config.getProperty("fiType_Bank"));
+		fiStatus.add(config.getProperty("fiType_CreditUnion"));
+		fiStatus.add(config.getProperty("fiType_Other"));
+		return fiStatus;
+	}
+	
+	public boolean verifyDropDownList(ArrayList<String> expectedList, String elementLocator) {
+		boolean flag= true;
+		List<WebElement>elementList= getElements(elementLocator);
+		ArrayList<String> dropdownText= new ArrayList<>();
+		for(WebElement element:elementList) {
+			dropdownText.add(element.getText());
+		}
+		for(int i=0; i<expectedList.size(); i++) {
+			if(!(expectedList.get(i).equalsIgnoreCase(dropdownText.get(i)))) {
+				flag= false;
+				break;
+			}
+		}
+		return flag;
+	}
+	
+	public boolean verifyFiStatusDropDownList() {
+		return verifyDropDownList(getFiStatusDropdownList(), "addFi_Licensed_FiStatusList");
+	}
+	
+	public boolean verifyFiCoreSyncDropDownList() {
+		return verifyDropDownList(getFiCoreSyncDropdownList(), "addFi_Licensed_FiCoreSyncList");
+	}
+	
+	public boolean verifyFiTypeDropDownList() {
+		return verifyDropDownList(getFiTypeyDropdownList(), "addFi_OtherDetails_FiTypeList");
+	}
+	
+	public boolean verifyLvAccountManagerDropDownList() {
+		boolean flag= true;
+		ArrayList<String> dropDownList= new ArrayList<>();
+		List<WebElement> elementList= getElements("addFi_Licensed_LvAccountManagerlist");
+		for(WebElement element: elementList) {
+			String user= element.getText();
+			dropDownList.add(user);
+		}
+		if(!(dropDownList.containsAll(arrayList)))
+			flag= false;
+		if(!(arrayList.containsAll(dropDownList)))
+			flag= false;
+		return flag;
+	}
+	
+	public void selectFromLvAccountManagerDropDown() {
+		selectDropdownByIndex("addFi_Licensed_LvAccountManager", 1);
+	}
+	
+	public void selectFromFiStatusDropDown() {
+		selectDropdownByVisibleTxt("addFi_Licensed_FiStatus", config.getProperty("fiStatus_PendingActive"));
+	}
+	
+	public void selectFromFiCoreSyncDropDown() {
+		selectDropdownByVisibleTxt("addFi_Licensed_FiCoreSync", config.getProperty("fiCoreSync_Manual"));
+	}
+	
+	public void selectFromFiType() {
+		selectDropdownByIndex("addFi_OtherDetails_FiType", 1);
+	}
+	
+	public void enterDataOn_OtherDetaislAssestSize() {
+		type("addFi_OtherDetails_AssetSize", config.getProperty("addFi_OtherDetails_AssestSize"));
+	}
+	
+	public void enterDataOn_LicensedDate() {
+		type("addFi_Licensed_LicensedDate", config.getProperty("addFi_LicensedDate"));
+	}
+	
+	public void enterDataOn_LicenseRateCommission() {
+		type("addFi_Licensed_LicensedRate", config.getProperty("addFi_LicensedRateCommission"));
+	}
+	
+	public void enterDataOn_LicensedMaturityDate() {
+		type("addFi_Licensed_LicensedMaturityDate", config.getProperty("addFi_LicensedMaturityDate"));
+	}
+	
+	public ArrayList<String> getAccountManagerList() {
+		//ArrayList<String> nameList= new ArrayList<>();
+		arrayList.clear();
+		int pageCount= driver.findElements(By.cssSelector("div.page-count>ul>li")).size();
+		for(int i=2; i<pageCount; i++)
+		{
+			JavascriptExecutor jsp= (JavascriptExecutor) driver;
+			jsp.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.page-count>ul>li:nth-of-type("+i+")>a")));
+			int rowCount= driver.findElements(By.cssSelector("table#userlist>tbody>tr")).size();
+			for(int j=1; j<=rowCount; j++) {
+				jsp.executeScript("arguments[0].scrollIntoView();",driver.findElement(By.cssSelector("table#userlist>tbody>tr:nth-of-type("+j+")>td:nth-of-type(8)")));
+				String roleName= driver.findElement(By.cssSelector("table#userlist>tbody>tr:nth-of-type("+j+")>td:nth-of-type(8)")).getText();
+				if(roleName.equalsIgnoreCase("Account Manager")) {
+					jsp.executeScript("arguments[0].scrollIntoView();", driver.findElement(By.cssSelector("table#userlist>tbody>tr:nth-of-type("+j+")>td:nth-of-type(4)")));
+					String userName= driver.findElement(By.cssSelector("table#userlist>tbody>tr:nth-of-type("+j+")>td:nth-of-type(4)")).getText();
+					arrayList.add(userName);
+				}
+			}
+		}
+		return arrayList;
+	}
+	
+	public boolean verifyUserCreationMessageIsDisplayed() {
+		return verifyDialogHeader(getElement("toast_UserUpdatedSuccessfully"), config.getProperty("fiUserCreationMessage"));
+	}
+	
+	public boolean verifyFiAdminPageTitle() {
+		boolean flag= false;
+		String pageTitle=getElement("homePage_Title").getText();
+		if(pageTitle.equalsIgnoreCase(config.getProperty("lendovativeAdminPageTitle")))
+			flag= true;
+		return flag;
+	}
+
 	
 	
 	
