@@ -227,5 +227,69 @@ public class RegressionCases extends BaseClass implements ITestListener{
         softAssert.assertEquals(homePage.verifyUserCreationMessageIsDisplayed(), true, "Add Fi User creation message don't get displayed upon creatin new FI user");
         softAssert.assertAll();
     }
+    @Test(testName = "TC_UC20_10", description =  "Verify User views Edit & Save Add User Details Flow ", priority = 07)
+	public void TC_UC20_10_Verify_User_Edit_Save_Add_User_DetailsFlow() throws InterruptedException, AWTException,IOException {
+		launchURL(config.getProperty("url"));
+		String ValidateUrl=driver.getCurrentUrl();
+		ValidateUrl.equalsIgnoreCase(config.getProperty("url"));
+		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+		loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
+		waitForPageGetsLoad();
+		homePage.clickSidemenu_FI_Admin();
+		homePage.click_Edit_FI();
+		homePage.click_Add_Admin_User();
+		homePage.updateEmpmailIdInExcel();	
+		loginPage.logout();
+		BaseClass.refresh();
+		//Add_Portfolio_Manager_User
+		loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
+		waitForPageGetsLoad();
+		homePage.clickSidemenu_FI_Admin();
+		homePage.click_Edit_FI();
+		waitForPageGetsLoad();
+		homePage.click_Add_Portfolio_Manager_User();
+		homePage.updateEmpmailIdInExcel();	
+		loginPage.logout(); 
+		BaseClass.refresh();
+		//Login as Restricted User
+		loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 27), ExcelMethods.getData("Sheet1", "Password", 27));
+		softAssert.assertEquals(loginPage.verifyErrorMessageIsDisplayedFor_Restricted_User(), true, "Error message don't get displayed for unregistered email account");
+		softAssert.assertAll();
+		//Login as unRestricted User
+		BaseClass.refresh();
+		loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
+		loginPage.logout();		
+	}
+	
+	@Test(testName = "TC_UC20_11", description =  "Verify User views Fliter by FI status Dropdown Flow  ", priority = 10)
+	public void TC_UC20_11_Verify_User_views_Fliter_by_FI_status_Dropdown_Flow() throws InterruptedException, AWTException{
+		launchURL(config.getProperty("url"));
+		String ValidateUrl=driver.getCurrentUrl();
+		ValidateUrl.equalsIgnoreCase(config.getProperty("url"));
+		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+		loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
+		waitForPageGetsLoad1();
+		homePage.clickSidemenu_FI_Admin();
+		waitForPageGetsLoad1();
+		homePage.clickDropdown_FI();
+		softAssert.assertEquals(homePage.verify_Active_Status(), true, "Active Status is not Displayed" );
+		softAssert.assertEquals(homePage.verify_Pending_Active_Status(), true, "Pending_Active_Status is not Displayed" );
+		softAssert.assertEquals(homePage.verify_License_Matured_Status(), true, "License_Matured_Status is not Displayed" );
+		softAssert.assertEquals(homePage.verify_Terminated_Status(), true, "Terminated_Status is not Displayed" );
+		homePage.click_Active_FI();
+		softAssert.assertEquals(homePage.verify_Active_Status(), true, "Active Status is not Displayed" );
+		softAssert.assertEquals(homePage.verify_Active_Status_Grid_FI(), true, "Active Status is not Displayed" );
+		homePage.click_Pending_Active_FI();
+		softAssert.assertEquals(homePage.verify_Pending_Active_Status(), true, "Pending_Active_Status is not Displayed" );
+		softAssert.assertEquals(homePage.verify_Pending_Active_Status_Grid_FI(), true, "Pending_Active_Status is not Displayed" );
+		homePage.click_License_Matured_FI();
+		softAssert.assertEquals(homePage.verify_License_Matured_Status(), true, "License_Matured_Status is not Displayed" );
+		softAssert.assertEquals(homePage.verify_License_Matured_Status_Grid_FI(), true, "License_Matured_Status is not Displayed" );
+		homePage.click_Terminated_FI();
+		softAssert.assertEquals(homePage.verify_Terminated_Status(), true, "Terminated_Status is not Displayed" );
+		softAssert.assertEquals(homePage.verify_Terminated_Status_Grid_FI(), true, "Terminated_Status is not Displayed" );
+		loginPage.logout();	
+		softAssert.assertAll();	
+	}
 		
 }
