@@ -1344,6 +1344,98 @@ public void click_Open_credits_field() throws InterruptedException {
         		type("Search_FIname",ExcelMethods.getData("Sheet1", "Finame", 1));
         		clickElement("Edit_FI");
             }
+            public void click_Sidebar_Icon() {
+                clickElement("Sidebar_Icon");  
+        }
+                                                         
+         public void click_Add_User_Admin_Menu() {  
+             clickElement("Sidebar_Icon");
+             clickElement("User_Admin_Menu");
+             clickElement("Sidebar_Icon");
+             type("First_Name", config.getProperty("First_Name"));
+             type("Last_Name", config.getProperty("Last_Name"));
+             type("Contact_Name", config.getProperty("Contact_Name"));
+             type("Contact_Number", config.getProperty("Contact_Number"));
+             type("Contact_Title", config.getProperty("Contact_Title"));
+             type("Email_Address", config.getProperty("Email_Address"));
+             clickElement("ContactSecurityRole_Dropdown");
+             clickElement("Administrator_Dropdown");
+             clickElement("Account_Manager_Dropdown");
+             clickElement("Viewer_Dropdown");
+             clickElement("Save_Button");   
+       }
+         
+          public boolean verifyLV_User_Admin_Page_Title() {
+           return verifyDialogHeader(getElement("LV_User_Admin_Page_Title"), config.getProperty("Lendovative User Admin"));
+          }
+          public void click_User_Admin_Menu() {   
+           clickElement("User_Admin_Menu");
+          }
+       
+      public void click_User_Edit_Save() {  
+         clickElement("Sidebar_Icon");
+       clickElement("User_Admin_Menu");
+       clickElement("Sidebar_Icon");
+       scrollToElement("Edit_Button");
+       waitForElementClickable("Edit_Button");
+           clickElement("Edit_Button");
+       type("First_Name", config.getProperty("First_Name"));
+         type("Last_Name", config.getProperty("Last_Name"));
+         type("Contact_Name", config.getProperty("Contact_Name"));
+         type("Contact_Number", config.getProperty("Contact_Number"));
+         type("Contact_Title", config.getProperty("Contact_Title"));
+         type("Email_Address", config.getProperty("Email_Address"));
+         clickElement("ContactSecurityRole_Dropdown");
+         clickElement("Administrator_Dropdown");
+         scrollToElement("Save_Button");
+           waitForElementClickable("Save_Button");
+         clickElement("Save_Button");  
+         clickElement("Toast_Container");
+      
+      }
+      public void click_User_Cancel_Delete() {  
+             clickElement("Sidebar_Icon");
+             clickElement("User_Admin_Menu");  
+             clickElement("Sidebar_Icon");
+             scrollToElement("Edit_Button");
+               waitForElementClickable("Edit_Button");
+             clickElement("Edit_Button");
+             type("First_Name", config.getProperty("First_Name"));
+             type("Last_Name", config.getProperty("Last_Name"));
+             type("Contact_Name", config.getProperty("Contact_Name"));
+             type("Contact_Number", config.getProperty("Contact_Number"));
+             type("Contact_Title", config.getProperty("Contact_Title"));
+             type("Email_Address", config.getProperty("Email_Address"));
+             clickElement("ContactSecurityRole_Dropdown");
+             clickElement("Administrator_Dropdown");
+               scrollToElement("Cancel_Button");
+               waitForElementClickable("Cancel_Button");
+             clickElement("Cancel_Button");
+             scrollToElement("Page_2");
+               waitForElementClickable("Page_2");
+             clickElement("Page_2");
+             clickElement("Delete_Button");  
+             clickElement("Toast_Container");
+      }
+      public void Create_New_Business() {  
+             clickElement("Sidebar_Icon");
+             scrollToElement("Business_Admin_Menu");
+               waitForElementClickable("Business_Admin_Menu");
+             clickElement("Business_Admin_Menu");
+             clickElement("Sidebar_Icon");
+             clickElement("Add_Business_Button");
+             type("Business_Name", config.getProperty("Business_Name"));
+             type("Business_Phone", config.getProperty("Business_Phone"));
+             type("Business_Email", config.getProperty("Business_Email"));
+             type("Business_Address_Line1", config.getProperty("Business_Address_Line1"));
+             type("Business_Address_Line2", config.getProperty("Business_Address_Line2"));
+             type("Business_city", config.getProperty("Business_city"));
+             type("Business_State", config.getProperty("Business_State"));
+             type("Zipcode", config.getProperty("Zipcode"));
+             type("NAICS_Industry_Code", config.getProperty("NAICS_Industry_Code"));
+      
+      
+   }
     }
         
        	
