@@ -10,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -25,6 +26,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.ClickAction;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -904,6 +906,7 @@ public void click_Open_credits_field() throws InterruptedException {
 		clickElement("Save_Btn_FI_TB");
 		clickElement("Toast_Container");
 		clickElement("Toast_Container");
+		clickElement("Toast_Container");
 	}
 	public void updateEmpmailId() throws IOException { 
 		 
@@ -1076,12 +1079,17 @@ public void click_Open_credits_field() throws InterruptedException {
 	}
 	
 	public void enterDataOn_FinancialInstiution() {
-		type(("addFi_FinancialInstiutionName"), config.getProperty("addFi_FinancialInstiutionName")+randStrGen("N", 3));
+		
+		//type(("addFi_FinancialInstiutionName"), config.getProperty("addFi_FinancialInstiutionName")+randStrGen("N", 3));
+		String S1= config.getProperty("addFi_FinancialInstiutionName")+randStrGen("N", 3);
+		type(("addFi_FinancialInstiutionName"), S1);
 		type(("addFi_Address1"), config.getProperty("addFi_Address1"));
 		type(("addFi_Address2"), config.getProperty("addFi_Address2"));
 		type(("addFi_City"), config.getProperty("addFi_City"));
 		type(("addFi_State"), config.getProperty("addFi_State"));
 		type(("addFi_ZipCode"), config.getProperty("addFi_ZipCode"));
+		ExcelMethods.putData("Sheet1", "Finame", 1, S1); 
+		System.out.println("the string value is  " +S1);
 	}
 	
 	public void enterDataOn_ServiceLevelFeeStrucure1() {
@@ -1297,9 +1305,45 @@ public void click_Open_credits_field() throws InterruptedException {
 	public boolean verify_Terminated_Status_Grid_FI() {
 		 return verifyDialogHeader(getElement("Grid_Status_FI"), config.getProperty("Terminated_Status"));
 	}
-	
-	
+	public void Add_User_Flow_FI() {
+		clickElement("Toast_Container");
+		clickElement("toogleButton_FiAdmin");
+		
 	}
+        public void Select_new_Protfolio() {
+        	clickElement("Toast_Container");
+        	clickElement("add_Protfolio_Tab");
+        	BaseClass.refresh();
+        	String s1 = ExcelMethods.getData("Sheet1", "Finame", 1);
+        	  Select select = new Select(driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div/app-lending-watchdog/lv-add-portfolio/app-add-portfolio-utils/section/div[1]/div/div[1]/div[1]/div/select")));
+            List<WebElement> optionElements = driver.findElement(By.cssSelector("#mainContent > div > app-lending-watchdog > lv-add-portfolio > app-add-portfolio-utils > section > div.CustomTab > div > div.card-header > div:nth-child(1) > div > select")).findElements(By.tagName("option"));
 
-
-
+            for (WebElement optionElement: optionElements) {
+                if (optionElement.getText().contains(s1)) {
+                    String optionIndex = optionElement.getAttribute("index");
+                    select.selectByIndex(Integer.parseInt(optionIndex));
+                    break;   
+                }
+            }
+        }
+            public void Create_new_Protfolio() {
+            	waitForElementClickable("Add_Icon_Protfolio");
+            clickElement("Add_Icon_Protfolio");
+            waitForElementClickable("Protfolio_Name_Field");
+            type("Protfolio_Name_Field",config.getProperty("Protfolio_name"));
+            clickElement("Create_Protfolio_Icon");
+            clickElement("Toast_Container");
+            }
+            
+            public void Navigate_To_FI() {
+            	clickElement("Sidemenu_FI_Admin");
+            	scrollToElement("ScrollTo_Dropdown");
+            	clickElement("Click_FI_RowSelection_Dropdown");
+            	clickElement("Click_FI_RowSelection_Dropdown_Value");
+            	scrollToElement("Search_FIname");
+        		type("Search_FIname",ExcelMethods.getData("Sheet1", "Finame", 1));
+        		clickElement("Edit_FI");
+            }
+    }
+        
+       	
