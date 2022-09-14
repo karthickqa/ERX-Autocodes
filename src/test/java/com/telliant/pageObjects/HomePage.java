@@ -38,6 +38,7 @@ public class HomePage extends WebDriverRoot {
 	 JavascriptExecutor js = (JavascriptExecutor)driver;
 	 Logger logger = Logger.getLogger(HomePage.class.getSimpleName());
 	 ArrayList<String> arrayList= new ArrayList<String>();
+	 static String getVal=null;
 		
  /*#################################################################################################################*/	
 	public boolean verifyHomePageTitle() {
@@ -1082,6 +1083,8 @@ public void click_Open_credits_field() throws InterruptedException {
 		type(("addFi_City"), config.getProperty("addFi_City"));
 		type(("addFi_State"), config.getProperty("addFi_State"));
 		type(("addFi_ZipCode"), config.getProperty("addFi_ZipCode"));
+		getVal= getElement("addFi_FinancialInstiutionName").getAttribute("value");
+		System.out.println(getVal);
 	}
 	
 	public void enterDataOn_ServiceLevelFeeStrucure1() {
@@ -1205,7 +1208,6 @@ public void click_Open_credits_field() throws InterruptedException {
 	}
 	
 	public ArrayList<String> getAccountManagerList() {
-		//ArrayList<String> nameList= new ArrayList<>();
 		arrayList.clear();
 		int pageCount= driver.findElements(By.cssSelector("div.page-count>ul>li")).size();
 		for(int i=2; i<pageCount; i++)
@@ -1298,8 +1300,43 @@ public void click_Open_credits_field() throws InterruptedException {
 		 return verifyDialogHeader(getElement("Grid_Status_FI"), config.getProperty("Terminated_Status"));
 	}
 	
+	public void click_EditButtonOnFiAdminUser() throws InterruptedException {
+		List<WebElement> elements= getElements("fi_Table");
+		boolean flag= false;
+		JavascriptExecutor js= (JavascriptExecutor) driver;
+		int j=0;
+		int pageCount= driver.findElements(By.cssSelector("div.page-count>ul>li")).size();
+		for(int i=2; i<pageCount; i++)
+		{
+			js.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.page-count>ul>li:nth-of-type("+i+")>a")));
+			for(WebElement element: elements) {
+			j++;
+			String fiName= element.getText();
+			if(fiName.contains(config.getProperty("addFi_FinancialInstiutionName"))) {
+				flag= true;
+				String num= String.valueOf(j);
+				scrollToElement(("fi_Table"));
+				js.executeScript("arguments[0].click();", getElement("fi_Table_Parametrized",num));
+				break;
+			}
+		}
+			if(flag) {
+				break;
+			}
+		
+	}
 	
 	}
+	
+	public boolean verify_FiName() {
+		boolean flag= false;
+		scrollToElement("addFi_FinancialInstiutionName");
+		String inputVal= getElement("addFi_FinancialInstiutionName").getAttribute("value");
+		System.out.println(inputVal);
+		if(inputVal.equalsIgnoreCase(getVal))
+			flag= true;
+		return flag;
+	}
 
-
+}
 

@@ -225,6 +225,7 @@ public class RegressionCases extends BaseClass implements ITestListener{
         homePage.enterDataOn_OtherDetaislAssestSize();
         homePage.clickSaveButton();
         softAssert.assertEquals(homePage.verifyUserCreationMessageIsDisplayed(), true, "Add Fi User creation message don't get displayed upon creatin new FI user");
+        loginPage.logout();
         softAssert.assertAll();
     }
     @Test(testName = "TC_UC20_10", description =  "Verify User views Edit & Save Add User Details Flow ", priority = 07)
