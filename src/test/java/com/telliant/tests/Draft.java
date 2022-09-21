@@ -59,8 +59,8 @@ public class Draft extends BaseClass implements ITestListener{
         homePage.clickSaveButton();
         softAssert.assertEquals(homePage.verifyUserCreationMessageIsDisplayed(), true, "Add Fi User creation message don't get displayed upon creatin new FI user");
         softAssert.assertEquals(homePage.verify_FiName(), true, "Updated name don't get displayed on FI-Name field");
+        homePage.click_ToastMessage();
         loginPage.logout();
         softAssert.assertAll();     	
-	}
-	
+	}	
 }

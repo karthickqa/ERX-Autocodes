@@ -1215,13 +1215,20 @@ public void click_Open_credits_field() throws InterruptedException {
 		type("addFi_Licensed_LicensedMaturityDate", config.getProperty("addFi_LicensedMaturityDate"));
 	}
 	
-	public ArrayList<String> getAccountManagerList() {
+	public ArrayList<String> getAccountManagerList(){
 		arrayList.clear();
-		int pageCount= driver.findElements(By.cssSelector("div.page-count>ul>li")).size();
-		for(int i=2; i<pageCount; i++)
-		{
-			JavascriptExecutor jsp= (JavascriptExecutor) driver;
-			jsp.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.page-count>ul>li:nth-of-type("+i+")>a")));
+		JavascriptExecutor jsp= (JavascriptExecutor) driver;
+		selectDropdownByValue("rowsToDisplayDropdown", config.getProperty("rowsPerPage"));
+		String rowsCount= getElement("totalRowsCount").getText();
+		String[] splitTotalRowsCount= rowsCount.split(" ", 2);
+		int totalRows= Integer.parseInt(splitTotalRowsCount[0]);
+		//System.out.println("TotalRows: "+ totalRows);
+		int pageCount= (totalRows/10)+1;
+		//System.out.println("pageCount: "+ pageCount);
+		for(int i=1; i<=pageCount; i++) {
+			if(i>1) {
+				jsp.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.page-count>ul>li:nth-of-type(5)>a")));
+			}
 			int rowCount= driver.findElements(By.cssSelector("table#userlist>tbody>tr")).size();
 			for(int j=1; j<=rowCount; j++) {
 				jsp.executeScript("arguments[0].scrollIntoView();",driver.findElement(By.cssSelector("table#userlist>tbody>tr:nth-of-type("+j+")>td:nth-of-type(8)")));
@@ -1231,7 +1238,7 @@ public void click_Open_credits_field() throws InterruptedException {
 					String userName= driver.findElement(By.cssSelector("table#userlist>tbody>tr:nth-of-type("+j+")>td:nth-of-type(4)")).getText();
 					arrayList.add(userName);
 				}
-			}
+			}	
 		}
 		return arrayList;
 	}
@@ -1393,31 +1400,45 @@ public void click_Open_credits_field() throws InterruptedException {
            waitForElementClickable("Save_Button");
          clickElement("Save_Button");  
          clickElement("Toast_Container");
-	public void click_EditButtonOnFiAdminUser() throws InterruptedException {
-		List<WebElement> elements= getElements("fi_Table");
-		boolean flag= false;
-		JavascriptExecutor js= (JavascriptExecutor) driver;
-		int j=0;
-		int pageCount= driver.findElements(By.cssSelector("div.page-count>ul>li")).size();
-		for(int i=2; i<pageCount; i++)
-		{
-			js.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.page-count>ul>li:nth-of-type("+i+")>a")));
-			for(WebElement element: elements) {
-			j++;
-			String fiName= element.getText();
-			if(fiName.contains(config.getProperty("addFi_FinancialInstiutionName"))) {
-				flag= true;
-				String num= String.valueOf(j);
-				scrollToElement(("fi_Table"));
-				js.executeScript("arguments[0].click();", getElement("fi_Table_Parametrized",num));
-				break;
-			}
-		}
-			if(flag) {
-				break;
-			}
-	     	
-      }
+      } 
+        
+      public void click_EditButtonOnFiAdminUser() throws InterruptedException {
+  		boolean flag= false;
+  		JavascriptExecutor js= (JavascriptExecutor) driver;
+  		selectDropdownByValue("rowsToDisplayDropdown", config.getProperty("rowsPerPage"));
+  		String rowsCount= getElement("totalRowsCount").getText();
+  		String[] splitTotalRowsCount= rowsCount.split(" ", 2);
+  		int totalRows= Integer.parseInt(splitTotalRowsCount[0]);
+  		//System.out.println("TotalRows: "+ totalRows);
+  		int pageCount= (totalRows/10)+1;
+  		//System.out.println("pageCount: "+ pageCount);
+  		for(int i=1; i<=pageCount; i++) {
+  			int j=0;
+  			if(i>1) {
+  				js.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.page-count>ul>li:nth-of-type(5)>a")));
+  			}
+  			//js.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.page-count>ul>li:nth-of-type("+i+")>a")));
+  			List<WebElement> elements= getElements("fi_Table");
+  			for(WebElement element: elements) {
+  			j++;
+  			js.executeScript("arguments[0].scrollIntoView();", element);
+  			String fiName= element.getText();
+  			if(fiName.contains(config.getProperty("addFi_FinancialInstiutionName"))) {
+  				flag= true;
+  				String num= String.valueOf(j);
+  				scrollToElement(("fi_Table"));
+  				js.executeScript("arguments[0].click();", getElement("fi_Table_Parametrized",num));
+  				//js.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.table-responsive>table>tbody>tr:nth-of-type("+j+")>td:nth-of-type(9)>a>i")));
+  				break;
+  			}
+  		}
+  			if(flag) {
+  				break;
+  			}
+  		
+  	}
+  	
+   }
       public void click_User_Cancel_Delete() {  
              clickElement("Sidebar_Icon");
              clickElement("User_Admin_Menu");  
@@ -1442,6 +1463,7 @@ public void click_Open_credits_field() throws InterruptedException {
              clickElement("Delete_Button");  
              clickElement("Toast_Container");
       }
+      
       public void Create_New_Business() {  
              clickElement("Sidebar_Icon");
              scrollToElement("Business_Admin_Menu");
@@ -1458,21 +1480,31 @@ public void click_Open_credits_field() throws InterruptedException {
              type("Business_State", config.getProperty("Business_State"));
              type("Zipcode", config.getProperty("Zipcode"));
              type("NAICS_Industry_Code", config.getProperty("NAICS_Industry_Code"));
-      
       	
    }
-    }
-        	}
+
 	
-       		public boolean verify_FiName() {
-		boolean flag= false;
-		scrollToElement("addFi_FinancialInstiutionName");
-		String inputVal= getElement("addFi_FinancialInstiutionName").getAttribute("value");
-		System.out.println(inputVal);
-		if(inputVal.equalsIgnoreCase(getVal))
-			flag= true;
-		return flag;
-	}
+      public boolean verify_FiName() {
+  		boolean flag= false;
+  		scrollToElement("addFi_FinancialInstiutionName");
+  		String inputVal= getElement("addFi_FinancialInstiutionName").getAttribute("value");
+  		//System.out.println(inputVal);
+  		//System.out.println("GET VAL: "+ getVal);
+  		if(inputVal.equalsIgnoreCase(getVal))
+  			flag= true;
+  		return flag;
+  	}
+  	
+  	public void click_ToastMessage() {
+  		boolean flag=false;
+  		try {
+  			flag= getElement("toast_UserUpdatedSuccessfully").isDisplayed();
+  		}catch(NoSuchElementException e) {
+  			System.out.println(e);
+  		}
+  		if(flag)
+  			getElement("toast_UserUpdatedSuccessfully").click();
+  	}
 
 }
 
