@@ -10,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -25,6 +26,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.ClickAction;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -905,6 +907,7 @@ public void click_Open_credits_field() throws InterruptedException {
 		clickElement("Save_Btn_FI_TB");
 		clickElement("Toast_Container");
 		clickElement("Toast_Container");
+		clickElement("Toast_Container");
 	}
 	public void updateEmpmailId() throws IOException { 
 		 
@@ -1077,7 +1080,10 @@ public void click_Open_credits_field() throws InterruptedException {
 	}
 	
 	public void enterDataOn_FinancialInstiution() {
-		type(("addFi_FinancialInstiutionName"), config.getProperty("addFi_FinancialInstiutionName")+randStrGen("N", 3));
+		
+		//type(("addFi_FinancialInstiutionName"), config.getProperty("addFi_FinancialInstiutionName")+randStrGen("N", 3));
+		String S1= config.getProperty("addFi_FinancialInstiutionName")+randStrGen("N", 3);
+		type(("addFi_FinancialInstiutionName"), S1);
 		type(("addFi_Address1"), config.getProperty("addFi_Address1"));
 		type(("addFi_Address2"), config.getProperty("addFi_Address2"));
 		type(("addFi_City"), config.getProperty("addFi_City"));
@@ -1085,6 +1091,8 @@ public void click_Open_credits_field() throws InterruptedException {
 		type(("addFi_ZipCode"), config.getProperty("addFi_ZipCode"));
 		getVal= getElement("addFi_FinancialInstiutionName").getAttribute("value");
 		System.out.println(getVal);
+		ExcelMethods.putData("Sheet1", "Finame", 1, S1); 
+		System.out.println("the string value is  " +S1);
 	}
 	
 	public void enterDataOn_ServiceLevelFeeStrucure1() {
@@ -1299,7 +1307,92 @@ public void click_Open_credits_field() throws InterruptedException {
 	public boolean verify_Terminated_Status_Grid_FI() {
 		 return verifyDialogHeader(getElement("Grid_Status_FI"), config.getProperty("Terminated_Status"));
 	}
-	
+	public void Add_User_Flow_FI() {
+		clickElement("Toast_Container");
+		clickElement("toogleButton_FiAdmin");
+		
+	}
+        public void Select_new_Protfolio() {
+        	clickElement("Toast_Container");
+        	clickElement("add_Protfolio_Tab");
+        	BaseClass.refresh();
+        	String s1 = ExcelMethods.getData("Sheet1", "Finame", 1);
+        	  Select select = new Select(driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div/app-lending-watchdog/lv-add-portfolio/app-add-portfolio-utils/section/div[1]/div/div[1]/div[1]/div/select")));
+            List<WebElement> optionElements = driver.findElement(By.cssSelector("#mainContent > div > app-lending-watchdog > lv-add-portfolio > app-add-portfolio-utils > section > div.CustomTab > div > div.card-header > div:nth-child(1) > div > select")).findElements(By.tagName("option"));
+
+            for (WebElement optionElement: optionElements) {
+                if (optionElement.getText().contains(s1)) {
+                    String optionIndex = optionElement.getAttribute("index");
+                    select.selectByIndex(Integer.parseInt(optionIndex));
+                    break;   
+                }
+            }
+        }
+            public void Create_new_Protfolio() {
+            	waitForElementClickable("Add_Icon_Protfolio");
+            clickElement("Add_Icon_Protfolio");
+            waitForElementClickable("Protfolio_Name_Field");
+            type("Protfolio_Name_Field",config.getProperty("Protfolio_name"));
+            clickElement("Create_Protfolio_Icon");
+            clickElement("Toast_Container");
+            }
+            
+            public void Navigate_To_FI() {
+            	clickElement("Sidemenu_FI_Admin");
+            	scrollToElement("ScrollTo_Dropdown");
+            	clickElement("Click_FI_RowSelection_Dropdown");
+            	clickElement("Click_FI_RowSelection_Dropdown_Value");
+            	scrollToElement("Search_FIname");
+        		type("Search_FIname",ExcelMethods.getData("Sheet1", "Finame", 1));
+        		clickElement("Edit_FI");
+            }
+            public void click_Sidebar_Icon() {
+                clickElement("Sidebar_Icon");  
+        }
+                                                         
+         public void click_Add_User_Admin_Menu() {  
+             clickElement("Sidebar_Icon");
+             clickElement("User_Admin_Menu");
+             clickElement("Sidebar_Icon");
+             type("First_Name", config.getProperty("First_Name"));
+             type("Last_Name", config.getProperty("Last_Name"));
+             type("Contact_Name", config.getProperty("Contact_Name"));
+             type("Contact_Number", config.getProperty("Contact_Number"));
+             type("Contact_Title", config.getProperty("Contact_Title"));
+             type("Email_Address", config.getProperty("Email_Address"));
+             clickElement("ContactSecurityRole_Dropdown");
+             clickElement("Administrator_Dropdown");
+             clickElement("Account_Manager_Dropdown");
+             clickElement("Viewer_Dropdown");
+             clickElement("Save_Button");   
+       }
+	        
+          public boolean verifyLV_User_Admin_Page_Title() {
+           return verifyDialogHeader(getElement("LV_User_Admin_Page_Title"), config.getProperty("Lendovative User Admin"));
+          }
+          public void click_User_Admin_Menu() {   
+           clickElement("User_Admin_Menu");
+          }
+       
+      public void click_User_Edit_Save() {  
+         clickElement("Sidebar_Icon");
+       clickElement("User_Admin_Menu");
+       clickElement("Sidebar_Icon");
+       scrollToElement("Edit_Button");
+       waitForElementClickable("Edit_Button");
+           clickElement("Edit_Button");
+       type("First_Name", config.getProperty("First_Name"));
+         type("Last_Name", config.getProperty("Last_Name"));
+         type("Contact_Name", config.getProperty("Contact_Name"));
+         type("Contact_Number", config.getProperty("Contact_Number"));
+         type("Contact_Title", config.getProperty("Contact_Title"));
+         type("Email_Address", config.getProperty("Email_Address"));
+         clickElement("ContactSecurityRole_Dropdown");
+         clickElement("Administrator_Dropdown");
+         scrollToElement("Save_Button");
+           waitForElementClickable("Save_Button");
+         clickElement("Save_Button");  
+         clickElement("Toast_Container");
 	public void click_EditButtonOnFiAdminUser() throws InterruptedException {
 		List<WebElement> elements= getElements("fi_Table");
 		boolean flag= false;
@@ -1323,12 +1416,55 @@ public void click_Open_credits_field() throws InterruptedException {
 			if(flag) {
 				break;
 			}
-		
-	}
+	     	
+      }
+      public void click_User_Cancel_Delete() {  
+             clickElement("Sidebar_Icon");
+             clickElement("User_Admin_Menu");  
+             clickElement("Sidebar_Icon");
+             scrollToElement("Edit_Button");
+               waitForElementClickable("Edit_Button");
+             clickElement("Edit_Button");
+             type("First_Name", config.getProperty("First_Name"));
+             type("Last_Name", config.getProperty("Last_Name"));
+             type("Contact_Name", config.getProperty("Contact_Name"));
+             type("Contact_Number", config.getProperty("Contact_Number"));
+             type("Contact_Title", config.getProperty("Contact_Title"));
+             type("Email_Address", config.getProperty("Email_Address"));
+             clickElement("ContactSecurityRole_Dropdown");
+             clickElement("Administrator_Dropdown");
+               scrollToElement("Cancel_Button");
+               waitForElementClickable("Cancel_Button");
+             clickElement("Cancel_Button");
+             scrollToElement("Page_2");
+               waitForElementClickable("Page_2");
+             clickElement("Page_2");
+             clickElement("Delete_Button");  
+             clickElement("Toast_Container");
+      }
+      public void Create_New_Business() {  
+             clickElement("Sidebar_Icon");
+             scrollToElement("Business_Admin_Menu");
+               waitForElementClickable("Business_Admin_Menu");
+             clickElement("Business_Admin_Menu");
+             clickElement("Sidebar_Icon");
+             clickElement("Add_Business_Button");
+             type("Business_Name", config.getProperty("Business_Name"));
+             type("Business_Phone", config.getProperty("Business_Phone"));
+             type("Business_Email", config.getProperty("Business_Email"));
+             type("Business_Address_Line1", config.getProperty("Business_Address_Line1"));
+             type("Business_Address_Line2", config.getProperty("Business_Address_Line2"));
+             type("Business_city", config.getProperty("Business_city"));
+             type("Business_State", config.getProperty("Business_State"));
+             type("Zipcode", config.getProperty("Zipcode"));
+             type("NAICS_Industry_Code", config.getProperty("NAICS_Industry_Code"));
+      
+      	
+   }
+    }
+        	}
 	
-	}
-	
-	public boolean verify_FiName() {
+       		public boolean verify_FiName() {
 		boolean flag= false;
 		scrollToElement("addFi_FinancialInstiutionName");
 		String inputVal= getElement("addFi_FinancialInstiutionName").getAttribute("value");
