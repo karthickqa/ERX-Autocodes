@@ -969,6 +969,7 @@ public void click_Open_credits_field() throws InterruptedException {
 		clickElement("AddUser_Tab_FI");
 		 type("Search_FIname",config.getProperty("Search_Business_name_Automation"));
 		scrollToElement("Edit_User_FI");
+		clickElement("Edit_User_FI");
 		type("First_Name_FI_TB",config.getProperty("First_Name_FI_TB_Edit"));
 		type("Last_Name_FI_TB", config.getProperty("Last_Name_FI_TB_Edit"));
 		type("Contact_Name_FI_TB", config.getProperty("Contact_Name_FI_TB_Edit"));
