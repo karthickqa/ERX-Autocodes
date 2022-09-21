@@ -865,6 +865,7 @@ public void click_Open_credits_field() throws InterruptedException {
 		clickElement("Edit_FI");
 	}
 	public void click_Add_Admin_User() {
+		waitForElementClickable("AddUser_Tab_FI");
 		clickElement("AddUser_Tab_FI");
 		type("First_Name_FI_TB",config.getProperty("First_Name_FI_TB"));
 		type("Last_Name_FI_TB", config.getProperty("Last_Name_FI_TB"));
@@ -966,7 +967,8 @@ public void click_Open_credits_field() throws InterruptedException {
 	
 	public void click_Edit_flow_FI_User() {
 		clickElement("AddUser_Tab_FI");
-		clickElement("Edit_User_FI");
+		 type("Search_FIname",config.getProperty("Search_Business_name_Automation"));
+		scrollToElement("Edit_User_FI");
 		type("First_Name_FI_TB",config.getProperty("First_Name_FI_TB_Edit"));
 		type("Last_Name_FI_TB", config.getProperty("Last_Name_FI_TB_Edit"));
 		type("Contact_Name_FI_TB", config.getProperty("Contact_Name_FI_TB_Edit"));
@@ -1505,6 +1507,62 @@ public void click_Open_credits_field() throws InterruptedException {
   		if(flag)
   			getElement("toast_UserUpdatedSuccessfully").click();
   	}
+  	 public void Validate_To_Business_Admin_Tab() {  
+         clickElement("Business_Admin_Tab");
+         scrollToElement("ScrollTo_Dropdown");
+         clickElement("Click_FI_RowSelection_Dropdown");
+         clickElement("Click_FI_RowSelection_Dropdown_Value");
+         scrollToElement("Search_FIname");
+         type("Search_FIname",config.getProperty("Search_Business_name"));
+         clickElement("Edit_FI");
+        
+         
+     }
+     public void click_Add_Admin_Business_User() {
+ 		waitForElementClickable("AddUser_Tab_FI");
+ 		clickElement("AddUser_Tab_FI");
+ 		type("First_Name_FI_TB",config.getProperty("First_Name_FI_TB"));
+ 		type("Last_Name_FI_TB", config.getProperty("Last_Name_FI_TB"));
+ 		type("Contact_Name_FI_TB", config.getProperty("Contact_Name_FI_TB"));
+ 		type("Contact_Number_FI_TB", config.getProperty("Contact_Number_FI_TB"));
+ 		type("Email_Address_FI_TB", ExcelMethods.getData("Sheet1", "emailID", 1));
+ 		type("Contact_Title_FI_TB", config.getProperty("Contact_Title_FI_TB"));
+ 		clickElement("Role_FI_TB");
+ 		clickElement("Administrator_FI_TB");
+ 		clickElement("isPrimaryAdmin_Dwn_FI_TB");
+ 		try {
+ 			clickElement("isPrimaryAdmin_Dwn_Yes_BA");
+ 			
+ 		} catch (Exception e) {
+ 			// TODO: handle exception
+ 			clickElement("isPrimaryAdmin_Dwn_No_BA");
+ 		}
+ 		clickElement("User_Status_FI_TB");
+ 		clickElement("Restricted_dwn_value_FI_TB");
+ 		clickElement("Save_Btn_FI_TB");
+ 		clickElement("Toast_Container");
+ 		clickElement("Toast_Container");
+ 		clickElement("Toast_Container");
+ 		clickElement("Toast_Container");
+ 	}
+     public void click_Add_Viewer_Business_User() {
+   		waitForElementClickable("AddUser_Tab_FI");
+   		clickElement("AddUser_Tab_FI");
+   		type("First_Name_FI_TB",config.getProperty("First_Name_FI_TB"));
+   		type("Last_Name_FI_TB", config.getProperty("Last_Name_FI_TB"));
+   		type("Contact_Name_FI_TB", config.getProperty("Contact_Name_FI_TB"));
+   		type("Contact_Number_FI_TB", config.getProperty("Contact_Number_FI_TB"));
+   		type("Email_Address_FI_TB", ExcelMethods.getData("Sheet1", "emailID", 1));
+   		type("Contact_Title_FI_TB", config.getProperty("Contact_Title_FI_TB"));
+   		clickElement("Role_FI_TB");
+   		clickElement("Viewer_Value_BA");
+   		clickElement("User_Status_FI_TB");
+     		clickElement("Restricted_dwn_value_FI_TB");
+     		clickElement("Save_Btn_FI_TB");
+     		clickElement("Toast_Container");
+     		clickElement("Toast_Container");
+     
+     }
 
 }
 
