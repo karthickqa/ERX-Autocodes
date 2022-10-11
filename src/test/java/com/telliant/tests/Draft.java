@@ -23,7 +23,7 @@ public class Draft extends BaseClass implements ITestListener{
 	LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 	ExcelMethods excel = PageFactory.initElements(driver, ExcelMethods.class);
 	HomePage homePage = PageFactory.initElements(driver, HomePage.class);
-	
+
 	@Test(testName = "TC_UC20_09", description =  "Verify User views Edit & Save FI details Flow", priority = 9)
 	public void TC_09_Verify_User_views_EditAndSave_FI_details_Flow() throws InterruptedException, AWTException{
 		launchURL(config.getProperty("url"));
@@ -43,7 +43,7 @@ public class Draft extends BaseClass implements ITestListener{
         homePage.enterDataOn_ServiceLevelFeeStrucure1();
         homePage.enterDataOn_ServiceLevelFeeStrucure2();
         homePage.enterDataOn_ServiceLevelFeeStrucure3();
-        
+
         homePage.enterDataOn_LicensedDate();
         homePage.enterDataOn_LicenseRateCommission();
         homePage.enterDataOn_LicensedMaturityDate();
@@ -61,6 +61,7 @@ public class Draft extends BaseClass implements ITestListener{
         softAssert.assertEquals(homePage.verify_FiName(), true, "Updated name don't get displayed on FI-Name field");
         homePage.click_ToastMessage();
         loginPage.logout();
-        softAssert.assertAll();     	
-	}	
+        softAssert.assertAll();
+        softAssert.assertAll();
+	}
 }
