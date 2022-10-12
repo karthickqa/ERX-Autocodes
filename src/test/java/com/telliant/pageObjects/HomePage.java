@@ -3,6 +3,8 @@ package com.telliant.pageObjects;
 
 import java.awt.AWTException;
 import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
@@ -1564,6 +1566,106 @@ public void click_Open_credits_field() throws InterruptedException {
      		clickElement("Toast_Container");
      
      }
+     public void Navigate_To_Support_Resource_Page() {
+    	 waitForElementClickable("toogleButton_FiAdmin");
+		 clickElement("toogleButton_FiAdmin");
+    	 waitForElementClickable("More_Value");
+ 	 	clickElement("More_Value");
+    		waitForElementClickable("Add_Support_Resources_Side_Menu");
+    		clickElement("Add_Support_Resources_Side_Menu");
+    		clickElement("toogleButton_FiAdmin");
+   		// clickElement("Documents_Tab");		 
+     }
+     public void Navigate_To_Industry_News_Tab() {
+    	 clickElement("Industry_News_Tab");
+     }
+	public void Navigate_To_Tutorials_Tab() {
+	 clickElement("Tutorials_Tab");
+     }
+	public void Navigate_To_Ancillary_Product_Information_Tab() {
+	 clickElement("Ancillary_Product_Information_Tab");
+	}
+	public void Navigate_To_Documents_Tab() {
+	 clickElement("Documents_Tab"); 
+	 
+	}
+     public boolean verify_Documents_Tab() {
+		 return verifyDialogHeader(getElement("Documents_Tab"), config.getProperty("Documents_Tab"));
+	}
+     public boolean verify_Industry_News_Tab() {
+		 return verifyDialogHeader(getElement("Industry_News_Tab"), config.getProperty("Industry_News_Tab"));
+	}
+     public boolean verify_Tutorials_Tab() {
+		 return verifyDialogHeader(getElement("Tutorials_Tab"), config.getProperty("Tutorials_Tab"));
+	}
+     public boolean verify_Ancillary_Product_Information_Tab() {
+		 return verifyDialogHeader(getElement("Ancillary_Product_Information_Tab"), config.getProperty("Ancillary_Product_Information_Tab"));
+	}
+     public boolean verify_AddDocument_Button() {
+		 return verifyDialogHeader(getElement("Add_Document_Button"), config.getProperty("Add_Document_Button"));
+	}
+     public void Add_Support_Document_Visible_for_Financial_Institution() throws IOException, InterruptedException {
+    	 clickElement("Add_Document_Button");
+    	 Thread.sleep(3000);
+    	 Runtime.getRuntime().exec("D:\\AutoIt\\Upload.exe");
+    	 Thread.sleep(3000);
+    	 clickElement("Document_Visible_for_Financial_Institution");
+    	 //clickElement("Document_Cancel_Btn");
+    	 clickElement("Document_Add_Btn");
+    	 waitForElementClickable("Toast_Container");
+    	 clickElement("Toast_Container");
+    	 
+    	}
+     public void Add_Support_Document_Visible_for_Business() throws IOException, InterruptedException {
+    	 clickElement("Add_Document_Button");
+    	 Thread.sleep(3000);
+    	 Runtime.getRuntime().exec("D:\\AutoIt\\Upload.exe");
+    	 Thread.sleep(3000);
+    	 clickElement("Document_Visible_for_Business");
+    	 //clickElement("Document_Cancel_Btn");
+    	 clickElement("Document_Add_Btn");
+    	 waitForElementClickable("Toast_Container");
+    	 clickElement("Toast_Container");
+    	 
+    	}
+     public void Add_Support_Document_Visible_for_Both() throws IOException, InterruptedException {
+    	 clickElement("Add_Document_Button");
+    	 Thread.sleep(3000);
+    	 Runtime.getRuntime().exec("D:\\AutoIt\\Upload.exe");
+    	 Thread.sleep(3000);
+    	 clickElement("Document_Visible_for_Both");
+    	 //clickElement("Document_Cancel_Btn");
+    	 clickElement("Document_Add_Btn");
+    	 waitForElementClickable("Toast_Container");
+    	 clickElement("Toast_Container");
+    	 
+    	}
+     public void Verify_Support_Document_Visible_for_Financial_Institution() throws IOException, InterruptedException {
+    	
+    	 clickElement("Fi_Support_Document_PAge");
+    	 scrollToElement("ScrollTo_Dropdown");
+     	clickElement("Click_FI_RowSelection_Dropdown1");
+     	clickElement("Click_FI_RowSelection_Dropdown_Value");
+     	scrollToElement("Search_FIname");
+    	//clickElement("searchTextBox");
+ 		type("searchTextBox", config.getProperty("searchText_support_Resource"));
+ 		
+     }
+     public void Verify_Support_Document_Visible_for_Business() throws IOException, InterruptedException {
+     	
+    	 clickElement("Business_Support_Document_PAge");
+    	 scrollToElement("ScrollTo_Dropdown");
+     	clickElement("Click_FI_RowSelection_Dropdown1");
+     	clickElement("Click_FI_RowSelection_Dropdown_Value");
+     	scrollToElement("Search_FIname");
+    	//clickElement("searchTextBox");
+ 		type("searchTextBox", config.getProperty("searchText_support_Resource"));
+ 		
+     }
+     public boolean verify_Added_Document() {
+		 return verifyDialogHeader(getElement("Document_Name"), config.getProperty("searchText_support_Resource"));
+	}
+ 		
 
 }
 
