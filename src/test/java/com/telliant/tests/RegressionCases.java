@@ -516,5 +516,43 @@ public class RegressionCases extends BaseClass implements ITestListener{
        		homePage.Cancel_btn();
        		softAssert.assertAll();
        	  }
+       	@Test(testName = "TC_UC24_01", description =  "Verify User views Lendovative Add Support resource Document", priority = 12)
+    	public void TC_UC24_01_Verify_User_views_Lendovative_Add_Support_resource_Document() throws InterruptedException, AWTException,IOException{
+    		launchURL(config.getProperty("url"));
+    		String ValidateUrl=driver.getCurrentUrl();
+    		ValidateUrl.equalsIgnoreCase(config.getProperty("url"));
+    	 	driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+    		  loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
+    		  waitForPageGetsLoad();
+    		  homePage.Navigate_To_Support_Resource_Page();
+    		  softAssert.assertEquals(homePage.verify_Documents_Tab(), true, "Title is not displaying as Documents");
+    		  homePage.Navigate_To_Industry_News_Tab();
+    		  softAssert.assertEquals(homePage.verify_Industry_News_Tab(), true, "Title is not displaying as Industry News ");
+    		  homePage.Navigate_To_Tutorials_Tab();
+    		  softAssert.assertEquals(homePage.verify_Tutorials_Tab(), true, "Title is not displaying as Tutorials");
+    		  homePage.Navigate_To_Ancillary_Product_Information_Tab();
+    		  softAssert.assertEquals(homePage.verify_Ancillary_Product_Information_Tab(), true, "Title is not displaying as Ancillary Product Information");
+    		  homePage.Navigate_To_Documents_Tab();
+    		  homePage.Add_Support_Document_Visible_for_Financial_Institution();
+    		  waitForPageGetsLoad();
+    		  homePage.Add_Support_Document_Visible_for_Business();
+    		  waitForPageGetsLoad();
+    		  homePage.Add_Support_Document_Visible_for_Both();
+    		  Thread.sleep(10000);
+    		  //softAssert.assertEquals(homePage.verify_AddDocument_Button(), true, "Page is not displaying as Add document Button");
+    		  loginPage.logout();
+    		  BaseClass.refresh();
+    		  loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 7), ExcelMethods.getData("Sheet1", "Password", 7)); 
+    		 	waitForPageGetsLoad();
+    		 	homePage.Verify_Support_Document_Visible_for_Financial_Institution();
+    		 	softAssert.assertEquals(homePage.verify_Added_Document(), true, "Added Document is not getting displayed");
+    		 	loginPage.logout();
+    		 	BaseClass.refresh();
+    		 	loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 11), ExcelMethods.getData("Sheet1", "Password", 11));
+    		 	homePage.Verify_Support_Document_Visible_for_Business();
+    		 	softAssert.assertEquals(homePage.verify_Added_Document(), true, "Added Document is not getting displayed");
+    		 	loginPage.logout();
+    			softAssert.assertAll();
+    	}	
              
 }
