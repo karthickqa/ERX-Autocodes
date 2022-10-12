@@ -1642,7 +1642,7 @@ public void click_Open_credits_field() throws InterruptedException {
     	}
      public void Verify_Support_Document_Visible_for_Financial_Institution() throws IOException, InterruptedException {
     	
-    	 clickElement("Fi_Support_Document_PAge");
+    	// clickElement("Fi_Support_Document_PAge");
     	 scrollToElement("ScrollTo_Dropdown");
      	clickElement("Click_FI_RowSelection_Dropdown1");
      	clickElement("Click_FI_RowSelection_Dropdown_Value");
@@ -1653,8 +1653,9 @@ public void click_Open_credits_field() throws InterruptedException {
      }
      public void Verify_Support_Document_Visible_for_Business() throws IOException, InterruptedException {
      	
-    	 clickElement("Business_Support_Document_PAge");
+    	// clickElement("Business_Support_Document_PAge");
     	 scrollToElement("ScrollTo_Dropdown");
+    	 waitForElementClickable("Click_FI_RowSelection_Dropdown1");
      	clickElement("Click_FI_RowSelection_Dropdown1");
      	clickElement("Click_FI_RowSelection_Dropdown_Value");
      	scrollToElement("Search_FIname");
@@ -1665,7 +1666,21 @@ public void click_Open_credits_field() throws InterruptedException {
      public boolean verify_Added_Document() {
 		 return verifyDialogHeader(getElement("Document_Name"), config.getProperty("searchText_support_Resource"));
 	}
- 		
-
+    
+     public void Navigate_Fi_Support_Document_PAge(){
+    	 clickElement("Fi_Support_Document_PAge");
+      }
+      
+     public void Navigate_Business_Support_Document_PAge(){
+    		 clickElement("Business_Support_Document_PAge");
+      } 	
+     public void Verify_Cancel_Flow() throws IOException, InterruptedException {
+    	 clickElement("Add_Document_Button");
+    	 Thread.sleep(3000);
+    	 Runtime.getRuntime().exec("D:\\AutoIt\\Upload.exe");
+    	 Thread.sleep(3000);
+    	 clickElement("Document_Visible_for_Financial_Institution");
+    	 clickElement("Document_Cancel_Btn");
+     }
 }
 
