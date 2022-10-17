@@ -1570,7 +1570,7 @@ public void click_Open_credits_field() throws InterruptedException {
     	 waitForElementClickable("toogleButton_FiAdmin");
 		 clickElement("toogleButton_FiAdmin");
     	 waitForElementClickable("More_Value");
- 	 	clickElement("More_Value");
+ 	   	 clickElement("More_Value");
     		waitForElementClickable("Add_Support_Resources_Side_Menu");
     		clickElement("Add_Support_Resources_Side_Menu");
     		clickElement("toogleButton_FiAdmin");
@@ -1682,5 +1682,26 @@ public void click_Open_credits_field() throws InterruptedException {
     	 clickElement("Document_Visible_for_Financial_Institution");
     	 clickElement("Document_Cancel_Btn");
      }
+     public void Download_Support_Document() {
+    	 scrollToElement("ScrollTo_Dropdown");
+    	 waitForElementClickable("Click_FI_RowSelection_Dropdown1");
+      	clickElement("Click_FI_RowSelection_Dropdown1");
+      	clickElement("Click_FI_RowSelection_Dropdown_Value");
+      	scrollToElement("Search_FIname");
+  		type("searchTextBox", config.getProperty("searchText_support_Resource"));
+  		clickElement("Download_Supportt_Document");
+     }
+
+     public void Delete_Support_Document() {
+	     scrollToElement("ScrollTo_Dropdown");
+    	 waitForElementClickable("Click_FI_RowSelection_Dropdown1");
+    	 clickElement("Click_FI_RowSelection_Dropdown1");
+    	 clickElement("Click_FI_RowSelection_Dropdown_Value");
+    	 scrollToElement("Search_FIname");
+    	 type("searchTextBox", config.getProperty("searchText_support_Resource"));
+    	 clickElement("Delete_Support_Document");
+    	 clickElement("Toast_Container");
+     }
+     
 }
 

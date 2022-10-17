@@ -617,5 +617,17 @@ public class RegressionCases extends BaseClass implements ITestListener{
     		  softAssert.assertEquals(homePage.verify_Added_Document(), true, "Added Document is not getting displayed");
     		  loginPage.logout();
     		  softAssert.assertAll();
-    }          
+    }      
+       	@Test(testName = "TC_UC24_03", description =  "Verify User views  Lendovative  Download & Delete Document", priority = 14)
+    	public void TC_UC24_03_Verify_User_views_Lendovative_Download_Delete_Document() throws InterruptedException, AWTException,IOException{
+    		launchURL(config.getProperty("url"));
+    		String ValidateUrl=driver.getCurrentUrl();
+    		ValidateUrl.equalsIgnoreCase(config.getProperty("url"));
+    	 	driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+    		  loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
+    		  waitForPageGetsLoad();
+    		  homePage.Navigate_To_Support_Resource_Page();
+    		  homePage.Download_Support_Document();
+    		  homePage. Delete_Support_Document();
+       	}
 }
