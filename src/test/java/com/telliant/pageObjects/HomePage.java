@@ -1702,6 +1702,46 @@ public void click_Open_credits_field() throws InterruptedException {
     	 clickElement("Delete_Support_Document");
     	 clickElement("Toast_Container");
      }
+     public void Navigate_To_Communication_Center_Page() {
+    	 waitForElementClickable("toogleButton_FiAdmin");
+		 clickElement("toogleButton_FiAdmin");
+    	 waitForElementClickable("More_Value");
+ 	   	 clickElement("More_Value");
+    		waitForElementClickable("Communication_Center_Page");
+    		clickElement("Communication_Center_Page");
+    		clickElement("toogleButton_FiAdmin");
+     }
+     public void Mail_Intiate_Flow() throws IOException, InterruptedException{
+    	 waitForElementClickable("Input_To");
+		 clickElement("Input_To");
+		 type("Input_To", config.getProperty("To_Mail"));
+    	 waitForElementClickable("Input_To_option");
+    	 clickElement("Input_To_option");
+    	 waitForElementClickable("Input_CC");
+		 clickElement("Input_CC");
+		 type("Input_CC", config.getProperty("Cc_Mail"));
+    	 waitForElementClickable("Input_To_option");
+    	 clickElement("Input_To_option");
+    	 clickElement("Subject_CC");
+		 type("Subject_CC", config.getProperty("Subject_mail"));
+		 clickElement("Mail_body");
+		 type("Mail_body", config.getProperty("Mail_body"));
+		 clickElement("Mail_Attachment");
+		 Thread.sleep(3000);
+    	 Runtime.getRuntime().exec("D:\\AutoIt\\Upload.exe");
+    	 Thread.sleep(3000);
+    	 clickElement("Image_attachment");
+    	 Thread.sleep(3000);
+    	 Runtime.getRuntime().exec("D:\\AutoIt\\Image.exe");
+    	 Thread.sleep(3000);
+    	 clickElement("video_attachment");
+    	 Thread.sleep(3000);
+    	 Runtime.getRuntime().exec("D:\\AutoIt\\Video.exe");
+    	 Thread.sleep(3000);
+     }
+     public void Send_mail_cc() {
+    	 clickElement("Send_Button_CC");
+    	 clickElement("Toast_Container");    	 
+     }
      
 }
-
