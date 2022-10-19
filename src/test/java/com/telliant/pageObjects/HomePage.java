@@ -11,6 +11,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -1415,7 +1417,12 @@ public void click_Open_credits_field() throws InterruptedException {
   		String[] splitTotalRowsCount= rowsCount.split(" ", 2);
   		int totalRows= Integer.parseInt(splitTotalRowsCount[0]);
   		//System.out.println("TotalRows: "+ totalRows);
-  		int pageCount= (totalRows/10)+1;
+		  int pageCount;
+		  if(totalRows%10==0){
+			  pageCount= totalRows/10;
+		  }else{
+			  pageCount= (totalRows/10)+1;
+		  }
   		//System.out.println("pageCount: "+ pageCount);
   		for(int i=1; i<=pageCount; i++) {
   			int j=0;
@@ -1682,66 +1689,273 @@ public void click_Open_credits_field() throws InterruptedException {
     	 clickElement("Document_Visible_for_Financial_Institution");
     	 clickElement("Document_Cancel_Btn");
      }
-     public void Download_Support_Document() {
-    	 scrollToElement("ScrollTo_Dropdown");
-    	 waitForElementClickable("Click_FI_RowSelection_Dropdown1");
-      	clickElement("Click_FI_RowSelection_Dropdown1");
-      	clickElement("Click_FI_RowSelection_Dropdown_Value");
-      	scrollToElement("Search_FIname");
-  		type("searchTextBox", config.getProperty("searchText_support_Resource"));
-  		clickElement("Download_Supportt_Document");
-     }
 
-     public void Delete_Support_Document() {
-	     scrollToElement("ScrollTo_Dropdown");
-    	 waitForElementClickable("Click_FI_RowSelection_Dropdown1");
-    	 clickElement("Click_FI_RowSelection_Dropdown1");
-    	 clickElement("Click_FI_RowSelection_Dropdown_Value");
-    	 scrollToElement("Search_FIname");
-    	 type("searchTextBox", config.getProperty("searchText_support_Resource"));
-    	 clickElement("Delete_Support_Document");
-    	 clickElement("Toast_Container");
-     }
-     public void Navigate_To_Communication_Center_Page() {
-    	 waitForElementClickable("toogleButton_FiAdmin");
-		 clickElement("toogleButton_FiAdmin");
-    	 waitForElementClickable("More_Value");
- 	   	 clickElement("More_Value");
-    		waitForElementClickable("Communication_Center_Page");
-    		clickElement("Communication_Center_Page");
-    		clickElement("toogleButton_FiAdmin");
-     }
-     public void Mail_Intiate_Flow() throws IOException, InterruptedException{
-    	 waitForElementClickable("Input_To");
-		 clickElement("Input_To");
-		 type("Input_To", config.getProperty("To_Mail"));
-    	 waitForElementClickable("Input_To_option");
-    	 clickElement("Input_To_option");
-    	 waitForElementClickable("Input_CC");
-		 clickElement("Input_CC");
-		 type("Input_CC", config.getProperty("Cc_Mail"));
-    	 waitForElementClickable("Input_To_option");
-    	 clickElement("Input_To_option");
-    	 clickElement("Subject_CC");
-		 type("Subject_CC", config.getProperty("Subject_mail"));
-		 clickElement("Mail_body");
-		 type("Mail_body", config.getProperty("Mail_body"));
-		 clickElement("Mail_Attachment");
-		 Thread.sleep(3000);
-    	 Runtime.getRuntime().exec("D:\\AutoIt\\Upload.exe");
-    	 Thread.sleep(3000);
-    	 clickElement("Image_attachment");
-    	 Thread.sleep(3000);
-    	 Runtime.getRuntime().exec("D:\\AutoIt\\Image.exe");
-    	 Thread.sleep(3000);
-    	 clickElement("video_attachment");
-    	 Thread.sleep(3000);
-    	 Runtime.getRuntime().exec("D:\\AutoIt\\Video.exe");
-    	 Thread.sleep(3000);
-     }
-     public void Send_mail_cc() {
-    	 clickElement("Send_Button_CC");
-    	 clickElement("Toast_Container");    	 
-     }
-     
+
+	public void Download_Support_Document() {
+		scrollToElement("ScrollTo_Dropdown");
+		waitForElementClickable("Click_FI_RowSelection_Dropdown1");
+		clickElement("Click_FI_RowSelection_Dropdown1");
+		clickElement("Click_FI_RowSelection_Dropdown_Value");
+		scrollToElement("Search_FIname");
+		type("searchTextBox", config.getProperty("searchText_support_Resource"));
+		clickElement("Download_Supportt_Document");
+	}
+
+	public void Delete_Support_Document() {
+		scrollToElement("ScrollTo_Dropdown");
+		waitForElementClickable("Click_FI_RowSelection_Dropdown1");
+		clickElement("Click_FI_RowSelection_Dropdown1");
+		clickElement("Click_FI_RowSelection_Dropdown_Value");
+		scrollToElement("Search_FIname");
+		type("searchTextBox", config.getProperty("searchText_support_Resource"));
+		clickElement("Delete_Support_Document");
+		clickElement("Toast_Container");
+	}
+	public void Navigate_To_Communication_Center_Page() {
+		waitForElementClickable("toogleButton_FiAdmin");
+		clickElement("toogleButton_FiAdmin");
+		waitForElementClickable("More_Value");
+		clickElement("More_Value");
+		waitForElementClickable("Communication_Center_Page");
+		clickElement("Communication_Center_Page");
+		clickElement("toogleButton_FiAdmin");
+	}
+	public void Mail_Intiate_Flow() throws IOException, InterruptedException{
+		waitForElementClickable("Input_To");
+		clickElement("Input_To");
+		type("Input_To", config.getProperty("To_Mail"));
+		waitForElementClickable("Input_To_option");
+		clickElement("Input_To_option");
+		waitForElementClickable("Input_CC");
+		clickElement("Input_CC");
+		type("Input_CC", config.getProperty("Cc_Mail"));
+		waitForElementClickable("Input_To_option");
+		clickElement("Input_To_option");
+		clickElement("Subject_CC");
+		type("Subject_CC", config.getProperty("Subject_mail"));
+		clickElement("Mail_body");
+		type("Mail_body", config.getProperty("Mail_body"));
+		clickElement("Mail_Attachment");
+		Thread.sleep(3000);
+		Runtime.getRuntime().exec("D:\\AutoIt\\Upload.exe");
+		Thread.sleep(3000);
+		clickElement("Image_attachment");
+		Thread.sleep(3000);
+		Runtime.getRuntime().exec("D:\\AutoIt\\Image.exe");
+		Thread.sleep(3000);
+		clickElement("video_attachment");
+		Thread.sleep(3000);
+		Runtime.getRuntime().exec("D:\\AutoIt\\Video.exe");
+		Thread.sleep(3000);
+	}
+	public void Send_mail_cc() {
+		clickElement("Send_Button_CC");
+		clickElement("Toast_Container");
+	}
+
+	public void click_BusinessAdmin(){
+		clickElement("Business_Admin_Tab");
+	}
+
+	public boolean verify_BusinessStatusDropdownIsDisplayed(){
+		return getElement("dropdown_FilterByBusinessStatus").isDisplayed();
+	}
+
+	public void click_BusinessStatusDropdown() throws InterruptedException {
+		waitForPageGetsLoad();
+		clickElementJs("dropdown_FilterByBusinessStatus");
+		//JavascriptExecutor jse= (JavascriptExecutor) driver;
+		//jse.executeScript("document.querySelector(\"div#mat-select-value-5\").click()");
+	}
+
+	public boolean verify_BusinessStatusDropdownList(){
+		ArrayList<String> actual= new ArrayList<>();
+		ArrayList<String> expected= new ArrayList<>();
+		expected.add(config.getProperty("businessStatus_Active"));
+		expected.add(config.getProperty("businessStatus_InActive"));
+		expected.add(config.getProperty("businessStatus_PendingActive"));
+		for(WebElement element: getElements("dropdownList_BusinessStatus")){
+			actual.add(element.getText());
+		}
+		return actual.equals(expected);
+	}
+
+	public void update_BusinessAdminStatusAsActive(){
+		waitUntilElementGetsDisplayed(("button_LendovativeBusinessTable_Edit1"));
+		clickElementJs("button_LendovativeBusinessTable_Edit1");
+		scrollToElement("dropdown_BusinessStatus");
+		selectDropdownByVisibleTxt("dropdown_BusinessStatus", config.getProperty("businessStatus_Active"));
+		waitUntilElementGetsDisplayed(("Save_Button"));
+		scrollToElement("Save_Button");
+		clickElementJs("Save_Button");
+		waitUntilElementGetsDisplayed(("toast_UserUpdatedSuccessfully"));
+		clickElement("toast_UserUpdatedSuccessfully");
+	}
+
+	public void update_BusinessAdminStatusAsInactive() throws InterruptedException {
+		waitUntilElementGetsDisplayed(("button_LendovativeBusinessTable_Edit2"));
+		clickElementJs("button_LendovativeBusinessTable_Edit2");
+		scrollToElement("dropdown_BusinessStatus");
+		selectDropdownByVisibleTxt("dropdown_BusinessStatus", config.getProperty("businessStatus_InActive"));
+		waitUntilElementGetsDisplayed(("Save_Button"));
+		waitForPageGetsLoad();
+		scrollToElement("Save_Button");
+		clickElementJs("Save_Button");
+		waitUntilElementGetsDisplayed(("toast_UserUpdatedSuccessfully"));
+		clickElement("toast_UserUpdatedSuccessfully");
+	}
+
+	public void update_BusinessAdminStatusAsPendingActive() throws InterruptedException {
+		waitUntilElementGetsDisplayed(("button_LendovativeBusinessTable_Edit3"));
+		clickElementJs("button_LendovativeBusinessTable_Edit3");
+		scrollToElement("dropdown_BusinessStatus");
+		selectDropdownByVisibleTxt("dropdown_BusinessStatus", config.getProperty("businessStatus_PendingActive"));
+		waitUntilElementGetsDisplayed(("Save_Button"));
+		waitForPageGetsLoad();
+		scrollToElement("Save_Button");
+		clickElementJs("Save_Button");
+		waitUntilElementGetsDisplayed(("toast_UserUpdatedSuccessfully"));
+		clickElement("toast_UserUpdatedSuccessfully");
+	}
+
+	public boolean getBusinessAdminStatus(String expected){
+		boolean flag= true;
+		JavascriptExecutor js= (JavascriptExecutor) driver;
+		selectDropdownByValue("rowsToDisplayDropdown", config.getProperty("rowsPerPage"));
+		String rowsCount= getElement("totalRowsCount").getText();
+		String[] splitTotalRowsCount= rowsCount.split(" ", 2);
+		int totalRows= Integer.parseInt(splitTotalRowsCount[0]);
+		//System.out.println("TotalRows: "+ totalRows);
+		int pageCount;
+		if(totalRows%10==0){
+			pageCount= totalRows/10;
+		}else{
+			pageCount= (totalRows/10)+1;
+		}
+		//System.out.println("pageCount: "+ pageCount);
+		for(int i=1; i<=pageCount; i++) {
+			int j=0;
+			if(i>1) {
+				js.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.page-count>ul>li:nth-of-type(5)>a")));
+			}
+			//js.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.page-count>ul>li:nth-of-type("+i+")>a")));
+			List<WebElement> elements= getElements("table_BusinessAdminStatus");
+			for(WebElement element: elements) {
+				j++;
+				js.executeScript("arguments[0].scrollIntoView();", element);
+				String businessStatus= element.getText();
+				//System.out.println(businessStatus);
+				if(!(businessStatus.equalsIgnoreCase(expected))) {
+					flag= false;
+					break;
+					//String num= String.valueOf(j);
+					//scrollToElement(("fi_Table"));
+					//js.executeScript("arguments[0].click();", getElement("fi_Table_Parametrized",num));
+					//js.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.table-responsive>table>tbody>tr:nth-of-type("+j+")>td:nth-of-type(9)>a>i")));
+				}
+			}
+			if(!flag){
+				break;
+			}
+
+		}
+		return flag;
+	}
+
+	public boolean verifyBusinessAdminStatusIsDisplayingAsActive(){
+
+		return getBusinessAdminStatus(config.getProperty("businessStatus_Active"));
+	}
+
+	public boolean verifyBusinessAdminStatusIsDisplayingAsPendingActive(){
+
+		return getBusinessAdminStatus(config.getProperty("businessStatus_PendingActive"));
+	}
+
+	public boolean verifyBusinessAdminStatusIsDisplayingAsInActive(){
+
+		return getBusinessAdminStatus(config.getProperty("businessStatus_InActive"));
+	}
+
+	public void setFilterAsActive(){
+
+		waitUntilElementGetsDisplayed(("button_LendovativeBusinessTable_Edit1"));
+		clickElementJs("dropdown_FilterByBusinessStatus");
+		clickElement("dropdown_BusinessStatusOptions", "1");
+	}
+
+	public void setFilterAsInActive(){
+
+		waitUntilElementGetsDisplayed(("button_LendovativeBusinessTable_Edit1"));
+		clickElementJs("dropdown_FilterByBusinessStatus");
+		clickElementJs("checkBox_SelectAll");
+		clickElementJs("checkBox_SelectAll");
+		clickElement("dropdown_BusinessStatusOptions", "2");
+	}
+
+	public void setFilterAsPendingActive(){
+
+		waitUntilElementGetsDisplayed(("button_LendovativeBusinessTable_Edit1"));
+		clickElementJs("dropdown_FilterByBusinessStatus");
+		clickElementJs("checkBox_SelectAll");
+		clickElementJs("checkBox_SelectAll");
+		clickElement("dropdown_BusinessStatusOptions", "3");
+	}
+
+	public void setFilterAsSelectAll(){
+		waitUntilElementGetsDisplayed(("button_LendovativeBusinessTable_Edit1"));
+		clickElementJs("dropdown_FilterByBusinessStatus");
+		clickElementJs("checkBox_SelectAll");
+	}
+
+	public boolean verifyBusinessAdminStatusWhenApplySelectAllFilter(){
+
+		boolean flag= true;
+		ArrayList<String>expected= new ArrayList<String>();
+		expected.add(config.getProperty("businessStatus_Active"));
+		expected.add(config.getProperty("businessStatus_InActive"));
+		expected.add(config.getProperty("businessStatus_PendingActive"));
+		JavascriptExecutor js= (JavascriptExecutor) driver;
+		selectDropdownByValue("rowsToDisplayDropdown", config.getProperty("rowsPerPage"));
+		String rowsCount= getElement("totalRowsCount").getText();
+		String[] splitTotalRowsCount= rowsCount.split(" ", 2);
+		int totalRows= Integer.parseInt(splitTotalRowsCount[0]);
+		//System.out.println("TotalRows: "+ totalRows);
+		int pageCount;
+		if(totalRows%10==0){
+			pageCount= totalRows/10;
+		}else{
+			pageCount= (totalRows/10)+1;
+		}
+		//System.out.println("pageCount: "+ pageCount);
+		for(int i=1; i<=pageCount; i++) {
+			int j=0;
+			if(i>1) {
+				js.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.page-count>ul>li:nth-of-type(5)>a")));
+			}
+			//js.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.page-count>ul>li:nth-of-type("+i+")>a")));
+			List<WebElement> elements= getElements("table_BusinessAdminStatus");
+			for(WebElement element: elements) {
+				j++;
+				js.executeScript("arguments[0].scrollIntoView();", element);
+				String businessStatus= element.getText();
+				//System.out.println(businessStatus);
+				if(!(businessStatus.equalsIgnoreCase(expected.get(0))|| businessStatus.equalsIgnoreCase(expected.get(1))|| businessStatus.equalsIgnoreCase(expected.get(2)))) {
+					flag= false;
+					break;
+					//String num= String.valueOf(j);
+					//scrollToElement(("fi_Table"));
+					//js.executeScript("arguments[0].click();", getElement("fi_Table_Parametrized",num));
+					//js.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.table-responsive>table>tbody>tr:nth-of-type("+j+")>td:nth-of-type(9)>a>i")));
+				}
+			}
+			if(!flag){
+				break;
+			}
+
+		}
+		return flag;
+	}
+
 }
+
