@@ -629,5 +629,20 @@ public class RegressionCases extends BaseClass implements ITestListener{
     		  homePage.Navigate_To_Support_Resource_Page();
     		  homePage.Download_Support_Document();
     		  homePage. Delete_Support_Document();
+    		  loginPage.logout();
        	}
+    	@Test(testName = "TC_UC25_01", description =  "Verify User views  Initiate Lendovative Communication Center", priority = 15)
+    	public void TC_UC25_01_Verify_User_views_Initiate_Lendovative_Communication_Center() throws InterruptedException, AWTException,IOException{
+    		launchURL(config.getProperty("url"));
+    		String ValidateUrl=driver.getCurrentUrl();
+    		ValidateUrl.equalsIgnoreCase(config.getProperty("url"));
+    	 	driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+    		  loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
+    		  waitForPageGetsLoad();
+    		  homePage.Navigate_To_Communication_Center_Page();
+    		  waitForPageGetsLoad();
+    		  homePage.Mail_Intiate_Flow();
+    		  homePage.Send_mail_cc();
+    		  loginPage.logout();
+    	}
 }
