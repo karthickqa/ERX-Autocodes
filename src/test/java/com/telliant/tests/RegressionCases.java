@@ -501,7 +501,10 @@ public class RegressionCases extends BaseClass implements ITestListener{
              driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
              loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
              waitForPageGetsLoad();
-             homePage.Validate_To_Business_Admin_Tab();
+			 homePage.click_BusinessAdmin();
+			 softAssert.assertEquals(homePage.verify_BusinessStatusDropdownIsDisplayed(), true, "Business status dropdown don't get dispalyed");
+             softAssert.assertEquals(homePage.verify_BusinessStatusDropdownList(), true, "Business dropdown lis don't");
+			 /*homePage.Validate_To_Business_Admin_Tab();
              waitForPageGetsLoad();
                homePage.click_Delete_flow_FI_User();
        		waitForPageGetsLoad();
@@ -514,7 +517,7 @@ public class RegressionCases extends BaseClass implements ITestListener{
        		softAssert.assertEquals(homePage.verify_Contact_Number_FI_TB(), true, "Given data don't get displayed on the Contact_Number field");
        		softAssert.assertEquals(homePage.verify_Contact_Title_FI_TB(), true, "Given data don't get displayed on the Contact_Title field");
        		homePage.Cancel_btn();
-       		softAssert.assertAll();
+       		softAssert.assertAll();*/
        	  }
        	@Test(testName = "TC_UC24_01", description =  "Verify User views Lendovative Add Support resource Document", priority = 12)
     	public void TC_UC24_01_Verify_User_views_Lendovative_Add_Support_resource_Document() throws InterruptedException, AWTException,IOException{
@@ -645,4 +648,37 @@ public class RegressionCases extends BaseClass implements ITestListener{
     		  homePage.Send_mail_cc();
     		  loginPage.logout();
     	}
+
+	@Test(testName = "TC_UC21_12", description =  "Verify User views Fliter by Business status Dropdown Flow ", priority = 16)
+	public void TC_UC21_12_Verify_User_Views_Fliter_By_Business_Status_Dropdown_Flow() throws InterruptedException, AWTException{
+
+		loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
+		waitForPageGetsLoad();
+		homePage.click_BusinessAdmin();
+		softAssert.assertEquals(homePage.verify_BusinessStatusDropdownIsDisplayed(), true, "Business status dropdown don't get dispalyed");
+		waitForPageGetsLoad();
+		homePage.click_BusinessStatusDropdown();
+		softAssert.assertEquals(homePage.verify_BusinessStatusDropdownList(), true, "Business dropdown lis don't get matches with the expected list");
+		waitForPageGetsLoad();
+		close_Popup();
+		homePage.update_BusinessAdminStatusAsActive();
+		homePage.update_BusinessAdminStatusAsInactive();
+		homePage.update_BusinessAdminStatusAsPendingActive();
+		driver.navigate().refresh();
+		waitForPageGetsLoad();
+		homePage.setFilterAsActive();
+		close_Popup();
+		softAssert.assertEquals(homePage.verifyBusinessAdminStatusIsDisplayingAsActive(), true, "All Business Admin status don't get displayed as Active");
+		homePage.setFilterAsInActive();
+		close_Popup();
+		softAssert.assertEquals(homePage.verifyBusinessAdminStatusIsDisplayingAsInActive(), true, "All Business Admin status don't get displayed as InActive");
+		homePage.setFilterAsPendingActive();
+		close_Popup();
+		softAssert.assertEquals(homePage.verifyBusinessAdminStatusIsDisplayingAsPendingActive(), true, "All Business Admin status don't get displayed as Pending Active");
+		homePage.setFilterAsSelectAll();
+		close_Popup();
+		homePage.verifyBusinessAdminStatusWhenApplySelectAllFilter();
+		loginPage.logout();
+		softAssert.assertAll();
+	}
 }
