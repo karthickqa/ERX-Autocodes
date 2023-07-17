@@ -414,8 +414,8 @@ public class RegressionCases extends BaseClass implements ITestListener{
                      waitForPageGetsLoad();
                      loginPage.logout();
 }
-             @Test(testName = "TC_UC21_01", description = "Verify User Views Add New Business Roles", priority = 1)
-             public void TC_19_Verify_User_Views_Add_New_Business_Roles () throws InterruptedException, AWTException{
+             @Test(testName ="TC_UC21_01_04_05", description = "Verify User Views Add New Business Roles", priority = 1)
+             public void TC_21_1_4_5Verify_User_Views_Add_New_Business_Roles () throws InterruptedException, AWTException{
              launchURL(config.getProperty("url"));
              String ValidateUrl=driver.getCurrentUrl();
              ValidateUrl.equalsIgnoreCase(config.getProperty("url"));
@@ -427,8 +427,46 @@ public class RegressionCases extends BaseClass implements ITestListener{
               softAssert.assertEquals(homePage.verifyLV_User_Admin_Page_Title(), true, "Selected LV Profile info page title do not displayed" );
               waitForPageGetsLoad();
               softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
+              softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
+              waitForPageGetsLoad();
+      }
+             
+             @Test(testName ="TC_UC21_07", description = "LV Business Add New User", priority = 1)
+             public void TC_21_07_Verify_LV_Business_Add_New_User () throws InterruptedException, AWTException{
+             launchURL(config.getProperty("url"));
+             String ValidateUrl=driver.getCurrentUrl();
+             ValidateUrl.equalsIgnoreCase(config.getProperty("url"));
+             driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+             //Login as LV Admin User
+             loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 25), ExcelMethods.getData("Sheet1", "Password", 25));
+              waitForPageGetsLoad();
+              homePage.LV_Business_Add_New_User();
+              softAssert.assertEquals(homePage.verifyLV_User_Admin_Page_Title(), true, "Selected LV Profile info page title do not displayed" );
+              waitForPageGetsLoad();
+              softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
               waitForPageGetsLoad();
               softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
               waitForPageGetsLoad();
-             }
-}
+             
+    }       
+             @Test(testName ="TC_UC21_08", description = "LV Business Edit User", priority = 1)
+             public void TC_21_08_Verify_LV_Business_Edit_New_User () throws InterruptedException, AWTException{
+             launchURL(config.getProperty("url"));
+             String ValidateUrl=driver.getCurrentUrl();
+             ValidateUrl.equalsIgnoreCase(config.getProperty("url"));
+             driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+             //Login as LV Admin User
+             loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 25), ExcelMethods.getData("Sheet1", "Password", 25));
+              waitForPageGetsLoad();
+              homePage.Edit_Business_Details();
+              softAssert.assertEquals(homePage.verifyLV_User_Admin_Page_Title(), true, "Selected LV Profile info page title do not displayed" );
+              waitForPageGetsLoad();
+              softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
+              waitForPageGetsLoad();
+              softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
+              waitForPageGetsLoad();
+             }     
+}   
+             
+             
+          
