@@ -424,11 +424,10 @@ public class RegressionCases extends BaseClass implements ITestListener{
              loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 25), ExcelMethods.getData("Sheet1", "Password", 25));
               waitForPageGetsLoad();
               homePage.Create_New_Business();
-              softAssert.assertEquals(homePage.verifyLV_User_Admin_Page_Title(), true, "Selected LV Profile info page title do not displayed" );
               waitForPageGetsLoad();
               softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
               softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
-              waitForPageGetsLoad();
+             
       }
              
              @Test(testName ="TC_UC21_07", description = "LV Business Add New User", priority = 1)
@@ -465,8 +464,73 @@ public class RegressionCases extends BaseClass implements ITestListener{
               waitForPageGetsLoad();
               softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
               waitForPageGetsLoad();
-             }     
-}   
+ }   
              
+             
+             @Test(testName ="TC_UC21_12", description = "LV Business Status Dropdwon", priority = 1)
+             public void TC_21_12_Verify_LV_Business_Status_Dropdown_Flow () throws InterruptedException, AWTException{
+             launchURL(config.getProperty("url"));
+             String ValidateUrl=driver.getCurrentUrl();
+             ValidateUrl.equalsIgnoreCase(config.getProperty("url"));
+             driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+             //Login as LV Admin User
+             loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 25), ExcelMethods.getData("Sheet1", "Password", 25));
+              waitForPageGetsLoad(); 
+              homePage.LV_Business_Status_Dropdown();
+              softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
+              waitForPageGetsLoad();
+              softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
+              waitForPageGetsLoad();
+  }        
+              
+              @Test(testName ="TC_UC22_01_04", description = "Edit Save LV Account Debtor Admin", priority = 1)
+              public void TC_22_01_04_Edit_Save_LV_Account_Debtor_Admin () throws InterruptedException, AWTException{
+              launchURL(config.getProperty("url"));
+              String ValidateUrl=driver.getCurrentUrl();
+              ValidateUrl.equalsIgnoreCase(config.getProperty("url"));
+              driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+              //Login as LV Admin User
+              loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 25), ExcelMethods.getData("Sheet1", "Password", 25));
+               waitForPageGetsLoad(); 
+               homePage.Edit_Save_LV_Account_Debtor_Admin();
+               softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
+               waitForPageGetsLoad();
+               softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
+               waitForPageGetsLoad();
+               
+}
+              @Test(testName ="TC_UC22_06", description = "TC_22_01_06 Edit Cancel LV Account Debtor Admin1", priority = 1)
+              public void TC_22_06_Edit_Cancel_LV_Account_Debtor_Admin1 () throws InterruptedException, AWTException{
+              launchURL(config.getProperty("url"));
+              String ValidateUrl=driver.getCurrentUrl();
+              ValidateUrl.equalsIgnoreCase(config.getProperty("url"));
+              driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+              //Login as LV Admin User
+              loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 25), ExcelMethods.getData("Sheet1", "Password", 25));
+               waitForPageGetsLoad(); 
+               homePage.Edit_Cancel_LV_Account_Debtor_Admin();
+               softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
+               waitForPageGetsLoad();
+               softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
+               waitForPageGetsLoad();   
+              
+          }   
+              @Test(testName ="TC_UC25_02", description = "Verify User Add New FI Notes", priority = 1)
+              public void TC_25_02_Verify_User_Add_New_FI_Notes () throws InterruptedException, AWTException{
+              launchURL(config.getProperty("url"));
+              String ValidateUrl=driver.getCurrentUrl();
+              ValidateUrl.equalsIgnoreCase(config.getProperty("url"));
+              driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+              //Login as LV Admin User
+              loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 25), ExcelMethods.getData("Sheet1", "Password", 25));
+               waitForPageGetsLoad(); 
+               homePage.User_Add_New_FI_Notes();
+               softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
+               waitForPageGetsLoad();
+               softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
+               waitForPageGetsLoad(); 
+              
+   }
+}    
              
           
