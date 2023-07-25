@@ -787,13 +787,59 @@ public void click_Open_credits_field() throws InterruptedException {
 		
 	}
 	
+	 public void LV_Click_Dropdown() throws InterruptedException {  
+   	  clickElement("LV_FilterBy_dropdown");
+   	clickElement("LV_FilterBy_Active");
+   	  clickElement("LV_FilterBy_Pending_Active");
+         clickElement("LV_FilterBy_License_Matured");
+         scrollToElement("LV_FilterBy_Terminated");
+        clickElement("LV_FilterBy_Terminated");
+	
+	
+	 }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void clickDropdown_HP() throws InterruptedException, AWTException {
 		waitForElementVisible("LV_FilterBy_dropdown");
-		clickElement("LV_FilterBy_dropdown");
+		clickElement("LV_Filter_By_FI_Status");
 		Thread.sleep(2000);
-		JavascriptExecutor js= (JavascriptExecutor) driver;
-		js.executeScript("document.querySelector(\"#mat-select-0-panel > div.mat-option.ng-tns-c57-1 > input\").click()");
-		Robot robot = new Robot();
+		 Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_ESCAPE);
 		robot.keyRelease(KeyEvent.VK_ESCAPE);
 	
@@ -1216,6 +1262,38 @@ public void click_Open_credits_field() throws InterruptedException {
 		type("addFi_Licensed_LicensedMaturityDate", config.getProperty("addFi_LicensedMaturityDate"));
 	}
 	
+	public void FI_Corefile_Upload_Details() throws InterruptedException {
+		scrollToElement("FI_CoreFile_Upload_Type_Dropdown");
+     clickElement("FI_CoreFile_Upload_Type_Dropdown");
+		clickElement("Four_Column_Format");
+		 scrollToElement("SFTP_Folder_Path");
+         waitForElementClickable("SFTP_Folder_Path");
+		clickElement("SFTP_Folder_Path");
+	 type("SFTP_Folder_Path_Value", config.getProperty("SFTP_Folder_Path_Value"));
+	}
+	 public void File_Pickup_Daily_Basis() throws InterruptedException {
+		clickElement("File_Pickup_Type");
+		clickElement("File_Pickup_Time_Value_Daily_Basis");
+		clickElement("Hours_Dropdown");
+		clickElement("Once_In_Hour");
+		clickElement("Once_In_2Hour");
+		}
+	
+	public void File_Pickup_Time_Basis() {
+		clickElement("File_Pickup_Type");
+		clickElement("File_Pickup_Time_Value_Time_Basis");
+		scrollToElement("Time_Dropdown");
+        waitForElementClickable("Time_Dropdown");
+		clickElement("Time_Dropdown");
+		clickElement("Time_Dropdown_Value");
+		
+		}
+	
+	public void File_Pickup_Immediate() {
+		clickElement("File_Pickup_Type");
+		clickElement("File_Pickup_Time_Value_Immediate");
+	
+	}
 	public ArrayList<String> getAccountManagerList() {
 		//ArrayList<String> nameList= new ArrayList<>();
 		arrayList.clear();
@@ -1829,5 +1907,5 @@ public void click_Open_credits_field() throws InterruptedException {
               
               
               
-}
+   }
 }       	
