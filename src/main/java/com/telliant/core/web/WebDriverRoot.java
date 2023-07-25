@@ -692,7 +692,7 @@ public class WebDriverRoot {
 				    , printButton);
 	  }
 	  
-	  public void waitForPageGetsLoad() throws InterruptedException {
+	  public void waitForPageGetsLoad2() throws InterruptedException {
 			Thread.sleep(3000);
 		}
 

@@ -340,7 +340,7 @@ public class HomePage extends WebDriverRoot {
 	
 	public void clickEditButton() throws InterruptedException {
 		scrollToElement("bbEditButton");
-		waitForPageGetsLoad();
+		waitForPageGetsLoad2();
 		clickElement("bbEditButton");
 	}
 	
@@ -442,6 +442,7 @@ public class HomePage extends WebDriverRoot {
 	public boolean verifyFiLineStructureHelpDialogHeader() {
 		return verifyDialogHeader(getElement("fiUserLineStructurePageHelpDialogTitle"), config.getProperty("fiUserLineStructurePageHelpDialogTitle"));
 	}
+	
 	public boolean verifyLVBusinessAdmin() {
 		return verifyDialogHeader(getElement("fiUserLineStructurePageHelpDialogTitle"), config.getProperty("fiUserLineStructurePageHelpDialogTitle"));
 	}
@@ -836,7 +837,7 @@ public void click_Open_credits_field() throws InterruptedException {
 	
 	
 	public void clickDropdown_HP() throws InterruptedException, AWTException {
-		waitForElementVisible("LV_FilterBy_dropdown");
+		waitForElementVisible("LV_Filter_By_FI_Status");
 		clickElement("LV_Filter_By_FI_Status");
 		Thread.sleep(2000);
 		 Robot robot = new Robot();
@@ -1500,6 +1501,7 @@ public void click_Open_credits_field() throws InterruptedException {
              clickElement("Delete_Button");  
              clickElement("Toast_Container");
       }
+      
       public void Create_New_Business() throws InterruptedException {  
              clickElement("Sidebar_Icon");
              scrollToElement("Business_Admin_Menu");
@@ -1522,7 +1524,7 @@ public void click_Open_credits_field() throws InterruptedException {
              waitForElementClickable("Financial_Institution");
              clickElement("Financial_Institution");
              clickElement("Choose_FI_Field");
-             waitForPageGetsLoad();
+             waitForPageGetsLoad2();
              waitForElementClickable("Assigned_FI_Lender");
              clickElement("Assigned_FI_Lender");
              waitForElementClickable("Choose_Assigned_FI_Lender");
@@ -1535,13 +1537,13 @@ public void click_Open_credits_field() throws InterruptedException {
              waitForElementClickable("FI_Portfolio");
              clickElement("FI_Portfolio");
              clickElement("Choose_FI_Portfolio");
-             waitForPageGetsLoad();
+             waitForPageGetsLoad2();
              clickElement("Line_Limit");
              type("Line_Limit", config.getProperty("Line_Limit"));
              clickElement("Funded_Balance");
              type("Funded_Balance", config.getProperty("Funded_Balance"));
              waitForElementClickable("Line_Begin_Date");
-             waitForPageGetsLoad();
+             waitForPageGetsLoad2();
              WebElement filinebegindate = getElement("Line_Begin_Date");
              js = (JavascriptExecutor)driver; 
              js.executeScript("arguments[0].value='2023-10-15';",filinebegindate);
@@ -1563,7 +1565,7 @@ public void click_Open_credits_field() throws InterruptedException {
           
              
              // LV Add Business(Service Level)&(Other details)
-             waitForPageGetsLoad();
+             waitForPageGetsLoad2();
              scrollToElement("Service_Level");
              waitForElementClickable("Service_Level");
              clickElement("Service_Level");
@@ -1576,12 +1578,12 @@ public void click_Open_credits_field() throws InterruptedException {
              type("Fee_Start_Date", config.getProperty("Fee_Start_Date"));
              clickElement("Fee_End_Date");
              type("Fee_End_Date", config.getProperty("Fee_End_Date"));
-             waitForPageGetsLoad();
+             waitForPageGetsLoad2();
              scrollToElement("Business_Status");
              waitForElementClickable("Business_Status");
              clickElement("Business_Status");
              clickElement("Choose_Business_Status");
-             waitForPageGetsLoad();
+             waitForPageGetsLoad2();
              scrollToElement("Argos_Risk_Details");
              clickElement("Argos_Risk_Details");
              clickElement("Choose_Argos_Risk_Details");
@@ -1599,7 +1601,7 @@ public void click_Open_credits_field() throws InterruptedException {
           waitForElementClickable("Business_Admin_Menu");
           clickElement("Business_Admin_Menu");
           clickElement("Sidebar_Icon");
-          waitForPageGetsLoad();
+          waitForPageGetsLoad2();
           scrollToElement("Edit_Button");
           clickElement("Edit_Button");
           scrollToElement("homePage_Title");
@@ -1646,7 +1648,7 @@ public void click_Open_credits_field() throws InterruptedException {
             waitForElementClickable("Business_Admin_Menu");
           clickElement("Business_Admin_Menu");
           clickElement("Sidebar_Icon");
-          waitForPageGetsLoad();
+          waitForPageGetsLoad2();
           scrollToElement("Edit_Button");
           clickElement("Edit_Button10");
           type("Edit_Business_Name", config.getProperty("Edit_Business_Name"));
@@ -1664,15 +1666,15 @@ public void click_Open_credits_field() throws InterruptedException {
           waitForElementClickable("Financial_Institution");
           clickElement("Financial_Institution");
           clickElement("Edit_Choose_Assigned_FI_Lender");
-          waitForPageGetsLoad();
+          waitForPageGetsLoad2();
           waitForElementClickable("Edit_FI_Lender_Assigned_Date");
           clickElement("Assigned_FI_Lender");
           waitForElementClickable("Edit_Choose_Assigned_FI_Lender");
           clickElement("Edit_Choose_Assigned_FI_Lender");
          waitForElementClickable("Edit_FI_Lender_Assigned_Date");
-          waitForPageGetsLoad();
+          waitForPageGetsLoad2();
           clickElement("Edit_FI_Lender_Assigned_Date");
-          waitForPageGetsLoad();
+          waitForPageGetsLoad2();
           //type("FI_Lender_Assigned_Date", config.getProperty("FI_Lender_Assigned_Date"));
           WebElement editfilenderassigneddate = driver.findElement(By.id("Edit_FI_Lender_Assigned_Date"));
 
@@ -1680,14 +1682,14 @@ public void click_Open_credits_field() throws InterruptedException {
           waitForElementClickable("FI_Portfolio");
           clickElement("FI_Portfolio");
           clickElement("Choose_FI_Portfolio");
-          waitForPageGetsLoad();
+          waitForPageGetsLoad2();
           clickElement("Edit_Line_Limit");
           type("Edit_Line_Limit", config.getProperty("Edit_Line_Limit"));
           clickElement("Edit_Funded_Balance");
           type("Edit_Funded_Balance", config.getProperty("Edit_Funded_Balance"));
           waitForElementClickable("Edit_Line_Begin_Date");
           clickElement("Edit_Line_Begin_Date");
-          waitForPageGetsLoad();
+          waitForPageGetsLoad2();
           type("Edit_Line_Begin_Date", config.getProperty("Edit_Line_Begin_Date"));
           waitForElementClickable("Edit_Line_Maturity_Date");
           clickElement("Edit_Line_Maturity_Date");  
@@ -1703,7 +1705,7 @@ public void click_Open_credits_field() throws InterruptedException {
           
           
           // LV Add Business(Service Level)&(Other details)
-          waitForPageGetsLoad();
+          waitForPageGetsLoad2();
           scrollToElement("Service_Level");
           waitForElementClickable("Service_Level");
           clickElement("Service_Level");
@@ -1731,7 +1733,7 @@ public void click_Open_credits_field() throws InterruptedException {
             waitForElementClickable("Business_Admin_Menu");
           clickElement("Business_Admin_Menu");
           clickElement("Sidebar_Icon");
-          waitForPageGetsLoad();
+          waitForPageGetsLoad2();
           clickElement("Business_Status_Dropdown");
           scrollToElement("Active_Dropdown");
           clickElement("Active_Dropdown");
@@ -1750,17 +1752,17 @@ public void click_Open_credits_field() throws InterruptedException {
           public void Edit_Save_LV_Account_Debtor_Admin() throws InterruptedException {  
         	  clickElement("Sidebar_Icon");
               scrollToElement("Account_Debtor_Admin_Menu");
-              waitForPageGetsLoad();
+              waitForPageGetsLoad2();
                clickElement("Account_Debtor_Admin_Menu");
               clickElement("Sidebar_Icon");
-              waitForPageGetsLoad();
+              waitForPageGetsLoad2();
               waitForElementClickable("AD_Down_Arrow");
               clickElement("AD_Down_Arrow");
-              waitForPageGetsLoad();
+              waitForPageGetsLoad2();
               scrollToElement("Edit_AD_Button");
               waitForElementClickable("Edit_AD_Button");
             clickElement("Edit_AD_Button");
-            waitForPageGetsLoad();
+            waitForPageGetsLoad2();
             waitForElementClickable("Account_Debtor_Name");
             clickElement("Account_Debtor_Name");
             type("Account_Debtor_Name", config.getProperty("Account_Debtor_Name"));
@@ -1819,17 +1821,17 @@ public void click_Open_credits_field() throws InterruptedException {
           public void Edit_Cancel_LV_Account_Debtor_Admin() throws InterruptedException {  
         	  clickElement("Sidebar_Icon");
               scrollToElement("Account_Debtor_Admin_Menu");
-              waitForPageGetsLoad();
+              waitForPageGetsLoad2();
                clickElement("Account_Debtor_Admin_Menu");
               clickElement("Sidebar_Icon");
-              waitForPageGetsLoad();
+              waitForPageGetsLoad2();
               waitForElementClickable("AD_Down_Arrow");
               clickElement("AD_Down_Arrow");
-              waitForPageGetsLoad();
+              waitForPageGetsLoad2();
               scrollToElement("Edit_AD_Button");
               waitForElementClickable("Edit_AD_Button");
             clickElement("Edit_AD_Button");
-            waitForPageGetsLoad();
+            waitForPageGetsLoad2();
             waitForElementClickable("Account_Debtor_Name");
             clickElement("Account_Debtor_Name");
             type("Account_Debtor_Name", config.getProperty("Account_Debtor_Name"));
@@ -1885,10 +1887,10 @@ public void click_Open_credits_field() throws InterruptedException {
           public void User_Add_New_FI_Notes() throws InterruptedException {  
         	  clickElement("Sidebar_Icon");
               scrollToElement("Communication_Center");
-              waitForPageGetsLoad();
+              waitForPageGetsLoad2();
                clickElement("Communication_Center");
               clickElement("Sidebar_Icon");
-              waitForPageGetsLoad();
+              waitForPageGetsLoad2();
               scrollToElement("Add_FI_Note_Tab");
               waitForElementClickable("Add_FI_Note_Tab");
               clickElement("Add_FI_Note_Tab");

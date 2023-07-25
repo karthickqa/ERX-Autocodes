@@ -99,6 +99,4 @@ public class GeneralMethods extends WebDriverRoot {
 		DateValue=DateValue.replaceAll(":", "_");
 		DateValue=DateValue.replaceAll(",", "");
 		return DateValue;
-		}
-	
-}
+		}}
