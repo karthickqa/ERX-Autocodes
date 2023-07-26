@@ -691,7 +691,9 @@ public class WebDriverRoot {
 				    "arguments[0].click();"
 				    , printButton);
 	  }
-	  
+	  public void waitForPageGetsLoad() throws InterruptedException {
+			Thread.sleep(2000);
+	  }
 	  public void waitForPageGetsLoad2() throws InterruptedException {
 			Thread.sleep(3000);
 		}
