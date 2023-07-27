@@ -33,16 +33,16 @@ public class RegressionCases extends BaseClass implements ITestListener{
 		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
 		//Login as LV Admin User 
 		loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
-		waitForPageGetsLoad2();
+		waitForPageGetsLoad();
 		homePage.clickOnFI_Name_1();
-		waitForPageGetsLoad2();
+		waitForPageGetsLoad();
 		softAssert.assertEquals(homePage.verifyLV_Business1_Lable(), true, "Selected LV Profile info page title do not displayed" );
 		homePage.clickHelpLink();
-		waitForPageGetsLoad2();
+		waitForPageGetsLoad();
 		softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
 		homePage.closeHelpDialog();
 		homePage.clickDownloadIcon();
-		waitForPageGetsLoad2();
+		waitForPageGetsLoad();
 		softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
 		loginPage.logout();
 		softAssert.assertAll();
@@ -50,12 +50,12 @@ public class RegressionCases extends BaseClass implements ITestListener{
 		
 		//Login as LV viewer User
 		loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 2), ExcelMethods.getData("Sheet1", "Password", 2));
-		waitForPageGetsLoad2();
+		waitForPageGetsLoad();
 		homePage.clickOnFI_Name_1();
-		waitForPageGetsLoad2();
+		waitForPageGetsLoad();
 		softAssert.assertEquals(homePage.verifyLV_Business1_Lable(), true, "Selected LV Profile info page title do not displayed" );
 		homePage.clickHelpLink();
-		waitForPageGetsLoad2();
+		waitForPageGetsLoad();
 		softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
 		homePage.closeHelpDialog();
 		homePage.clickDownloadIcon();
@@ -64,16 +64,16 @@ public class RegressionCases extends BaseClass implements ITestListener{
 		
 		//Login as LV Manager User 
 		loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 26), ExcelMethods.getData("Sheet1", "Password", 26));
-		waitForPageGetsLoad2();
+		waitForPageGetsLoad();
 		homePage.clickOnFI_Name_1();
-		waitForPageGetsLoad2();
+		waitForPageGetsLoad();
 		softAssert.assertEquals(homePage.verifyLV_Business1_Lable(), true, "Selected LV Profile info page title do not displayed" );
 		homePage.clickHelpLink();
-		waitForPageGetsLoad2();
+		waitForPageGetsLoad();
 		softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
 		homePage.closeHelpDialog();
 		homePage.clickDownloadIcon();
-		waitForPageGetsLoad2();
+		waitForPageGetsLoad();
 		softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
 		loginPage.logout();
 		softAssert.assertAll();
@@ -115,16 +115,16 @@ public class RegressionCases extends BaseClass implements ITestListener{
 		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
 		//Add_Admin_User
 		 loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
-	        waitForPageGetsLoad2();
+	        waitForPageGetsLoad();
 	        softAssert.assertEquals(homePage.verifyHomePageTitle(), true, "Title is not displaying as Lendovative Home Page");
 	        homePage.clickUserAdmin();
 	        homePage.getAccountManagerList();
 	        homePage.clickFiAdmin();
-	        waitForPageGetsLoad2();
+	        waitForPageGetsLoad();
 	        softAssert.assertEquals(homePage.verifyFiAdminPageTitle(), true, "FI Admin page title is not displaying as Lendovative Financial Institution Admin");
 	        softAssert.assertEquals(homePage.verifyAddFinancialInstiutionButtonIsDisplayed(), true, "Add Financial Instiution button don't get displayed");
 	        homePage.click_AddFinancialInstiutionButton();
-	        waitForPageGetsLoad2();
+	        waitForPageGetsLoad();
 	        softAssert.assertEquals(homePage.verifyAddFinancialInstitutionPageTitle(), true, "Add Financial Institution page is not displayed");
 	        softAssert.assertEquals(homePage.verifyCardHeadersOnAddFiPage(), true, "All Card Headers section don't get displayed on the Add FI page");
 	        homePage.enterDataOn_FinancialInstiution();
@@ -154,7 +154,7 @@ public class RegressionCases extends BaseClass implements ITestListener{
 	        homePage.click_Add_Admin_User();
 	        homePage.updateEmpmailIdInExcel();	
 	        homePage.Select_new_Protfolio();
-			 waitForPageGetsLoad2();
+			 waitForPageGetsLoad();
 			 homePage.Create_new_Protfolio();
 			 homePage.Navigate_To_FI();
 	        //#Add_Portfolio_Manager_User
@@ -180,13 +180,13 @@ public class RegressionCases extends BaseClass implements ITestListener{
 		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
 		//Add_Admin_User
 		loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
-		waitForPageGetsLoad2();
+		waitForPageGetsLoad();
 		homePage.clickSidemenu_FI_Admin();
 		homePage.click_Edit_FI();
 		homePage.click_Delete_flow_FI_User();
-		waitForPageGetsLoad2();
+		waitForPageGetsLoad();
 		homePage.click_Edit_flow_FI_User();
-		waitForPageGetsLoad2();
+		waitForPageGetsLoad();
 		homePage.Verify_Edit_FI_User();
 		softAssert.assertEquals(homePage.verify_First_Name_FI_TB(), true, "Given data don't get displayed on the First_Name Field");
 		softAssert.assertEquals(homePage.verify_Last_Name_FI_TB(), true, "Given data don't get displayed on the Last_Name field");
@@ -204,14 +204,14 @@ public class RegressionCases extends BaseClass implements ITestListener{
         driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
         //Login as LV Admin User
         loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
-        waitForPageGetsLoad2();
+        waitForPageGetsLoad();
         softAssert.assertEquals(homePage.verifyHomePageTitle(), true, "Title is not displaying as Lendovative Home Page");
         homePage.clickFiAdmin();
-        waitForPageGetsLoad2();
+        waitForPageGetsLoad();
         softAssert.assertEquals(homePage.verifyFiAdminPageTitle(), true, "FI Admin page title is not displaying as Lendovative Financial Institution Admin");
         softAssert.assertEquals(homePage.verifyAddFinancialInstiutionButtonIsDisplayed(), true, "Add Financial Instiution button don't get displayed");
         homePage.click_AddFinancialInstiutionButton();
-        waitForPageGetsLoad2();
+        waitForPageGetsLoad();
         softAssert.assertEquals(homePage.verifyAddFinancialInstitutionPageTitle(), true, "Add Financial Institution page is not displayed");
         softAssert.assertEquals(homePage.verifyCardHeadersOnAddFiPage(), true, "All Card Headers section don't get displayed on the Add FI page");
         homePage.enterDataOn_FinancialInstiution();
@@ -225,16 +225,16 @@ public class RegressionCases extends BaseClass implements ITestListener{
     @Test(testName = "TC_UC20_05", description = "Verify User views Licensed & Other details", priority = 07)
     public void TC_07_Verify_User_Views_Licensed_And_Otherdetails() throws InterruptedException{
         loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
-        waitForPageGetsLoad2();
+        waitForPageGetsLoad();
         softAssert.assertEquals(homePage.verifyHomePageTitle(), true, "Title is not displaying as Lendovative Home Page");
         homePage.clickUserAdmin();
         homePage.getAccountManagerList();
         homePage.clickFiAdmin();
-        waitForPageGetsLoad2();
+        waitForPageGetsLoad();
         softAssert.assertEquals(homePage.verifyFiAdminPageTitle(), true, "FI Admin page title is not displaying as Lendovative Financial Institution Admin");
         softAssert.assertEquals(homePage.verifyAddFinancialInstiutionButtonIsDisplayed(), true, "Add Financial Instiution button don't get displayed");
         homePage.click_AddFinancialInstiutionButton();
-        waitForPageGetsLoad2();
+        waitForPageGetsLoad();
         softAssert.assertEquals(homePage.verifyAddFinancialInstitutionPageTitle(), true, "Add Financial Institution page is not displayed");
         softAssert.assertEquals(homePage.verifyCardHeadersOnAddFiPage(), true, "All Card Headers section don't get displayed on the Add FI page");
         homePage.enterDataOn_FinancialInstiution();
@@ -265,7 +265,7 @@ public class RegressionCases extends BaseClass implements ITestListener{
 		ValidateUrl.equalsIgnoreCase(config.getProperty("url"));
 		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
 		loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
-		waitForPageGetsLoad2();
+		waitForPageGetsLoad();
 		homePage.clickSidemenu_FI_Admin();
 		homePage.click_Edit_FI();
 		homePage.click_Add_Admin_User();
@@ -274,10 +274,10 @@ public class RegressionCases extends BaseClass implements ITestListener{
 		BaseClass.refresh();
 		//Add_Portfolio_Manager_User
 		loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 1), ExcelMethods.getData("Sheet1", "Password", 1));
-		waitForPageGetsLoad2();
+		waitForPageGetsLoad();
 		homePage.clickSidemenu_FI_Admin();
 		homePage.click_Edit_FI();
-		waitForPageGetsLoad2();
+		waitForPageGetsLoad();
 		homePage.click_Add_Portfolio_Manager_User();
 		homePage.updateEmpmailIdInExcel();	
 		loginPage.logout(); 
@@ -330,51 +330,51 @@ public class RegressionCases extends BaseClass implements ITestListener{
         driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
         //Login as LV Admin User
         loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 25), ExcelMethods.getData("Sheet1", "Password", 25));
-         waitForPageGetsLoad2();
+         waitForPageGetsLoad();
          homePage.click_Add_User_Admin_Menu();
-         waitForPageGetsLoad2();
+         waitForPageGetsLoad();
          softAssert.assertEquals(homePage.verifyLV_User_Admin_Page_Title(), true, "Selected LV Profile info page title do not displayed" );
-         waitForPageGetsLoad2();
+         waitForPageGetsLoad();
          softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
-         waitForPageGetsLoad2();
+         waitForPageGetsLoad();
          softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
-         waitForPageGetsLoad2();
+         waitForPageGetsLoad();
          //homePage.clickSave_Button();
          loginPage.logout();
   
                 
          //Login as LV Manager User
          BaseClass.refresh();
-         waitForPageGetsLoad2();
+         waitForPageGetsLoad();
          loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 26), ExcelMethods.getData("Sheet1", "Password", 26));
-         waitForPageGetsLoad2();
+         waitForPageGetsLoad();
          homePage.click_Sidebar_Icon();
-         waitForPageGetsLoad2();
+         waitForPageGetsLoad();
          homePage.click_User_Admin_Menu();
          homePage.click_Sidebar_Icon();
          softAssert.assertEquals(homePage.verifyLV_User_Admin_Page_Title(), true, "Selected LV Profile info page title do not displayed" );
-         waitForPageGetsLoad2();
+         waitForPageGetsLoad();
          softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
-         waitForPageGetsLoad2();
+         waitForPageGetsLoad();
          softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
-         waitForPageGetsLoad2();
+         waitForPageGetsLoad();
          loginPage.logout();    
          
          //Login as LV Viewer User
          BaseClass.refresh();
-         waitForPageGetsLoad2();
+         waitForPageGetsLoad();
          loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 2), ExcelMethods.getData("Sheet1", "Password", 2));
-         waitForPageGetsLoad2();
+         waitForPageGetsLoad();
          homePage.click_Sidebar_Icon();
-         waitForPageGetsLoad2();
+         waitForPageGetsLoad();
          homePage.click_User_Admin_Menu();
          homePage.click_Sidebar_Icon();
          softAssert.assertEquals(homePage.verifyLV_User_Admin_Page_Title(), true, "Selected LV Profile info page title do not displayed" );
-         waitForPageGetsLoad2();
+         waitForPageGetsLoad();
          softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
-         waitForPageGetsLoad2();
+         waitForPageGetsLoad();
          softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
-         waitForPageGetsLoad2();
+         waitForPageGetsLoad();
          loginPage.logout();        
          
     }
@@ -387,14 +387,14 @@ public class RegressionCases extends BaseClass implements ITestListener{
             driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
             //Login as LV Admin User
             loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 25), ExcelMethods.getData("Sheet1", "Password", 25));
-             waitForPageGetsLoad2();
+             waitForPageGetsLoad();
              homePage.click_User_Edit_Save();
              softAssert.assertEquals(homePage.verifyLV_User_Admin_Page_Title(), true, "Selected LV Profile info page title do not displayed" );
-             waitForPageGetsLoad2();
+             waitForPageGetsLoad();
              softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
-             waitForPageGetsLoad2();
+             waitForPageGetsLoad();
              softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
-             waitForPageGetsLoad2();
+             waitForPageGetsLoad();
              loginPage.logout();
 }             
              
@@ -407,14 +407,14 @@ public class RegressionCases extends BaseClass implements ITestListener{
                     driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
                     //Login as LV Admin User
                     loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 25), ExcelMethods.getData("Sheet1", "Password", 25));
-                     waitForPageGetsLoad2();
+                     waitForPageGetsLoad();
                      homePage.click_User_Cancel_Delete();
                      softAssert.assertEquals(homePage.verifyLV_User_Admin_Page_Title(), true, "Selected LV Profile info page title do not displayed" );
-                     waitForPageGetsLoad2();
+                     waitForPageGetsLoad();
                      softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
-                     waitForPageGetsLoad2();
+                     waitForPageGetsLoad();
                      softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
-                     waitForPageGetsLoad2();
+                     waitForPageGetsLoad();
                      loginPage.logout();
 }
              @Test(testName ="TC_UC21_01_04_05", description = "Verify User Views Add New Business Roles", priority = 1)
@@ -425,9 +425,9 @@ public class RegressionCases extends BaseClass implements ITestListener{
              driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
              //Login as LV Admin User
              loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 25), ExcelMethods.getData("Sheet1", "Password", 25));
-              waitForPageGetsLoad2();
+              waitForPageGetsLoad();
               homePage.Create_New_Business();
-              waitForPageGetsLoad2();
+              waitForPageGetsLoad();
               softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
               softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
              
@@ -441,14 +441,14 @@ public class RegressionCases extends BaseClass implements ITestListener{
              driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
              //Login as LV Admin User
              loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 25), ExcelMethods.getData("Sheet1", "Password", 25));
-              waitForPageGetsLoad2();
+              waitForPageGetsLoad();
               homePage.LV_Business_Add_New_User();
               softAssert.assertEquals(homePage.verifyLV_User_Admin_Page_Title(), true, "Selected LV Profile info page title do not displayed" );
-              waitForPageGetsLoad2();
+              waitForPageGetsLoad();
               softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
-              waitForPageGetsLoad2();
+              waitForPageGetsLoad();
               softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
-              waitForPageGetsLoad2();
+              waitForPageGetsLoad();
              
     }       
              @Test(testName ="TC_UC21_08", description = "LV Business Edit User", priority = 1)
@@ -459,14 +459,14 @@ public class RegressionCases extends BaseClass implements ITestListener{
              driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
              //Login as LV Admin User
              loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 25), ExcelMethods.getData("Sheet1", "Password", 25));
-              waitForPageGetsLoad2();
+              waitForPageGetsLoad();
               homePage.Edit_Business_Details();
               softAssert.assertEquals(homePage.verifyLV_User_Admin_Page_Title(), true, "Selected LV Profile info page title do not displayed" );
-              waitForPageGetsLoad2();
+              waitForPageGetsLoad();
               softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
-              waitForPageGetsLoad2();
+              waitForPageGetsLoad();
               softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
-              waitForPageGetsLoad2();
+              waitForPageGetsLoad();
  }   
              
              
@@ -478,12 +478,12 @@ public class RegressionCases extends BaseClass implements ITestListener{
              driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
              //Login as LV Admin User
              loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 25), ExcelMethods.getData("Sheet1", "Password", 25));
-              waitForPageGetsLoad2(); 
+              waitForPageGetsLoad(); 
               homePage.LV_Business_Status_Dropdown();
               softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
-              waitForPageGetsLoad2();
+              waitForPageGetsLoad();
               softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
-              waitForPageGetsLoad2();
+              waitForPageGetsLoad();
   }        
               
               @Test(testName ="TC_UC22_01_04", description = "Edit Save LV Account Debtor Admin", priority = 1)
@@ -494,12 +494,12 @@ public class RegressionCases extends BaseClass implements ITestListener{
               driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
               //Login as LV Admin User
               loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 25), ExcelMethods.getData("Sheet1", "Password", 25));
-               waitForPageGetsLoad2(); 
+               waitForPageGetsLoad(); 
                homePage.Edit_Save_LV_Account_Debtor_Admin();
                softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
-               waitForPageGetsLoad2();
+               waitForPageGetsLoad();
                softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
-               waitForPageGetsLoad2();
+               waitForPageGetsLoad();
                
 }
               @Test(testName ="TC_UC22_06", description = "TC_22_01_06 Edit Cancel LV Account Debtor Admin1", priority = 1)
@@ -510,12 +510,12 @@ public class RegressionCases extends BaseClass implements ITestListener{
               driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
               //Login as LV Admin User
               loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 25), ExcelMethods.getData("Sheet1", "Password", 25));
-               waitForPageGetsLoad2(); 
+               waitForPageGetsLoad(); 
                homePage.Edit_Cancel_LV_Account_Debtor_Admin();
                softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
-               waitForPageGetsLoad2();
+               waitForPageGetsLoad();
                softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
-               waitForPageGetsLoad2();   
+               waitForPageGetsLoad();   
               
           }   
               @Test(testName ="TC_UC25_02", description = "Verify User Add New FI Notes", priority = 1)
@@ -526,12 +526,12 @@ public class RegressionCases extends BaseClass implements ITestListener{
               driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
               //Login as LV Admin User
               loginPage.login(ExcelMethods.getData("Sheet1", "UserName", 25), ExcelMethods.getData("Sheet1", "Password", 25));
-               waitForPageGetsLoad2(); 
+               waitForPageGetsLoad(); 
                homePage.User_Add_New_FI_Notes();
                softAssert.assertEquals(homePage.verifyHelpModalIsDiplayed(), true, "Help dialog do not get displayed on FI Home Page");
-               waitForPageGetsLoad2();
+               waitForPageGetsLoad();
                softAssert.assertEquals(homePage.verifyBusinessListFileIsDownladed(), true, "Business List file do not get downladed");
-               waitForPageGetsLoad2(); 
+               waitForPageGetsLoad(); 
               
    }
 }    

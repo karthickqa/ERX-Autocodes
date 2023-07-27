@@ -788,11 +788,15 @@ public void click_Open_credits_field() throws InterruptedException {
 		
 	}
 	
-	 public void LV_Click_Dropdown() throws InterruptedException {  
+	
+	
+	
+	
+	public void LV_Click_Dropdown() throws InterruptedException {  
    	  clickElement("LV_FilterBy_dropdown");
    	clickElement("LV_FilterBy_Active");
    	  clickElement("LV_FilterBy_Pending_Active");
-         clickElement("LV_FilterBy_License_Matured");
+         clickElement("LV_FilterBy_License_Matured1");
          scrollToElement("LV_FilterBy_Terminated");
         clickElement("LV_FilterBy_Terminated");
 	
@@ -1441,7 +1445,7 @@ public void click_Open_credits_field() throws InterruptedException {
              type("Contact_Number", config.getProperty("Contact_Number"));
              type("Contact_Title", config.getProperty("Contact_Title"));
              type("Email_Address", config.getProperty("Email_Address"));
-             clickElement("ContactSecurityRole_Dropdown");
+             clickElement("ContactSecurityRole_dropdown");
              clickElement("Administrator_Dropdown");
              clickElement("Account_Manager_Dropdown");
              clickElement("Viewer_Dropdown");
@@ -1468,7 +1472,7 @@ public void click_Open_credits_field() throws InterruptedException {
          type("Contact_Number", config.getProperty("Contact_Number"));
          type("Contact_Title", config.getProperty("Contact_Title"));
          type("Email_Address", config.getProperty("Email_Address"));
-         clickElement("ContactSecurityRole_Dropdown");
+         clickElement("ContactSecurityRole_dropdown");
          clickElement("Administrator_Dropdown");
          scrollToElement("Save_Button");
            waitForElementClickable("Save_Button");
@@ -1490,7 +1494,7 @@ public void click_Open_credits_field() throws InterruptedException {
              type("Contact_Number", config.getProperty("Contact_Number"));
              type("Contact_Title", config.getProperty("Contact_Title"));
              type("Email_Address", config.getProperty("Email_Address"));
-             clickElement("ContactSecurityRole_Dropdown");
+             clickElement("ContactSecurityRole_dropdown");
              clickElement("Administrator_Dropdown");
                scrollToElement("Cancel_Button");
                waitForElementClickable("Cancel_Button");
