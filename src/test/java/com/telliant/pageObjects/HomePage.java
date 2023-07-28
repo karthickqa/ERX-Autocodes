@@ -25,6 +25,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
@@ -41,11 +42,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class HomePage extends WebDriverRoot {
-	 JavascriptExecutor js = (JavascriptExecutor)driver;
+	 public static final String User_Add_New_FI_Notes = null;
+	JavascriptExecutor js = (JavascriptExecutor)driver;
 	 Logger logger = Logger.getLogger(HomePage.class.getSimpleName());
 	 ArrayList<String> arrayList= new ArrayList<String>();
 	 static String getVal=null;
-		
+
  /*#################################################################################################################*/	
 	public boolean verifyHomePageTitle() {
 		boolean flag= false;
@@ -343,7 +345,7 @@ public class HomePage extends WebDriverRoot {
 	
 	public void clickEditButton() throws InterruptedException {
 		scrollToElement("bbEditButton");
-		waitForPageGetsLoad();
+		waitForPageGetsLoad2();
 		clickElement("bbEditButton");
 	}
 	
@@ -446,6 +448,9 @@ public class HomePage extends WebDriverRoot {
 		return verifyDialogHeader(getElement("fiUserLineStructurePageHelpDialogTitle"), config.getProperty("fiUserLineStructurePageHelpDialogTitle"));
 	}
 	
+	public boolean verifyLVBusinessAdmin() {
+		return verifyDialogHeader(getElement("fiUserLineStructurePageHelpDialogTitle"), config.getProperty("fiUserLineStructurePageHelpDialogTitle"));
+	}
 	public boolean verifyEditButtonIsDisplayed() {
 		boolean flag= false;
 		if(getElement("bbEditButton").isDisplayed())
@@ -788,13 +793,59 @@ public void click_Open_credits_field() throws InterruptedException {
 		
 	}
 	
+	 public void LV_Click_Dropdown() throws InterruptedException {
+   	  clickElement("LV_FilterBy_dropdown");
+   	clickElement("LV_FilterBy_Active");
+   	  clickElement("LV_FilterBy_Pending_Active");
+         clickElement("LV_FilterBy_License_Matured");
+         scrollToElement("LV_FilterBy_Terminated");
+        clickElement("LV_FilterBy_Terminated");
+
+
+	 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public void clickDropdown_HP() throws InterruptedException, AWTException {
-		waitForElementVisible("LV_FilterBy_dropdown");
-		clickElement("LV_FilterBy_dropdown");
+		waitForElementVisible("LV_Filter_By_FI_Status");
+		clickElement("LV_Filter_By_FI_Status");
 		Thread.sleep(2000);
-		JavascriptExecutor js= (JavascriptExecutor) driver;
-		js.executeScript("document.querySelector(\"#mat-select-0-panel > div.mat-option.ng-tns-c57-1 > input\").click()");
-		Robot robot = new Robot();
+		 Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_ESCAPE);
 		robot.keyRelease(KeyEvent.VK_ESCAPE);
 	
@@ -1098,7 +1149,7 @@ public void click_Open_credits_field() throws InterruptedException {
 		type(("addFi_ZipCode"), config.getProperty("addFi_ZipCode"));
 		getVal= getElement("addFi_FinancialInstiutionName").getAttribute("value");
 		System.out.println(getVal);
-		ExcelMethods.putData("Sheet1", "Finame", 1, S1); 
+		ExcelMethods.putData("Sheet1", "Finame", 1, S1);
 		System.out.println("the string value is  " +S1);
 	}
 	
@@ -1245,7 +1296,7 @@ public void click_Open_credits_field() throws InterruptedException {
 					String userName= driver.findElement(By.cssSelector("table#userlist>tbody>tr:nth-of-type("+j+")>td:nth-of-type(4)")).getText();
 					arrayList.add(userName);
 				}
-			}	
+			}
 		}
 		return arrayList;
 	}
@@ -1380,7 +1431,7 @@ public void click_Open_credits_field() throws InterruptedException {
              clickElement("Viewer_Dropdown");
              clickElement("Save_Button");   
        }
-	        
+
           public boolean verifyLV_User_Admin_Page_Title() {
            return verifyDialogHeader(getElement("LV_User_Admin_Page_Title"), config.getProperty("Lendovative User Admin"));
           }
@@ -1407,8 +1458,8 @@ public void click_Open_credits_field() throws InterruptedException {
            waitForElementClickable("Save_Button");
          clickElement("Save_Button");  
          clickElement("Toast_Container");
-      } 
-        
+      }
+
       public void click_EditButtonOnFiAdminUser() throws InterruptedException {
   		boolean flag= false;
   		JavascriptExecutor js= (JavascriptExecutor) driver;
@@ -1447,11 +1498,12 @@ public void click_Open_credits_field() throws InterruptedException {
   			if(flag) {
   				break;
   			}
-  		
+
   	}
-  	
+
    }
       public void click_User_Cancel_Delete() {  
+    	//LV Add Business(Business Information)
              clickElement("Sidebar_Icon");
              clickElement("User_Admin_Menu");  
              clickElement("Sidebar_Icon");
@@ -1475,8 +1527,8 @@ public void click_Open_credits_field() throws InterruptedException {
              clickElement("Delete_Button");  
              clickElement("Toast_Container");
       }
-      
-      public void Create_New_Business() {  
+
+      public void Create_New_Business() {
              clickElement("Sidebar_Icon");
              scrollToElement("Business_Admin_Menu");
                waitForElementClickable("Business_Admin_Menu");
@@ -1492,10 +1544,10 @@ public void click_Open_credits_field() throws InterruptedException {
              type("Business_State", config.getProperty("Business_State"));
              type("Zipcode", config.getProperty("Zipcode"));
              type("NAICS_Industry_Code", config.getProperty("NAICS_Industry_Code"));
-      	
+
    }
 
-	
+
       public boolean verify_FiName() {
   		boolean flag= false;
   		scrollToElement("addFi_FinancialInstiutionName");
@@ -1506,7 +1558,7 @@ public void click_Open_credits_field() throws InterruptedException {
   			flag= true;
   		return flag;
   	}
-  	
+
   	public void click_ToastMessage() {
   		boolean flag=false;
   		try {
@@ -1517,7 +1569,7 @@ public void click_Open_credits_field() throws InterruptedException {
   		if(flag)
   			getElement("toast_UserUpdatedSuccessfully").click();
   	}
-  	 public void Validate_To_Business_Admin_Tab() {  
+  	 public void Validate_To_Business_Admin_Tab() {
          clickElement("Business_Admin_Tab");
          scrollToElement("ScrollTo_Dropdown");
          clickElement("Click_FI_RowSelection_Dropdown");
@@ -1525,8 +1577,8 @@ public void click_Open_credits_field() throws InterruptedException {
          scrollToElement("Search_FIname");
          type("Search_FIname",config.getProperty("Search_Business_name"));
          clickElement("Edit_FI");
-        
-         
+
+
      }
      public void click_Add_Admin_Business_User() {
  		waitForElementClickable("AddUser_Tab_FI");
@@ -1542,7 +1594,7 @@ public void click_Open_credits_field() throws InterruptedException {
  		clickElement("isPrimaryAdmin_Dwn_FI_TB");
  		try {
  			clickElement("isPrimaryAdmin_Dwn_Yes_BA");
- 			
+
  		} catch (Exception e) {
  			// TODO: handle exception
  			clickElement("isPrimaryAdmin_Dwn_No_BA");
@@ -1571,7 +1623,7 @@ public void click_Open_credits_field() throws InterruptedException {
      		clickElement("Save_Btn_FI_TB");
      		clickElement("Toast_Container");
      		clickElement("Toast_Container");
-     
+
      }
      public void Navigate_To_Support_Resource_Page() {
     	 waitForElementClickable("toogleButton_FiAdmin");
@@ -1581,7 +1633,7 @@ public void click_Open_credits_field() throws InterruptedException {
     		waitForElementClickable("Add_Support_Resources_Side_Menu");
     		clickElement("Add_Support_Resources_Side_Menu");
     		clickElement("toogleButton_FiAdmin");
-   		// clickElement("Documents_Tab");		 
+   		// clickElement("Documents_Tab");
      }
      public void Navigate_To_Industry_News_Tab() {
     	 clickElement("Industry_News_Tab");
@@ -1593,8 +1645,8 @@ public void click_Open_credits_field() throws InterruptedException {
 	 clickElement("Ancillary_Product_Information_Tab");
 	}
 	public void Navigate_To_Documents_Tab() {
-	 clickElement("Documents_Tab"); 
-	 
+	 clickElement("Documents_Tab");
+
 	}
      public boolean verify_Documents_Tab() {
 		 return verifyDialogHeader(getElement("Documents_Tab"), config.getProperty("Documents_Tab"));
@@ -1621,7 +1673,7 @@ public void click_Open_credits_field() throws InterruptedException {
     	 clickElement("Document_Add_Btn");
     	 waitForElementClickable("Toast_Container");
     	 clickElement("Toast_Container");
-    	 
+
     	}
      public void Add_Support_Document_Visible_for_Business() throws IOException, InterruptedException {
     	 clickElement("Add_Document_Button");
@@ -1633,7 +1685,7 @@ public void click_Open_credits_field() throws InterruptedException {
     	 clickElement("Document_Add_Btn");
     	 waitForElementClickable("Toast_Container");
     	 clickElement("Toast_Container");
-    	 
+
     	}
      public void Add_Support_Document_Visible_for_Both() throws IOException, InterruptedException {
     	 clickElement("Add_Document_Button");
@@ -1645,10 +1697,10 @@ public void click_Open_credits_field() throws InterruptedException {
     	 clickElement("Document_Add_Btn");
     	 waitForElementClickable("Toast_Container");
     	 clickElement("Toast_Container");
-    	 
+
     	}
      public void Verify_Support_Document_Visible_for_Financial_Institution() throws IOException, InterruptedException {
-    	
+
     	// clickElement("Fi_Support_Document_PAge");
     	 scrollToElement("ScrollTo_Dropdown");
      	clickElement("Click_FI_RowSelection_Dropdown1");
@@ -1656,10 +1708,10 @@ public void click_Open_credits_field() throws InterruptedException {
      	scrollToElement("Search_FIname");
     	//clickElement("searchTextBox");
  		type("searchTextBox", config.getProperty("searchText_support_Resource"));
- 		
+
      }
      public void Verify_Support_Document_Visible_for_Business() throws IOException, InterruptedException {
-     	
+
     	// clickElement("Business_Support_Document_PAge");
     	 scrollToElement("ScrollTo_Dropdown");
     	 waitForElementClickable("Click_FI_RowSelection_Dropdown1");
@@ -1668,19 +1720,19 @@ public void click_Open_credits_field() throws InterruptedException {
      	scrollToElement("Search_FIname");
     	//clickElement("searchTextBox");
  		type("searchTextBox", config.getProperty("searchText_support_Resource"));
- 		
+
      }
      public boolean verify_Added_Document() {
 		 return verifyDialogHeader(getElement("Document_Name"), config.getProperty("searchText_support_Resource"));
 	}
-    
+
      public void Navigate_Fi_Support_Document_PAge(){
     	 clickElement("Fi_Support_Document_PAge");
       }
-      
+
      public void Navigate_Business_Support_Document_PAge(){
     		 clickElement("Business_Support_Document_PAge");
-      } 	
+      }
      public void Verify_Cancel_Flow() throws IOException, InterruptedException {
     	 clickElement("Add_Document_Button");
     	 Thread.sleep(3000);
@@ -1952,6 +2004,399 @@ public void click_Open_credits_field() throws InterruptedException {
 			if(!flag){
 				break;
 			}
+
+             // LV Add Business(FI Information)
+             scrollToElement("Financial_Institution");
+             waitForElementClickable("Financial_Institution");
+             clickElement("Financial_Institution");
+             clickElement("Choose_FI_Field");
+             waitForPageGetsLoad2();
+             waitForElementClickable("Assigned_FI_Lender");
+             clickElement("Assigned_FI_Lender");
+             waitForElementClickable("Choose_Assigned_FI_Lender");
+             clickElement("Choose_Assigned_FI_Lender");
+            waitForElementClickable("FI_Lender_Assigned_Date");
+             waitForPageGetsLoad1();
+             WebElement filenderassigneddate = getElement("FI_Lender_Assigned_Date");
+             js = (JavascriptExecutor)driver;
+             js.executeScript("arguments[0].value='2023-07-20';",filenderassigneddate);
+             waitForElementClickable("FI_Portfolio");
+             clickElement("FI_Portfolio");
+             clickElement("Choose_FI_Portfolio");
+             waitForPageGetsLoad2();
+             clickElement("Line_Limit");
+             type("Line_Limit", config.getProperty("Line_Limit"));
+             clickElement("Funded_Balance");
+             type("Funded_Balance", config.getProperty("Funded_Balance"));
+             waitForElementClickable("Line_Begin_Date");
+             waitForPageGetsLoad2();
+             WebElement filinebegindate = getElement("Line_Begin_Date");
+             js = (JavascriptExecutor)driver;
+             js.executeScript("arguments[0].value='2023-10-15';",filinebegindate);
+            // type("Line_Begin_Date", config.getProperty("Line_Begin_Date"));
+             waitForElementClickable("Line_Maturity_Date");
+             WebElement linematuritydate = getElement("Line_Maturity_Date");
+             js = (JavascriptExecutor)driver;
+             js.executeScript("arguments[0].value='2023-07-15';",linematuritydate);
+             //type("Line_Maturity_Date", config.getProperty("Line_Maturity_Date"));
+             clickElement("Commercial_Loan_Number");
+             type("Commercial_Loan_Number", config.getProperty("Commercial_Loan_Number"));
+             clickElement("Note_Number");
+             type("Note_Number", config.getProperty("Note_Number"));
+             scrollToElement("AR_Aging_Date");
+             waitForElementClickable("AR_Aging_Date");
+             WebElement lineagingdate= getElement("AR_Aging_Date");
+             js = (JavascriptExecutor)driver;
+             js.executeScript("arguments[0].value='2023-07-15';",lineagingdate);
+
+
+             // LV Add Business(Service Level)&(Other details)
+             waitForPageGetsLoad2();
+             scrollToElement("Service_Level");
+             waitForElementClickable("Service_Level");
+             clickElement("Service_Level");
+             clickElement("Choose_Sevice_Level");
+             waitForElementClickable("Business_Fee");
+             clickElement("Business_Fee");
+             type("Business_Fee", config.getProperty("Business_Fee"));
+             waitForElementClickable("Fee_Start_Date");
+             clickElement("Fee_Start_Date");
+             type("Fee_Start_Date", config.getProperty("Fee_Start_Date"));
+             clickElement("Fee_End_Date");
+             type("Fee_End_Date", config.getProperty("Fee_End_Date"));
+             waitForPageGetsLoad2();
+             scrollToElement("Business_Status");
+             waitForElementClickable("Business_Status");
+             clickElement("Business_Status");
+             clickElement("Choose_Business_Status");
+             waitForPageGetsLoad2();
+             scrollToElement("Argos_Risk_Details");
+             clickElement("Argos_Risk_Details");
+             clickElement("Choose_Argos_Risk_Details");
+             scrollToElement("Save_Business_Admin");
+             waitForElementClickable("Save_Business_Admin");
+             //clickElement("Save_Business_Admin");
+
+
+   }
+
+
+      public void LV_Business_Add_New_User() throws InterruptedException {
+          clickElement("Sidebar_Icon");
+          scrollToElement("Business_Admin_Menu");
+          waitForElementClickable("Business_Admin_Menu");
+          clickElement("Business_Admin_Menu");
+          clickElement("Sidebar_Icon");
+          waitForPageGetsLoad2();
+          scrollToElement("Edit_Button");
+          clickElement("Edit_Button");
+          scrollToElement("homePage_Title");
+          //clickElement("homePage_Title");
+          scrollToElement("Business_Add_User_Tab");
+          waitForElementClickable("Business_Add_User_Tab");
+
+//          clickElement("Business_Add_User_Tab");
+
+          WebElement businessAddUserTab = getElement("Business_Add_User_Tab");
+          JavascriptExecutor js = (JavascriptExecutor)driver;
+          js.executeScript("arguments[0].click();", businessAddUserTab);
+          clickElement("Business_First_Name");
+          type("Business_First_Name", config.getProperty("Business_First_Name"));
+          clickElement("Business_Last_Name");
+          type("Business_Last_Name", config.getProperty("Business_Last_Name"));
+          waitForElementClickable("Business_Contact_Name");
+          clickElement("Business_Contact_Name");
+          type("Business_Contact_Name", config.getProperty("Business_Contact_Name"));
+          waitForElementClickable("Country_code");
+          clickElement("Country_code");
+          clickElement("Choose_Country_code");
+          waitForElementClickable("Business_Contact_Number");
+          clickElement("Business_Contact_Number");
+          type("Business_Contact_Number", config.getProperty("Business_Contact_Number"));
+          clickElement("Business_Email_Address");
+          type("Business_Email_Address", config.getProperty("Business_Email_Address"));
+          waitForElementClickable("Business_Contact_Title");
+          clickElement("Business_Contact_Title");
+          type("Business_Contact_Title", config.getProperty("Business_Contact_Title"));
+          clickElement("Business_Choose_Security_Role");
+          clickElement("Choose_Business_Choose_Security_Role");
+          waitForElementClickable("Business_Primary_Admin");
+          clickElement("Business_Primary_Admin");
+          clickElement("Choose_Business_Primary_Admin");
+          waitForElementClickable("Business_User_Status");
+          clickElement("Business_User_Status");
+          clickElement("Choose_Business_User_Status");
+
+      }
+      public void Edit_Business_Details() throws InterruptedException {
+          clickElement("Sidebar_Icon");
+          scrollToElement("Business_Admin_Menu");
+            waitForElementClickable("Business_Admin_Menu");
+          clickElement("Business_Admin_Menu");
+          clickElement("Sidebar_Icon");
+          waitForPageGetsLoad2();
+          scrollToElement("Edit_Button");
+          clickElement("Edit_Button10");
+          type("Edit_Business_Name", config.getProperty("Edit_Business_Name"));
+          type("Edit_Business_Phone", config.getProperty("Edit_Business_Phone"));
+          type("Edit_Business_Email", config.getProperty("Edit_Business_Email"));
+          type("Edit_Business_Address_Line1", config.getProperty("Edit_Business_Address_Line1"));
+          type("Edit_Business_Address_Line2", config.getProperty("Edit_Business_Address_Line2"));
+          type("Edit_Business_city", config.getProperty("Edit_Business_city"));
+          type("Edit_Business_State", config.getProperty("Edit_Business_State"));
+          type("Edit_Zipcode", config.getProperty("Edit_Zipcode"));
+          type("Edit_NAICS_Industry_Code", config.getProperty("Edit_NAICS_Industry_Code"));
+
+          // LV Add Business(FI Information)
+          scrollToElement("Financial_Institution");
+          waitForElementClickable("Financial_Institution");
+          clickElement("Financial_Institution");
+          clickElement("Edit_Choose_Assigned_FI_Lender");
+          waitForPageGetsLoad2();
+          waitForElementClickable("Edit_FI_Lender_Assigned_Date");
+          clickElement("Assigned_FI_Lender");
+          waitForElementClickable("Edit_Choose_Assigned_FI_Lender");
+          clickElement("Edit_Choose_Assigned_FI_Lender");
+         waitForElementClickable("Edit_FI_Lender_Assigned_Date");
+          waitForPageGetsLoad2();
+          clickElement("Edit_FI_Lender_Assigned_Date");
+          waitForPageGetsLoad2();
+          //type("FI_Lender_Assigned_Date", config.getProperty("FI_Lender_Assigned_Date"));
+          WebElement editfilenderassigneddate = driver.findElement(By.id("Edit_FI_Lender_Assigned_Date"));
+
+          js.executeScript("arguments[0].value='02-6-2023';", editfilenderassigneddate);
+          waitForElementClickable("FI_Portfolio");
+          clickElement("FI_Portfolio");
+          clickElement("Choose_FI_Portfolio");
+          waitForPageGetsLoad2();
+          clickElement("Edit_Line_Limit");
+          type("Edit_Line_Limit", config.getProperty("Edit_Line_Limit"));
+          clickElement("Edit_Funded_Balance");
+          type("Edit_Funded_Balance", config.getProperty("Edit_Funded_Balance"));
+          waitForElementClickable("Edit_Line_Begin_Date");
+          clickElement("Edit_Line_Begin_Date");
+          waitForPageGetsLoad2();
+          type("Edit_Line_Begin_Date", config.getProperty("Edit_Line_Begin_Date"));
+          waitForElementClickable("Edit_Line_Maturity_Date");
+          clickElement("Edit_Line_Maturity_Date");
+          type("Edit_Line_Maturity_Date", config.getProperty("Edit_Line_Maturity_Date"));
+          clickElement("Edit_Commercial_Loan_Number");
+          type("Edit_Commercial_Loan_Number", config.getProperty("Edit_Commercial_Loan_Number"));
+          clickElement("Edit_Note_Number");
+          type("Edit_Note_Number", config.getProperty("Edit_Note_Number"));
+          scrollToElement("Edit_AR_Aging_Date");
+          waitForElementClickable("Edit_AR_Aging_Date");
+          clickElement("Edit_AR_Aging_Date");
+          type("Edit_AR_Aging_Date", config.getProperty("Edit_AR_Aging_Date"));
+
+
+          // LV Add Business(Service Level)&(Other details)
+          waitForPageGetsLoad2();
+          scrollToElement("Service_Level");
+          waitForElementClickable("Service_Level");
+          clickElement("Service_Level");
+          clickElement("Choose_Sevice_Level");
+          waitForElementClickable("Business_Fee");
+          clickElement("Business_Fee");
+          type("Business_Fee", config.getProperty("Business_Fee"));
+          waitForElementClickable("Fee_Start_Date");
+          clickElement("Fee_Start_Date");
+          type("Fee_Start_Date", config.getProperty("Fee_Start_Date"));
+          clickElement("Fee_End_Date");
+          type("Fee_End_Date", config.getProperty("Fee_End_Date"));
+          scrollToElement("Business_Status");
+          clickElement("Business_Status");
+          clickElement("Choose_Business_Status");
+          scrollToElement("Argos_Risk_Details");
+          clickElement("Argos_Risk_Details");
+          clickElement("Choose_Argos_Risk_Details");
+
+ }
+
+      public void LV_Business_Status_Dropdown() throws InterruptedException {
+    	  clickElement("Sidebar_Icon");
+          scrollToElement("Business_Admin_Menu");
+            waitForElementClickable("Business_Admin_Menu");
+          clickElement("Business_Admin_Menu");
+          clickElement("Sidebar_Icon");
+          waitForPageGetsLoad2();
+          clickElement("Business_Status_Dropdown");
+          scrollToElement("Active_Dropdown");
+          clickElement("Active_Dropdown");
+          clickElement("Close_Dropdown_header");
+          clickElement("Business_Status_Dropdown");
+          clickElement("Inactive_Dropdown");
+          clickElement("Close_Dropdown_header");
+          clickElement("Business_Status_Dropdown");
+          clickElement("Pending_Active_Dropdown");
+          clickElement("Close_Dropdown_header");
+          clickElement("Business_Status_Dropdown");
+          clickElement("SelectAll_Dropdown");
+          clickElement("Close_Dropdown_header");
+ }
+
+          public void Edit_Save_LV_Account_Debtor_Admin() throws InterruptedException {
+        	  clickElement("Sidebar_Icon");
+              scrollToElement("Account_Debtor_Admin_Menu");
+              waitForPageGetsLoad2();
+               clickElement("Account_Debtor_Admin_Menu");
+              clickElement("Sidebar_Icon");
+              waitForPageGetsLoad2();
+              waitForElementClickable("AD_Down_Arrow");
+              clickElement("AD_Down_Arrow");
+              waitForPageGetsLoad2();
+              scrollToElement("Edit_AD_Button");
+              waitForElementClickable("Edit_AD_Button");
+            clickElement("Edit_AD_Button");
+            waitForPageGetsLoad2();
+            waitForElementClickable("Account_Debtor_Name");
+            clickElement("Account_Debtor_Name");
+            type("Account_Debtor_Name", config.getProperty("Account_Debtor_Name"));
+            waitForElementClickable("Account_Number");
+            clickElement("Account_Number");
+            type("Account_Number", config.getProperty("Account_Number"));
+            waitForElementClickable("Contact_Name");
+            clickElement("Contact_Name");
+            type("Contact_Name", config.getProperty("Contact_Name"));
+            waitForElementClickable("Phone_Number");
+            clickElement("Phone_Number");
+            type("Phone_Number", config.getProperty("Phone_Number"));
+            waitForElementClickable("Email");
+            clickElement("Email");
+            type("Email", config.getProperty("Email"));
+            waitForElementClickable("Address_Line1");
+            clickElement("Address_Line1");
+            type("Address_Line1", config.getProperty("Address_Line1"));
+            waitForElementClickable("Address_Line2");
+            clickElement("Address_Line2");
+            type("Address_Line2", config.getProperty("Address_Line2"));
+            waitForElementClickable("City");
+            clickElement("City");
+            type("City", config.getProperty("City"));
+            waitForElementClickable("State");
+            clickElement("State");
+            type("State", config.getProperty("State"));
+            waitForElementClickable("Zip_Code");
+            clickElement("Zip_Code");
+            type("Zip_Code", config.getProperty("Zip_Code"));
+            waitForElementClickable("Unique_ID");
+            clickElement("Unique_ID");
+            type("Unique_ID", config.getProperty("Unique_ID"));
+            clickElement("Status_Dropdown");
+            clickElement("Choose_Active_Status");
+
+            waitForElementClickable("Company_ID");
+            clickElement("Company_ID");
+            type("Company_ID", config.getProperty("Company_ID"));
+
+            waitForElementClickable("Insured_Limit");
+            clickElement("Insured_Limit");
+            type("Insured_Limit", config.getProperty("Insured_Limit"));
+
+            WebElement expirationdate = getElement("Expiration_Date");
+            js = (JavascriptExecutor)driver;
+            js.executeScript("arguments[0].value='2023-11-15';",expirationdate);
+            scrollToElement("Save_Button");
+            waitForElementClickable("Save_Button");
+            clickElement("Save_Button");
+
+
+
+}
+
+          public void Edit_Cancel_LV_Account_Debtor_Admin() throws InterruptedException {
+        	  clickElement("Sidebar_Icon");
+              scrollToElement("Account_Debtor_Admin_Menu");
+              waitForPageGetsLoad2();
+               clickElement("Account_Debtor_Admin_Menu");
+              clickElement("Sidebar_Icon");
+              waitForPageGetsLoad2();
+              waitForElementClickable("AD_Down_Arrow");
+              clickElement("AD_Down_Arrow");
+              waitForPageGetsLoad2();
+              scrollToElement("Edit_AD_Button");
+              waitForElementClickable("Edit_AD_Button");
+            clickElement("Edit_AD_Button");
+            waitForPageGetsLoad2();
+            waitForElementClickable("Account_Debtor_Name");
+            clickElement("Account_Debtor_Name");
+            type("Account_Debtor_Name", config.getProperty("Account_Debtor_Name"));
+            waitForElementClickable("Account_Number");
+            clickElement("Account_Number");
+            type("Account_Number", config.getProperty("Account_Number"));
+            waitForElementClickable("Contact_Name");
+            clickElement("Contact_Name");
+            type("Contact_Name", config.getProperty("Contact_Name"));
+            waitForElementClickable("Phone_Number");
+            clickElement("Phone_Number");
+            type("Phone_Number", config.getProperty("Phone_Number"));
+            waitForElementClickable("Email");
+            clickElement("Email");
+            type("Email", config.getProperty("Email"));
+            waitForElementClickable("Address_Line1");
+            clickElement("Address_Line1");
+            type("Address_Line1", config.getProperty("Address_Line1"));
+            waitForElementClickable("Address_Line2");
+            clickElement("Address_Line2");
+            type("Address_Line2", config.getProperty("Address_Line2"));
+            waitForElementClickable("City");
+            clickElement("City");
+            type("City", config.getProperty("City"));
+            waitForElementClickable("State");
+            clickElement("State");
+            type("State", config.getProperty("State"));
+            waitForElementClickable("Zip_Code");
+            clickElement("Zip_Code");
+            type("Zip_Code", config.getProperty("Zip_Code"));
+            waitForElementClickable("Unique_ID");
+            clickElement("Unique_ID");
+            type("Unique_ID", config.getProperty("Unique_ID"));
+            clickElement("Status_Dropdown");
+            clickElement("Choose_Active_Status");
+
+            waitForElementClickable("Company_ID");
+            clickElement("Company_ID");
+            type("Company_ID", config.getProperty("Company_ID"));
+
+            waitForElementClickable("Insured_Limit");
+            clickElement("Insured_Limit");
+            type("Insured_Limit", config.getProperty("Insured_Limit"));
+
+            WebElement expirationdate = getElement("Expiration_Date");
+            js = (JavascriptExecutor)driver;
+            js.executeScript("arguments[0].value='2023-11-15';",expirationdate);
+            scrollToElement("Cancel_Button");
+            waitForElementClickable("Cancel_Button");
+            clickElement("Cancel_Button");
+          }
+
+          public void User_Add_New_FI_Notes() throws InterruptedException {
+        	  clickElement("Sidebar_Icon");
+              scrollToElement("Communication_Center");
+              waitForPageGetsLoad2();
+               clickElement("Communication_Center");
+              clickElement("Sidebar_Icon");
+              waitForPageGetsLoad2();
+              scrollToElement("Add_FI_Note_Tab");
+              waitForElementClickable("Add_FI_Note_Tab");
+              clickElement("Add_FI_Note_Tab");
+              scrollToElement("FI_Dropdown");
+              waitForElementClickable("FI_Dropdown");
+              clickElement("FI_Dropdown");
+              waitForElementClickable("Choose_FI_Dropdown");
+              clickElement("Choose_FI_Dropdown");
+              scrollToElement("Add_Notes");
+              waitForElementClickable("Add_Notes");
+              clickElement("Add_Notes");
+              type("Add_Notes", config.getProperty("Add_Notes"));
+              scrollToElement("Add_Button");
+              waitForElementClickable("Add_Button");
+              clickElement("Add_Button");
+
+
+
+   }
+}
 
 		}
 		return flag;

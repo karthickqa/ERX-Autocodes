@@ -125,7 +125,7 @@ public class LoginPage extends BaseClass {
 	}
 	
 	public boolean verifyErrorMessageIsDisplayedForUnregisteredEmail() throws InterruptedException {
-		waitForPageGetsLoad();
+		waitForPageGetsLoad2();
 		boolean flag= false;
 		String toastMessage= getElement("forgotPasswordResponseMessage").getText();
 		if(toastMessage.equalsIgnoreCase(config.getProperty("unregisteredEmailAlertMessage"))) {
@@ -135,7 +135,7 @@ public class LoginPage extends BaseClass {
 	}
 	
 	public boolean verifySuccessrMessageIsDisplayedForRegisteredEmail() throws InterruptedException {
-		waitForPageGetsLoad();
+		waitForPageGetsLoad2();
 		boolean flag= false;
 		String toastMessage= getElement("forgotPasswordResponseMessage").getText();
 		if(toastMessage.equalsIgnoreCase(config.getProperty("registeredEmailAlertMessage"))) {
@@ -159,7 +159,7 @@ public class LoginPage extends BaseClass {
 		return flag;
 	}
 	public boolean verifyErrorMessageIsDisplayedFor_Restricted_User() throws InterruptedException {
-		waitForPageGetsLoad();
+		waitForPageGetsLoad2();
 		boolean flag= false;
 		String toastMessage= getElement("forgotPasswordResponseMessage").getText();
 		if(toastMessage.equalsIgnoreCase(config.getProperty("Restricted_User_AlertMessage"))) {

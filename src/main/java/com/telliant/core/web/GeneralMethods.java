@@ -11,11 +11,16 @@ import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.interactions.Actions;
 
 
 public class GeneralMethods extends WebDriverRoot {
+
+	private static final String Keys = null;
 
 	public String takeScreenshot() throws IOException {
 		
@@ -94,8 +99,4 @@ public class GeneralMethods extends WebDriverRoot {
 		DateValue=DateValue.replaceAll(":", "_");
 		DateValue=DateValue.replaceAll(",", "");
 		return DateValue;
-		}
-	
-	
-	
-}
+		}}

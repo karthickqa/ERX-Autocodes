@@ -706,6 +706,10 @@ public class WebDriverRoot {
 	  
 	  public void waitForPageGetsLoad() throws InterruptedException {
 			Thread.sleep(2000);
+	  }
+	  
+	  public void waitForPageGetsLoad2() throws InterruptedException {
+			Thread.sleep(3000);
 		}
 
 	  public void waitForPageGetsLoad1() throws InterruptedException {
