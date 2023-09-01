@@ -2208,8 +2208,7 @@ public void click_Open_credits_field() throws InterruptedException {
 	}
 
 	public void setFilterAsPendingActive(){
-
-		waitUntilElementGetsDisplayed(("button_LendovativeBusinessTable_Edit1"));
+     waitUntilElementGetsDisplayed(("button_LendovativeBusinessTable_Edit1"));
 		clickElementJs("dropdown_FilterByBusinessStatus");
 		clickElementJs("checkBox_SelectAll");
 		clickElementJs("checkBox_SelectAll");
