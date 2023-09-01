@@ -357,14 +357,11 @@ public class WebDriverRoot {
 		 * " Browser"); break;
 		 */
 		case "chrome":
-			WebDriverManager.chromedriver().setup();
-			options = new ChromeOptions();
-			Map<String, Object> prefs= new HashMap<String, Object>();
-			prefs.put("download.default_directory", System.getProperty("user.dir")+"\\Downloads\\");
-			options.setExperimentalOption("prefs", prefs);
+			//WebDriverManager.chromedriver().setup();
+			//options = new ChromeOptions();
 			//options.setExperimentalOption("useAutomationExtension", false);
-			//options.setExperimentalOption(browserName, ObjRepo);
-			driver = new ChromeDriver(options);
+			System.setProperty("webdriver.chrome.driver", "./drivers/chrome/chromedriver.exe");
+			driver = new ChromeDriver();
 			break;
 		case "ie":
 			System.setProperty("webdriver.edge.driver", "./drivers/edge/msedgedriver.exe");

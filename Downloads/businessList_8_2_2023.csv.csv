@@ -1,0 +1,6 @@
+﻿S.No, businessName, loanNumber, noteNumber, lender, creditLimit, fundedBalance, availableBalance, maturityDate, arLastUploadDate, bbReviewStatus,
+1,Mid south Fabric Clothes,587456325,2000,Stephanie Simmons,500001,385462.24,-225268.28,2023-02-28T00:00:00,2023-07-11T05:59:58.48,BB Needs Review
+2,Craig's Design and Landscaping Services,215698745,1000,Stephanie Simmons,1500000,1000000,-914103.81,2023-03-14T00:00:00,2023-05-29T06:05:40.393,BB Needs Review
+3,Jet Airline,1212,323,Stephanie Simmons,1500000.56,1000000.56,-195652.68,2022-07-07T00:00:00,2023-06-02T23:07:43.583,BB Needs Review
+4,Mid south asia,150,150,Stephanie Simmons,97550,77000,,2022-07-11T00:00:00,2023-01-25T07:50:10.587,BB Needs Review
+5,Automation sample,600002,6020000,Stephanie Simmons,46789,23456,-23334.7,2024-07-11T00:00:00,2023-01-25T11:55:03.473,BB Needs Review
