@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebElement;
 
 import com.telliant.core.web.BaseClass;
 public class LoginPage extends BaseClass {
@@ -12,6 +13,8 @@ public class LoginPage extends BaseClass {
 	JavascriptExecutor executor = (JavascriptExecutor)driver;
 
 	public void login(String username, String pwd) throws InterruptedException {
+		driver.navigate().refresh();
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);	
 		try {
 			clickElement("username");
 			}catch(StaleElementReferenceException | NullPointerException e){
@@ -56,9 +59,15 @@ public class LoginPage extends BaseClass {
 			scrollToElement("logoutDropdown");
 			waitForElementVisible("logoutDropdown");
 			waitForElementClickable("logoutDropdown");
-			clickElement("logoutDropdown");
+			WebElement logoutdropdown = getElement("logoutDropdown");
+            JavascriptExecutor js = (JavascriptExecutor)driver;
+            js.executeScript("arguments[0].click();", logoutdropdown);
+			//clickElement("logoutDropdown");
 			waitForElementClickable("logoutButton");
-			clickElement("logoutButton");
+			WebElement logoutbutton = getElement("logoutButton");
+            JavascriptExecutor js1 = (JavascriptExecutor)driver;
+            js1.executeScript("arguments[0].click();", logoutbutton);
+			//clickElement("logoutButton");
 		}
 		
 	}

@@ -1,11 +1,14 @@
 package com.telliant.core.web;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +16,7 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 
 import org.openqa.selenium.Alert;
@@ -353,14 +357,11 @@ public class WebDriverRoot {
 		 * " Browser"); break;
 		 */
 		case "chrome":
-			WebDriverManager.chromedriver().setup();
-			options = new ChromeOptions();
-			Map<String, Object> prefs= new HashMap<String, Object>();
-			prefs.put("download.default_directory", System.getProperty("user.dir")+"\\Downloads\\");
-			options.setExperimentalOption("prefs", prefs);
+			//WebDriverManager.chromedriver().setup();
+			//options = new ChromeOptions();
 			//options.setExperimentalOption("useAutomationExtension", false);
-			//options.setExperimentalOption(browserName, ObjRepo);
-			driver = new ChromeDriver(options);
+			System.setProperty("webdriver.chrome.driver", "./drivers/chrome/chromedriver.exe");
+			driver = new ChromeDriver();
 			break;
 		case "ie":
 			System.setProperty("webdriver.edge.driver", "./drivers/edge/msedgedriver.exe");
@@ -418,6 +419,14 @@ public class WebDriverRoot {
 		Select selObj = new Select(element);
 		if (element.isDisplayed()) {
 			selObj.selectByValue(Value);
+		}
+	}
+
+	public static void deselectAllDropdownValue(String locator){
+		element= getElement(locator);
+		Select selObj= new Select(element);
+		if(element.isDisplayed()){
+			selObj.deselectAll();
 		}
 	}
 
@@ -703,5 +712,81 @@ public class WebDriverRoot {
 	  public void waitForPageGetsLoad1() throws InterruptedException {
 			Thread.sleep(7000);
 		}
+
+		public static void clickElementJs(String locator) {
+		try {
+			JavascriptExecutor jse= (JavascriptExecutor) driver;
+			jse.executeScript("arguments[0].click();", getElement(locator));
+		} catch (NoSuchElementException e) {
+			e.printStackTrace();
+			System.out.println("Element is not enabled");
+		}
+	}
+
+	public static void until(WebDriver diver, Function<WebDriver, Boolean>function, Long timeUnit){
+
+			WebDriverWait wait= new WebDriverWait(driver, timeUnit);
+			wait.withTimeout(Duration.ofSeconds(timeUnit));
+			wait.ignoring(NoSuchElementException.class);
+			try {
+				wait.until(function);
+			}catch (Exception e) {
+
+			}
+	}
+
+	public static void waitUntilElementGetsDisplayed(String locator) {
+		until(driver, (d)->{
+			boolean flag= getElements(locator).size()>0;
+			return flag;
+		}, 20L);
+	}
+
+	public static List<WebElement> getElements(String locator, String xpath) {
+		String repolocator = ObjRepo.getProperty(locator).trim();
+		String[] tokens = repolocator.split(";");
+		String locatorType = tokens[0];
+		String strlocator = tokens[1]+xpath.trim()+tokens[2];
+		List<WebElement> webElement = null;
+
+		try {
+
+			if (locatorType.equalsIgnoreCase("XPATH")) {
+
+				webElement = driver.findElements(By.xpath(strlocator));
+
+			} else if (locatorType.equalsIgnoreCase("ID")) {
+
+				webElement = driver.findElements(By.id(strlocator));
+
+			} else if (locatorType.equalsIgnoreCase("NAME")) {
+
+				webElement = driver.findElements(By.name(strlocator));
+
+			} else if (locatorType.equalsIgnoreCase("CSS")) {
+
+				webElement = driver.findElements(By.cssSelector(strlocator));
+
+			} else if (locatorType.equalsIgnoreCase("LINKTEXT")) {
+
+				webElement = driver.findElements(By.linkText(strlocator));
+			}
+
+		} catch (NoSuchElementException e) {
+
+			e.printStackTrace();
+			System.out.println(strlocator + " Element not found");
+			// Assert.fail(strlocator + " Element not found");
+
+		}
+
+		return webElement;
+	}
+
+	public static void close_Popup() throws AWTException {
+		Robot robot= new Robot();
+		robot.keyPress(KeyEvent.VK_ESCAPE);
+		robot.keyRelease(KeyEvent.VK_ESCAPE);
+	}
 
 }

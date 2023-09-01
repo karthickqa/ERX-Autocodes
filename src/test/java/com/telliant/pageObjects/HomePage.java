@@ -3,12 +3,17 @@ package com.telliant.pageObjects;
 
 import java.awt.AWTException;
 import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
+import java.lang.reflect.Array;
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -39,10 +44,13 @@ import java.util.logging.Logger;
 
 public class HomePage extends WebDriverRoot {
 	 public static final String User_Add_New_FI_Notes = null;
+	private static final String Add_User_Save_Button = null;
+	private static final String Edit_button_bu = null;
 	JavascriptExecutor js = (JavascriptExecutor)driver;
 	 Logger logger = Logger.getLogger(HomePage.class.getSimpleName());
 	 ArrayList<String> arrayList= new ArrayList<String>();
-		
+	 static String getVal=null;
+
  /*#################################################################################################################*/	
 	public boolean verifyHomePageTitle() {
 		boolean flag= false;
@@ -196,7 +204,10 @@ public class HomePage extends WebDriverRoot {
 	}
 	
 	public void clickDownloadIcon() {
-		clickElement("downloadButton");
+		//clickElement("downloadButton");
+		 WebElement Dowloadbutton = getElement("downloadButton");
+	      js = (JavascriptExecutor)driver;
+	      js.executeScript("arguments[0].value='2023-11-15';",Dowloadbutton);
 	}
 	
 	public void clickUploadIcon() {
@@ -311,6 +322,7 @@ public class HomePage extends WebDriverRoot {
 	}
 	
 	public void clickOnBusinessName() {
+		type("searchTextBox", config.getProperty("Business_Name"));
 		clickElement("businessNameList");
 	}
 	
@@ -501,6 +513,7 @@ public class HomePage extends WebDriverRoot {
 		scrollToElement("lsSaveButton");
 		JavascriptExecutor js= (JavascriptExecutor) driver;
 		js.executeScript("document.querySelector(\"div.heading-elements>button.btn.btn-primary\").click()");
+		clickElement("Successful_popup");
 	}
 	
 	public boolean verifyServiceLevel1BusinessPageTitle() {
@@ -788,58 +801,60 @@ public void click_Open_credits_field() throws InterruptedException {
 		
 	}
 	
+
 	
 	
 	
 	
-	public void LV_Click_Dropdown() throws InterruptedException {  
+	
+	 public void LV_Click_Dropdown() throws InterruptedException {
+//'main' of https://@dev.azure.com/LendovativeDemoCICD/Lendovative-Automation/_git/Lendovative-Automation
    	  clickElement("LV_FilterBy_dropdown");
-   	clickElement("LV_FilterBy_Active");
-   	  clickElement("LV_FilterBy_Pending_Active");
-         clickElement("LV_FilterBy_License_Matured1");
-         scrollToElement("LV_FilterBy_Terminated");
-        clickElement("LV_FilterBy_Terminated");
-	
-	
+   clickElement("LV_FilterBy_Active");
+   	 clickElement("LV_FilterBy_Pending_Active");
+   	 clickElement("LV_FilterBy_License_matured1");
+   	clickElement("LV_FilterBy_Terminated");
+
+
 	 }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public void clickDropdown_HP() throws InterruptedException, AWTException {
 		waitForElementVisible("LV_Filter_By_FI_Status");
 		clickElement("LV_Filter_By_FI_Status");
@@ -852,36 +867,39 @@ public void click_Open_credits_field() throws InterruptedException {
 	public void click_Active_HP() throws InterruptedException, AWTException {
 		JavascriptExecutor js= (JavascriptExecutor) driver;
 		Robot robot = new Robot();
-		clickElement("LV_FilterBy_dropdown");
-		js.executeScript("document.querySelector(\"#mat-select-0-panel > div.mat-option.ng-tns-c57-1 > input\").click()");
-		js.executeScript("document.querySelector(\"#mat-option-0 > mat-pseudo-checkbox\").click()");
+		clickElement("LVhomepage_Activedropdown");
 		robot.keyPress(KeyEvent.VK_ESCAPE);
 		robot.keyRelease(KeyEvent.VK_ESCAPE);
 	}
 	public void click_Pending_Active_HP() throws InterruptedException, AWTException {
 		JavascriptExecutor js= (JavascriptExecutor) driver;
 		Robot robot = new Robot();
-		clickElement("LV_FilterBy_dropdown");
-		js.executeScript("document.querySelector(\"#mat-option-0 > mat-pseudo-checkbox\").click()");
-		js.executeScript("document.querySelector(\"#mat-option-1 > mat-pseudo-checkbox\").click()");
+		scrollToElement("LV_FilterBy_dropdown");
+		WebElement LV_FilterBy_dropdown = getElement("LV_FilterBy_dropdown");
+        JavascriptExecutor js1 = (JavascriptExecutor)driver;
+        js1.executeScript("arguments[0].click();", LV_FilterBy_dropdown);
+		//clickElement("LV_FilterBy_dropdown");
+		clickElement("LVhomepage_PendingActivedropdown");
 		robot.keyPress(KeyEvent.VK_ESCAPE);
 		robot.keyRelease(KeyEvent.VK_ESCAPE);
 	}
 	public void click_License_Matured() throws InterruptedException, AWTException {
-		JavascriptExecutor js= (JavascriptExecutor) driver;
 		Robot robot = new Robot();
-		clickElement("LV_FilterBy_dropdown");
-		js.executeScript("document.querySelector(\"#mat-option-1 > mat-pseudo-checkbox\").click()");
-		js.executeScript("document.querySelector(\"#mat-option-2 > mat-pseudo-checkbox\").click()");
+		scrollToElement("LV_FilterBy_dropdown");
+		WebElement LV_FilterBy_dropdown = getElement("LV_FilterBy_dropdown");
+        JavascriptExecutor js1 = (JavascriptExecutor)driver;
+        js1.executeScript("arguments[0].click();", LV_FilterBy_dropdown);
+		//clickElement("LV_FilterBy_dropdown");
+		clickElement("LVhomepage_Licensematureddropdown");
 		robot.keyPress(KeyEvent.VK_ESCAPE);
 		robot.keyRelease(KeyEvent.VK_ESCAPE);
 	}
 	public void click_Terminated() throws InterruptedException, AWTException {
 		JavascriptExecutor js= (JavascriptExecutor) driver;
 		Robot robot = new Robot();
+		scrollToElement("LV_FilterBy_dropdown");
 		clickElement("LV_FilterBy_dropdown");
-		js.executeScript("document.querySelector(\"#mat-option-2 > mat-pseudo-checkbox\").click()");
-		js.executeScript("document.querySelector(\"#mat-option-3 > mat-pseudo-checkbox\").click()");
+		clickElement("LVhomepage_Terminateddropdown");
 		robot.keyPress(KeyEvent.VK_ESCAPE);
 		robot.keyRelease(KeyEvent.VK_ESCAPE);
 	}
@@ -912,19 +930,40 @@ public void click_Open_credits_field() throws InterruptedException {
 		 return verifyDialogHeader(getElement("Grid_Status"), config.getProperty("Terminated_Status"));
 	}
 	public void clickSidemenu_FI_Admin() {
+		scrollToElement("Sidemenu_FI_Admin");
 		clickElement("Sidemenu_FI_Admin");
 	}
 	public void click_Edit_FI() {
 		type("Search_FIname",config.getProperty("Search_FIname"));
+		driver.navigate().refresh();
 		clickElement("Edit_FI");
 	}
-	public void click_Add_Admin_User() {
-		clickElement("AddUser_Tab_FI");
+	public void click_Add_Admin_User() throws InterruptedException {
+		scrollToElement("Edit_FI");
+		 WebElement editfi = getElement("Edit_FI");
+	        JavascriptExecutor js = (JavascriptExecutor)driver;
+	        js.executeScript("arguments[0].click();", editfi);
+		//clickElement("Edit_FI");
+		scrollToElement("AddUser_Tab_FI");
+		waitForElementClickable("AddUser_Tab_FI");
+	    clickElement("AddUser_Tab_FI");
+	    waitForPageGetsLoad2();
+	    clickElement("First_Name_FI_TB");
 		type("First_Name_FI_TB",config.getProperty("First_Name_FI_TB"));
+		clickElement("Last_Name_FI_TB");
 		type("Last_Name_FI_TB", config.getProperty("Last_Name_FI_TB"));
+		waitForPageGetsLoad2();
+		clickElement("Contact_Name_FI_TB");
 		type("Contact_Name_FI_TB", config.getProperty("Contact_Name_FI_TB"));
+		waitForPageGetsLoad2();
+		clickElement("Country_code");
+        clickElement("Choose_Country_code");
+        waitForPageGetsLoad2();
+		clickElement("Contact_Number_FI_TB");
 		type("Contact_Number_FI_TB", config.getProperty("Contact_Number_FI_TB"));
+		clickElement("Email_Address_FI_TB");
 		type("Email_Address_FI_TB", ExcelMethods.getData("Sheet1", "emailID", 1));
+		clickElement("Contact_Title_FI_TB");
 		type("Contact_Title_FI_TB", config.getProperty("Contact_Title_FI_TB"));
 		clickElement("Role_FI_TB");
 		clickElement("Administrator_FI_TB");
@@ -941,27 +980,33 @@ public void click_Open_credits_field() throws InterruptedException {
 		clickElement("User_Status_FI_TB");
 		clickElement("Restricted_dwn_value_FI_TB");
 		clickElement("Save_Btn_FI_TB");
-		clickElement("Toast_Container");
-		clickElement("Toast_Container");
+		//clickElement("Toast_Container");
+		
 	}
-	public void click_Add_Portfolio_Manager_User() {
+	public void click_Add_Portfolio_Manager_User() throws InterruptedException {
 		clickElement("AddUser_Tab_FI");
+		waitForPageGetsLoad2();
+		clickElement("First_Name_FI_TB");
 		type("First_Name_FI_TB",config.getProperty("First_Name_FI_TB"));
+		clickElement("Last_Name_FI_TB");
 		type("Last_Name_FI_TB", config.getProperty("Last_Name_FI_TB"));
+		clickElement("Contact_Name_FI_TB");
 		type("Contact_Name_FI_TB", config.getProperty("Contact_Name_FI_TB"));
+		clickElement("Contact_Number_FI_TB");
 		type("Contact_Number_FI_TB", config.getProperty("Contact_Number_FI_TB"));
+		clickElement("Email_Address_FI_TB");
 		type("Email_Address_FI_TB",ExcelMethods.getData("Sheet1", "emailID", 1));
-		type("Contact_Title_FI_TB", config.getProperty("Contact_Title_FI_TB"));
+		clickElement("Contact_Title_FI_TB");
+	   type("Contact_Title_FI_TB", config.getProperty("Contact_Title_FI_TB"));
 		clickElement("Role_FI_TB");
 		clickElement("Portfolio_Manager_FI_TB");
 		clickElement("Fi_portfolio_dwn_FI_TB");
-		clickElement("Fi_portfolio_dwn_Val_FI_TB");
+		clickElement("Fi_portfolio_dwn_Val_FI_TB1");
 		clickElement("User_Status_FI_TB");
 		clickElement("Restricted_dwn_value_FI_TB");
 		clickElement("Save_Btn_FI_TB");
 		clickElement("Toast_Container");
-		clickElement("Toast_Container");
-		clickElement("Toast_Container");
+		
 	}
 	public void updateEmpmailId() throws IOException { 
 		 
@@ -981,10 +1026,10 @@ public void click_Open_credits_field() throws InterruptedException {
         System.out.println("Updated Employee mailid is :" +replaceString); 
   
          FileOutputStream out = new FileOutputStream("config.properties");
-	     FileInputStream in = new FileInputStream("config.properties");
+	     FileInputStream in = new FileInputStream();
 	     Properties props = new Properties();
-	     props.load(in);
-	     in.close();
+	    // props.load0(in);
+	     //Object clone = in.clone();
          props.setProperty("Email_Address_FI_TB",replaceString);
          props.store(out,null);
          out.close();
@@ -1009,7 +1054,13 @@ public void click_Open_credits_field() throws InterruptedException {
 }
 	public void click_Delete_flow_FI_User() {
 		clickElement("AddUser_Tab_FI");
-		//type("Search_FIname",config.getProperty("User_delete"));
+		scrollToElement("Click_FI_RowSelection_Dropdown");
+    	WebElement rowselectiondropdown = getElement("Click_FI_RowSelection_Dropdown");
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].click();", rowselectiondropdown);
+        clickElement("Click_FI_RowSelection_Dropdown_Value");
+		type("Search_FIname",config.getProperty("User_delete"));
+		scrollToElement("Delete_icon_FI_User_TB");
 		clickElement("Delete_icon_FI_User_TB");
 		clickElement("Toast_Container");
 		
@@ -1018,15 +1069,30 @@ public void click_Open_credits_field() throws InterruptedException {
 		return verifyDialogHeader(getElement("Toast_Container"), config.getProperty("Toast_Container_delete"));
 	}
 	
-	public void click_Edit_flow_FI_User() {
+	public void click_Edit_flow_FI_User() throws InterruptedException {
+		scrollToElement("AddUser_Tab_FI");
+		waitForPageGetsLoad2();
 		clickElement("AddUser_Tab_FI");
+		 type("Search_FIname",config.getProperty("Search_Business_name_Automation"));
+		scrollToElement("Edit_User_FI");
 		clickElement("Edit_User_FI");
+		scrollToElement("First_Name_FI_TB");
+		waitForPageGetsLoad2();
+		clickElement("First_Name_FI_TB");
 		type("First_Name_FI_TB",config.getProperty("First_Name_FI_TB_Edit"));
+		clickElement("Last_Name_FI_TB");
 		type("Last_Name_FI_TB", config.getProperty("Last_Name_FI_TB_Edit"));
+		clickElement("Contact_Name_FI_TB");
 		type("Contact_Name_FI_TB", config.getProperty("Contact_Name_FI_TB_Edit"));
+		clickElement("Contact_Number_FI_TB");
 		type("Contact_Number_FI_TB", config.getProperty("Contact_Number_FI_TB_Edit"));
+		clickElement("Contact_Title_FI_TB");
 		type("Contact_Title_FI_TB", config.getProperty("Contact_Title_FI_TB_Edit"));
-		clickElement("Save_Btn_FI_TB");
+		scrollToElement("Save_Btn_FI_TB");
+		WebElement savebutton = getElement("Save_Btn_FI_TB");
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].click();", savebutton);
+		//clickElement("Save_Btn_FI_TB");
 		clickElement("Toast_Container");
 	}
 
@@ -1034,7 +1100,11 @@ public void click_Open_credits_field() throws InterruptedException {
 		clickElement("Edit_User_FI");
 	}
 	public void Cancel_btn() {
-		clickElement("Cancel_btn_Edit_User_FI");
+		 scrollToElement("Cancel_btn_Edit_User_FI");
+		 WebElement CancelbtnEditUserFI = getElement("Cancel_btn_Edit_User_FI");
+	        JavascriptExecutor js = (JavascriptExecutor)driver;
+	        js.executeScript("arguments[0].click();", CancelbtnEditUserFI);
+		//clickElement("Cancel_btn_Edit_User_FI");
 	}
 	public boolean verify_First_Name_FI_TB() {	
 		boolean flag = false;
@@ -1134,7 +1204,6 @@ public void click_Open_credits_field() throws InterruptedException {
 	}
 	
 	public void enterDataOn_FinancialInstiution() {
-		
 		//type(("addFi_FinancialInstiutionName"), config.getProperty("addFi_FinancialInstiutionName")+randStrGen("N", 3));
 		String S1= config.getProperty("addFi_FinancialInstiutionName")+randStrGen("N", 3);
 		type(("addFi_FinancialInstiutionName"), S1);
@@ -1143,7 +1212,9 @@ public void click_Open_credits_field() throws InterruptedException {
 		type(("addFi_City"), config.getProperty("addFi_City"));
 		type(("addFi_State"), config.getProperty("addFi_State"));
 		type(("addFi_ZipCode"), config.getProperty("addFi_ZipCode"));
-		ExcelMethods.putData("Sheet1", "Finame", 1, S1); 
+		getVal= getElement("addFi_FinancialInstiutionName").getAttribute("value");
+		System.out.println(getVal);
+		ExcelMethods.putData("Sheet1", "Finame", 1, S1);
 		System.out.println("the string value is  " +S1);
 	}
 	
@@ -1252,8 +1323,18 @@ public void click_Open_credits_field() throws InterruptedException {
 	}
 	
 	public void enterDataOn_OtherDetaislAssestSize() {
-		type("addFi_OtherDetails_AssetSize", config.getProperty("addFi_OtherDetails_AssestSize"));
-	}
+		//clickElement("addFi_OtherDetails_AssetSize");
+		WebElement addfiotherdetails = getElement("addFi_OtherDetails_AssetSize");
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].click();", addfiotherdetails);
+		type("addFi_OtherDetails_AssetSize", config.getProperty("addFi_OtherDetails_AssetSize"));
+		 scrollToElement("FI_corefile_upload_type");
+		 WebElement corefiledropdown = getElement("FI_corefile_upload_type");
+	        JavascriptExecutor js1 = (JavascriptExecutor)driver;
+	        js1.executeScript("arguments[0].click();", corefiledropdown);
+	     clickElement("Choose_FI_corefile_upload_type");
+		
+}
 	
 	public void enterDataOn_LicensedDate() {
 		type("addFi_Licensed_LicensedDate", config.getProperty("addFi_LicensedDate"));
@@ -1267,46 +1348,20 @@ public void click_Open_credits_field() throws InterruptedException {
 		type("addFi_Licensed_LicensedMaturityDate", config.getProperty("addFi_LicensedMaturityDate"));
 	}
 	
-	public void FI_Corefile_Upload_Details() throws InterruptedException {
-		scrollToElement("FI_CoreFile_Upload_Type_Dropdown");
-     clickElement("FI_CoreFile_Upload_Type_Dropdown");
-		clickElement("Four_Column_Format");
-		 scrollToElement("SFTP_Folder_Path");
-         waitForElementClickable("SFTP_Folder_Path");
-		clickElement("SFTP_Folder_Path");
-	 type("SFTP_Folder_Path_Value", config.getProperty("SFTP_Folder_Path_Value"));
-	}
-	 public void File_Pickup_Daily_Basis() throws InterruptedException {
-		clickElement("File_Pickup_Type");
-		clickElement("File_Pickup_Time_Value_Daily_Basis");
-		clickElement("Hours_Dropdown");
-		clickElement("Once_In_Hour");
-		clickElement("Once_In_2Hour");
-		}
-	
-	public void File_Pickup_Time_Basis() {
-		clickElement("File_Pickup_Type");
-		clickElement("File_Pickup_Time_Value_Time_Basis");
-		scrollToElement("Time_Dropdown");
-        waitForElementClickable("Time_Dropdown");
-		clickElement("Time_Dropdown");
-		clickElement("Time_Dropdown_Value");
-		
-		}
-	
-	public void File_Pickup_Immediate() {
-		clickElement("File_Pickup_Type");
-		clickElement("File_Pickup_Time_Value_Immediate");
-	
-	}
-	public ArrayList<String> getAccountManagerList() {
-		//ArrayList<String> nameList= new ArrayList<>();
+	public ArrayList<String> getAccountManagerList(){
 		arrayList.clear();
-		int pageCount= driver.findElements(By.cssSelector("div.page-count>ul>li")).size();
-		for(int i=2; i<pageCount; i++)
-		{
-			JavascriptExecutor jsp= (JavascriptExecutor) driver;
-			jsp.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.page-count>ul>li:nth-of-type("+i+")>a")));
+		JavascriptExecutor jsp= (JavascriptExecutor) driver;
+		selectDropdownByValue("rowsToDisplayDropdown", config.getProperty("rowsPerPage"));
+		String rowsCount= getElement("totalRowsCount").getText();
+		String[] splitTotalRowsCount= rowsCount.split(" ", 2);
+		int totalRows= Integer.parseInt(splitTotalRowsCount[0]);
+		//System.out.println("TotalRows: "+ totalRows);
+		int pageCount= (totalRows/10)+1;
+		//System.out.println("pageCount: "+ pageCount);
+		for(int i=1; i<=pageCount; i++) {
+			if(i>1) {
+				jsp.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.page-count>ul>li:nth-of-type(5)>a")));
+			}
 			int rowCount= driver.findElements(By.cssSelector("table#userlist>tbody>tr")).size();
 			for(int j=1; j<=rowCount; j++) {
 				jsp.executeScript("arguments[0].scrollIntoView();",driver.findElement(By.cssSelector("table#userlist>tbody>tr:nth-of-type("+j+")>td:nth-of-type(8)")));
@@ -1337,9 +1392,24 @@ public void click_Open_credits_field() throws InterruptedException {
 		waitForElementVisible("LV_FilterBy_dropdown_FI");
 		clickElement("LV_FilterBy_dropdown_FI");
 		Thread.sleep(2000);
-		JavascriptExecutor js= (JavascriptExecutor) driver;
-		js.executeScript("document.querySelector(\"#mat-select-4-panel > div.mat-option.ng-tns-c57-5 > input\").click()");
-		Robot robot = new Robot();
+	    WebElement activedropdown = getElement("LV_FilterBy_Active");
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].click();", activedropdown);
+        WebElement pendingactivedropdown = getElement("LV_FilterBy_Pending_Active");
+        JavascriptExecutor js1 = (JavascriptExecutor)driver;
+        js1.executeScript("arguments[0].click();", pendingactivedropdown);
+        WebElement licensematured = getElement("LV_FilterBy_License_matured1");
+        JavascriptExecutor js2 = (JavascriptExecutor)driver;
+        js2.executeScript("arguments[0].click();", licensematured);
+        WebElement terminated = getElement("LV_FilterBy_Terminated");
+        JavascriptExecutor js3 = (JavascriptExecutor)driver;
+        js3.executeScript("arguments[0].click();", terminated);
+       scrollToElement("selectalldropdown");
+       waitForElementClickable("selectalldropdown");
+        WebElement selectalldropdown = getElement("selectalldropdown");
+        JavascriptExecutor js4 = (JavascriptExecutor)driver;
+        js4.executeScript("arguments[0].click();", selectalldropdown);
+        Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_ESCAPE);
 		robot.keyRelease(KeyEvent.VK_ESCAPE);
 	
@@ -1356,7 +1426,8 @@ public void click_Open_credits_field() throws InterruptedException {
 	public void click_Pending_Active_FI() throws InterruptedException, AWTException {
 		JavascriptExecutor js= (JavascriptExecutor) driver;
 		Robot robot = new Robot();
-		clickElement("LV_FilterBy_dropdown_FI");
+		//clickElement("LV_FilterBy_dropdown_FI");
+		clickElement("LV_FilterBy_Pending_Active");
 		js.executeScript("document.querySelector(\"#mat-option-4 > mat-pseudo-checkbox\").click()");
 		js.executeScript("document.querySelector(\"#mat-option-5 > mat-pseudo-checkbox\").click()");
 		robot.keyPress(KeyEvent.VK_ESCAPE);
@@ -1375,6 +1446,7 @@ public void click_Open_credits_field() throws InterruptedException {
 		JavascriptExecutor js= (JavascriptExecutor) driver;
 		Robot robot = new Robot();
 		clickElement("LV_FilterBy_dropdown_FI");
+		clickElement("LV_FilterBy_License_matured1");
 		js.executeScript("document.querySelector(\"#mat-option-6 > mat-pseudo-checkbox\").click()");
 		js.executeScript("document.querySelector(\"#mat-option-7 > mat-pseudo-checkbox\").click()");
 		robot.keyPress(KeyEvent.VK_ESCAPE);
@@ -1392,12 +1464,14 @@ public void click_Open_credits_field() throws InterruptedException {
 	public boolean verify_Terminated_Status_Grid_FI() {
 		 return verifyDialogHeader(getElement("Grid_Status_FI"), config.getProperty("Terminated_Status"));
 	}
-	public void Add_User_Flow_FI() {
+	public void Add_User_Flow_FI() throws InterruptedException {
+		waitForPageGetsLoad2();
 		clickElement("Toast_Container");
 		clickElement("toogleButton_FiAdmin");
 		
 	}
-        public void Select_new_Protfolio() {
+        public void Select_new_Protfolio() throws InterruptedException {
+        	waitForPageGetsLoad2();
         	clickElement("Toast_Container");
         	clickElement("add_Protfolio_Tab");
         	BaseClass.refresh();
@@ -1413,19 +1487,23 @@ public void click_Open_credits_field() throws InterruptedException {
                 }
             }
         }
-            public void Create_new_Protfolio() {
+            public void Create_new_Protfolio() throws InterruptedException {
             	waitForElementClickable("Add_Icon_Protfolio");
             clickElement("Add_Icon_Protfolio");
             waitForElementClickable("Protfolio_Name_Field");
             type("Protfolio_Name_Field",config.getProperty("Protfolio_name"));
             clickElement("Create_Protfolio_Icon");
+            waitForPageGetsLoad2();
             clickElement("Toast_Container");
             }
             
             public void Navigate_To_FI() {
             	clickElement("Sidemenu_FI_Admin");
-            	scrollToElement("ScrollTo_Dropdown");
-            	clickElement("Click_FI_RowSelection_Dropdown");
+            	scrollToElement("Click_FI_RowSelection_Dropdown");
+            	WebElement rowselectiondropdown = getElement("Click_FI_RowSelection_Dropdown");
+                JavascriptExecutor js = (JavascriptExecutor)driver;
+                js.executeScript("arguments[0].click();", rowselectiondropdown);
+            	//clickElement("Click_FI_RowSelection_Dropdown");
             	clickElement("Click_FI_RowSelection_Dropdown_Value");
             	scrollToElement("Search_FIname");
         		type("Search_FIname",ExcelMethods.getData("Sheet1", "Finame", 1));
@@ -1435,23 +1513,37 @@ public void click_Open_credits_field() throws InterruptedException {
                 clickElement("Sidebar_Icon");  
         }
                                                          
-         public void click_Add_User_Admin_Menu() {  
+         public void click_Add_User_Admin_Menu() throws InterruptedException {  
+        	 waitForPageGetsLoad2();
+         	 scrollToElement("Sidebar_Icon");
              clickElement("Sidebar_Icon");
              clickElement("User_Admin_Menu");
              clickElement("Sidebar_Icon");
+             waitForPageGetsLoad2();
+             clickElement("First_Name");
              type("First_Name", config.getProperty("First_Name"));
+             clickElement("Last_Name");
              type("Last_Name", config.getProperty("Last_Name"));
-             type("Contact_Name", config.getProperty("Contact_Name"));
+             WebElement contactname = getElement("USer_contact_name");
+             JavascriptExecutor js = (JavascriptExecutor)driver;
+             js.executeScript("arguments[0].click();", contactname);
+             //clickElement("Contact_Name");
+             type("USer_contact_name", config.getProperty("USer_contact_name"));
+             clickElement("Country_code");
+             clickElement("Choose_Country_code");
+             clickElement("Contact_Number");
              type("Contact_Number", config.getProperty("Contact_Number"));
+             clickElement("Contact_Title");
              type("Contact_Title", config.getProperty("Contact_Title"));
+             clickElement("Email_Address");
              type("Email_Address", config.getProperty("Email_Address"));
              clickElement("ContactSecurityRole_dropdown");
              clickElement("Administrator_Dropdown");
              clickElement("Account_Manager_Dropdown");
              clickElement("Viewer_Dropdown");
-             clickElement("Save_Button");   
+               
        }
-         
+
           public boolean verifyLV_User_Admin_Page_Title() {
            return verifyDialogHeader(getElement("LV_User_Admin_Page_Title"), config.getProperty("Lendovative User Admin"));
           }
@@ -1465,48 +1557,129 @@ public void click_Open_credits_field() throws InterruptedException {
        clickElement("Sidebar_Icon");
        scrollToElement("Edit_Button");
        waitForElementClickable("Edit_Button");
-           clickElement("Edit_Button");
+       WebElement editbutton = getElement("Edit_Button");
+       JavascriptExecutor js = (JavascriptExecutor)driver;
+       js.executeScript("arguments[0].click();", editbutton);
+          // clickElement("Edit_Button");
+           scrollToElement("First_Name");
+           WebElement firstname = getElement("First_Name");
+           JavascriptExecutor js1 = (JavascriptExecutor)driver;
+           js1.executeScript("arguments[0].click();", firstname);
+           //clickElement("First_Name");
        type("First_Name", config.getProperty("First_Name"));
+       clickElement("Last_Name");
          type("Last_Name", config.getProperty("Last_Name"));
-         type("Contact_Name", config.getProperty("Contact_Name"));
+         clickElement("USer_contact_name");
+         type("USer_contact_name", config.getProperty("USer_contact_name"));
+         waitForElementClickable("Country_code");
+         clickElement("Country_code");
+         clickElement("Choose_Country_code");
+         clickElement("Contact_Number");
          type("Contact_Number", config.getProperty("Contact_Number"));
+         clickElement("Contact_Title");
          type("Contact_Title", config.getProperty("Contact_Title"));
+         clickElement("Email_Address");
          type("Email_Address", config.getProperty("Email_Address"));
          clickElement("ContactSecurityRole_dropdown");
          clickElement("Administrator_Dropdown");
-         scrollToElement("Save_Button");
-           waitForElementClickable("Save_Button");
-         clickElement("Save_Button");  
-         clickElement("Toast_Container");
-      
+         
       }
-      public void click_User_Cancel_Delete() {  
-    	//LV Add Business(Business Information) 
+
+      public void click_EditButtonOnFiAdminUser() throws InterruptedException {
+    	  clickElement("Edit_button_bu");
+  		boolean flag= false;
+  		//JavascriptExecutor js= (JavascriptExecutor) driver;
+  		//selectDropdownByValue("rowsToDisplayDropdown", config.getProperty("rowsPerPage"));
+  		//String rowsCount= getElement("totalRowsCount").getText();
+  		//String[] splitTotalRowsCount= rowsCount.split(" ", 2);
+  		//int totalRows= Integer.parseInt(splitTotalRowsCount[0]);
+  		//System.out.println("TotalRows: "+ totalRows);
+		 // int pageCount;
+		  //if(totalRows%10==0){
+			//  pageCount= totalRows/10;
+		  //}else{
+		//	  pageCount= (totalRows/10)+1;
+		  //}
+  		//System.out.println("pageCount: "+ pageCount);
+  	//	for(int i=1; i<=pageCount; i++) {
+  		//	int j=0;
+  			//if(i>1) {
+  				//js.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.page-count>ul>li:nth-of-type(5)>a")));
+  			//}
+  			//js.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.page-count>ul>li:nth-of-type("+i+")>a")));
+  			//List<WebElement> elements= getElements("fi_Table");
+  		//	for(WebElement element: elements) {
+  			//j++;
+  			//js.executeScript("arguments[0].scrollIntoView();", element);
+  			//String fiName= element.getText();
+  			//if(fiName.contains(config.getProperty("addFi_FinancialInstiutionName"))) {
+  				//flag= true;
+  				//String num= String.valueOf(j);
+  				//scrollToElement(("fi_Table"));
+  		//		js.executeScript("arguments[0].click();", getElement("fi_Table_Parametrized",num));
+  				//js.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.table-responsive>table>tbody>tr:nth-of-type("+j+")>td:nth-of-type(9)>a>i")));
+  			//	break;
+  			//}
+  //		}
+  	//		if(flag) {
+  		//		break;
+  			//}
+
+  	//}
+
+   }
+      public void click_User_Cancel_Delete() throws InterruptedException {  
+    	//LV Add Business(Business Information)
              clickElement("Sidebar_Icon");
+             scrollToElement("User_Admin_Menu");
              clickElement("User_Admin_Menu");  
              clickElement("Sidebar_Icon");
              scrollToElement("Edit_Button");
-               waitForElementClickable("Edit_Button");
-             clickElement("Edit_Button");
+             WebElement Edit_Button = getElement("Edit_Button");
+             JavascriptExecutor js = (JavascriptExecutor)driver;
+             js.executeScript("arguments[0].click();", Edit_Button);
+            // clickElement("Edit_Button");
+             scrollToElement("First_Name");
+             WebElement firstname = getElement("First_Name");
+             JavascriptExecutor js1 = (JavascriptExecutor)driver;
+             js1.executeScript("arguments[0].click();", firstname);
              type("First_Name", config.getProperty("First_Name"));
+             clickElement("Last_Name");
              type("Last_Name", config.getProperty("Last_Name"));
-             type("Contact_Name", config.getProperty("Contact_Name"));
+             clickElement("USer_contact_name");
+             type("USer_contact_name", config.getProperty("USer_contact_name"));
+             waitForElementClickable("Country_code");
+             clickElement("Country_code");
+             clickElement("Choose_Country_code");
+             clickElement("Contact_Number");
              type("Contact_Number", config.getProperty("Contact_Number"));
+             clickElement("Contact_Title");
              type("Contact_Title", config.getProperty("Contact_Title"));
+             clickElement("Email_Address");
              type("Email_Address", config.getProperty("Email_Address"));
              clickElement("ContactSecurityRole_dropdown");
              clickElement("Administrator_Dropdown");
-               scrollToElement("Cancel_Button");
-               waitForElementClickable("Cancel_Button");
-             clickElement("Cancel_Button");
+             waitForPageGetsLoad2();
+              scrollToElement("logoutDropdown");
+               scrollToElement("Cancel_Button1");
+               WebElement cancelbutton = getElement("Cancel_Button1");
+               JavascriptExecutor js2 = (JavascriptExecutor)driver;
+               js2.executeScript("arguments[0].click();",cancelbutton);
+              //clickElement("Cancel_Button1");
              scrollToElement("Page_2");
                waitForElementClickable("Page_2");
-             clickElement("Page_2");
-             clickElement("Delete_Button");  
-             clickElement("Toast_Container");
+               WebElement page2 = getElement("Page_2");
+               JavascriptExecutor js3 = (JavascriptExecutor)driver;
+               js3.executeScript("arguments[0].click();",page2);
+             //clickElement("Page_2");
+             scrollToElement("Delete_Button");
+             WebElement deletebutton = getElement("Delete_Button");
+             JavascriptExecutor js4 = (JavascriptExecutor)driver;
+             js4.executeScript("arguments[0].click();",deletebutton);
+
       }
-      
-      public void Create_New_Business() throws InterruptedException {  
+
+      public void Create_New_Business() throws InterruptedException {
              clickElement("Sidebar_Icon");
              scrollToElement("Business_Admin_Menu");
                waitForElementClickable("Business_Admin_Menu");
@@ -1523,7 +1696,8 @@ public void click_Open_credits_field() throws InterruptedException {
              type("Zipcode", config.getProperty("Zipcode"));
              type("NAICS_Industry_Code", config.getProperty("NAICS_Industry_Code"));
              
-             // LV Add Business(FI Information) 
+             
+          // LV Add Business(FI Information) 
              scrollToElement("Financial_Institution");
              waitForElementClickable("Financial_Institution");
              clickElement("Financial_Institution");
@@ -1536,11 +1710,11 @@ public void click_Open_credits_field() throws InterruptedException {
             waitForElementClickable("FI_Lender_Assigned_Date");
              waitForPageGetsLoad1();
              WebElement filenderassigneddate = getElement("FI_Lender_Assigned_Date");
-             js = (JavascriptExecutor)driver; 
+             js = (JavascriptExecutor)driver;
              js.executeScript("arguments[0].value='2023-07-20';",filenderassigneddate);
              waitForElementClickable("FI_Portfolio");
              clickElement("FI_Portfolio");
-             clickElement("Choose_FI_Portfolio");
+             clickElement("Choose_FI_Portfolio1");
              waitForPageGetsLoad2();
              clickElement("Line_Limit");
              type("Line_Limit", config.getProperty("Line_Limit"));
@@ -1549,12 +1723,12 @@ public void click_Open_credits_field() throws InterruptedException {
              waitForElementClickable("Line_Begin_Date");
              waitForPageGetsLoad2();
              WebElement filinebegindate = getElement("Line_Begin_Date");
-             js = (JavascriptExecutor)driver; 
+             js = (JavascriptExecutor)driver;
              js.executeScript("arguments[0].value='2023-10-15';",filinebegindate);
             // type("Line_Begin_Date", config.getProperty("Line_Begin_Date"));
              waitForElementClickable("Line_Maturity_Date");
              WebElement linematuritydate = getElement("Line_Maturity_Date");
-             js = (JavascriptExecutor)driver; 
+             js = (JavascriptExecutor)driver;
              js.executeScript("arguments[0].value='2023-07-15';",linematuritydate);
              //type("Line_Maturity_Date", config.getProperty("Line_Maturity_Date"));
              clickElement("Commercial_Loan_Number");
@@ -1564,10 +1738,10 @@ public void click_Open_credits_field() throws InterruptedException {
              scrollToElement("AR_Aging_Date");
              waitForElementClickable("AR_Aging_Date");
              WebElement lineagingdate= getElement("AR_Aging_Date");
-             js = (JavascriptExecutor)driver; 
+             js = (JavascriptExecutor)driver;
              js.executeScript("arguments[0].value='2023-07-15';",lineagingdate);
-          
-             
+
+
              // LV Add Business(Service Level)&(Other details)
              waitForPageGetsLoad2();
              scrollToElement("Service_Level");
@@ -1593,69 +1767,606 @@ public void click_Open_credits_field() throws InterruptedException {
              clickElement("Choose_Argos_Risk_Details");
              scrollToElement("Save_Business_Admin");
              waitForElementClickable("Save_Business_Admin");
-             //clickElement("Save_Business_Admin");
-             
+             WebElement savebutton = getElement("Save_Business_Admin");
+             JavascriptExecutor js = (JavascriptExecutor)driver;
+             js.executeScript("arguments[0].click();", savebutton);
              
    }
+
+
+      public boolean verify_FiName() {
+  		boolean flag= false;
+  		scrollToElement("addFi_FinancialInstiutionName");
+  		String inputVal= getElement("addFi_FinancialInstiutionName").getAttribute("value");
+  		//System.out.println(inputVal);
+  		//System.out.println("GET VAL: "+ getVal);
+  		if(inputVal.equalsIgnoreCase(getVal))
+  			flag= true;
+  		return flag;
+  	}
+
+  	public void click_ToastMessage() throws InterruptedException {
+  		boolean flag=false;
+  		try {
+  			flag= getElement("toast_UserUpdatedSuccessfully").isDisplayed();
+  		}catch(NoSuchElementException e) {
+  			waitForPageGetsLoad2();
+  			System.out.println(e);
+  		}
+  		if(flag)
+  			getElement("toast_UserUpdatedSuccessfully").click();
+  	}
+  	 public void Validate_To_Business_Admin_Tab() throws InterruptedException {
+  		  WebElement BusinessAdminTab = getElement("Business_Admin_Tab");
+          JavascriptExecutor js = (JavascriptExecutor)driver;
+          js.executeScript("arguments[0].click();", BusinessAdminTab);
+        // clickElement("Business_Admin_Tab");
+         waitForPageGetsLoad2();
+         scrollToElement("ScrollTo_Dropdown");
+         waitForElementClickable("Click_FI_RowSelection_Dropdown");
+         scrollToElement("Click_FI_RowSelection_Dropdown");
+         //clickElement("Click_FI_RowSelection_Dropdown");
+         
+
+         WebElement rowselectiondropdown = getElement("Click_FI_RowSelection_Dropdown");
+         JavascriptExecutor js1 = (JavascriptExecutor)driver;
+         js1.executeScript("arguments[0].click();", rowselectiondropdown);
+
+         clickElement("Click_FI_RowSelection_Dropdown_Value");
+         scrollToElement("Search_FIname");
+         type("Search_FIname",config.getProperty("Search_Business_name"));
+         clickElement("Edit_FI");
+
+
+     }
+     public void click_Add_Admin_Business_User() {
+ 		waitForElementClickable("AddUser_Tab_FI");
+ 		clickElement("AddUser_Tab_FI");
+ 		type("First_Name_FI_TB",config.getProperty("First_Name_FI_TB"));
+ 		type("Last_Name_FI_TB", config.getProperty("Last_Name_FI_TB"));
+ 		type("Contact_Name_FI_TB", config.getProperty("Contact_Name_FI_TB"));
+ 		type("Contact_Number_FI_TB", config.getProperty("Contact_Number_FI_TB"));
+ 		type("Email_Address_FI_TB", ExcelMethods.getData("Sheet1", "emailID", 1));
+ 		type("Contact_Title_FI_TB", config.getProperty("Contact_Title_FI_TB"));
+ 		clickElement("Role_FI_TB");
+ 		clickElement("Administrator_FI_TB");
+ 		clickElement("isPrimaryAdmin_Dwn_FI_TB");
+ 		try {
+ 			clickElement("isPrimaryAdmin_Dwn_Yes_BA");
+
+ 		} catch (Exception e) {
+ 			// TODO: handle exception
+ 			clickElement("isPrimaryAdmin_Dwn_No_BA");
+ 		}
+ 		clickElement("User_Status_FI_TB");
+ 		clickElement("Restricted_dwn_value_FI_TB");
+ 		clickElement("Save_Btn_FI_TB");
+ 		clickElement("Toast_Container");
+ 		clickElement("Toast_Container");
+ 		clickElement("Toast_Container");
+ 		clickElement("Toast_Container");
+ 	}
+     public void click_Add_Viewer_Business_User() {
+   		waitForElementClickable("AddUser_Tab_FI");
+   		clickElement("AddUser_Tab_FI");
+   		type("First_Name_FI_TB",config.getProperty("First_Name_FI_TB"));
+   		type("Last_Name_FI_TB", config.getProperty("Last_Name_FI_TB"));
+   		type("Contact_Name_FI_TB", config.getProperty("Contact_Name_FI_TB"));
+   		type("Contact_Number_FI_TB", config.getProperty("Contact_Number_FI_TB"));
+   		type("Email_Address_FI_TB", ExcelMethods.getData("Sheet1", "emailID", 1));
+   		type("Contact_Title_FI_TB", config.getProperty("Contact_Title_FI_TB"));
+   		clickElement("Role_FI_TB");
+   		clickElement("Viewer_Value_BA");
+   		clickElement("User_Status_FI_TB");
+     		clickElement("Restricted_dwn_value_FI_TB");
+     		clickElement("Save_Btn_FI_TB");
+     		clickElement("Toast_Container");
+     		clickElement("Toast_Container");
+
+     }
+     public void Navigate_To_Support_Resource_Page() {
+    	 waitForElementClickable("toogleButton_FiAdmin");
+		 clickElement("toogleButton_FiAdmin");
+    	 waitForElementClickable("More_Value");
+ 	   	 clickElement("More_Value");
+    		waitForElementClickable("Add_Support_Resources_Side_Menu");
+    		clickElement("Add_Support_Resources_Side_Menu");
+    		clickElement("toogleButton_FiAdmin");
+   		// clickElement("Documents_Tab");
+     }
+     public void Navigate_To_Industry_News_Tab() {
+    	 clickElement("Industry_News_Tab");
+     }
+	public void Navigate_To_Tutorials_Tab() {
+		scrollToElement("Tutorials_Tab");
+	 clickElement("Tutorials_Tab");
+     }
+	public void Navigate_To_Ancillary_Product_Information_Tab() {
+	 //clickElement("Ancillary_Product_Information_Tab");
+	 WebElement productinfo = getElement("Ancillary_Product_Information_Tab");
+     js = (JavascriptExecutor)driver;
+     js.executeScript("arguments[0].value='2023-11-15';",productinfo);
+	}
+	public void Navigate_To_Documents_Tab() {
+	 clickElement("Documents_Tab");
+
+	}
+     public boolean verify_Documents_Tab() {
+		 return verifyDialogHeader(getElement("Documents_Tab"), config.getProperty("Documents_Tab"));
+	}
+     public boolean verify_Industry_News_Tab() {
+		 return verifyDialogHeader(getElement("Industry_News_Tab"), config.getProperty("Industry_News_Tab"));
+	}
+     public boolean verify_Tutorials_Tab() {
+		 return verifyDialogHeader(getElement("Tutorials_Tab"), config.getProperty("Tutorials_Tab"));
+	}
+     public boolean verify_Ancillary_Product_Information_Tab() {
+		 return verifyDialogHeader(getElement("Ancillary_Product_Information_Tab"), config.getProperty("Ancillary_Product_Information_Tab"));
+	}
+     public boolean verify_AddDocument_Button() {
+		 return verifyDialogHeader(getElement("Add_Document_Button"), config.getProperty("Add_Document_Button"));
+	}
+     public void Add_Support_Document_Visible_for_Financial_Institution() throws IOException, InterruptedException {
+    	 clickElement("Add_Document_Button");
+    	 Thread.sleep(3000);
+    	 Runtime.getRuntime().exec("D:\\AutoIt\\Upload.exe");
+    	 Thread.sleep(3000);
+    	 clickElement("Document_Visible_for_Financial_Institution");
+    	 //clickElement("Document_Cancel_Btn");
+    	 clickElement("Document_Add_Btn");
+    	 waitForElementClickable("Toast_Container");
+    	 clickElement("Toast_Container");
+
+    	}
+     public void Add_Support_Document_Visible_for_Business() throws IOException, InterruptedException {
+    	 clickElement("Add_Document_Button");
+    	 Thread.sleep(3000);
+    	 Runtime.getRuntime().exec("D:\\AutoIt\\Upload.exe");
+    	 Thread.sleep(3000);
+    	 clickElement("Document_Visible_for_Business");
+    	 //clickElement("Document_Cancel_Btn");
+    	 clickElement("Document_Add_Btn");
+    	 waitForElementClickable("Toast_Container");
+    	 clickElement("Toast_Container");
+
+    	}
+     public void Add_Support_Document_Visible_for_Both() throws IOException, InterruptedException {
+    	 clickElement("Add_Document_Button");
+    	 Thread.sleep(3000);
+    	 Runtime.getRuntime().exec("D:\\AutoIt\\Upload.exe");
+    	 Thread.sleep(3000);
+    	 clickElement("Document_Visible_for_Both");
+    	 //clickElement("Document_Cancel_Btn");
+    	 clickElement("Document_Add_Btn");
+    	 waitForElementClickable("Toast_Container");
+    	 clickElement("Toast_Container");
+
+    	}
+     public void Verify_Support_Document_Visible_for_Financial_Institution() throws IOException, InterruptedException {
+
+    	// clickElement("Fi_Support_Document_PAge");
+    	 scrollToElement("ScrollTo_Dropdown");
+    	 scrollToElement("Click_FI_RowSelection_Dropdown1");
+    	 WebElement FIrowselect = getElement("Click_FI_RowSelection_Dropdown1");
+         JavascriptExecutor js = (JavascriptExecutor)driver;
+         js.executeScript("arguments[0].click();", FIrowselect);
+     	//clickElement("Click_FI_RowSelection_Dropdown1");
+     	clickElement("Click_FI_RowSelection_Dropdown_Value");
+     	scrollToElement("Search_FIname");
+    	//clickElement("searchTextBox");
+ 		type("searchTextBox", config.getProperty("searchText_support_Resource"));
+
+     }
+     public void Verify_Support_Document_Visible_for_Business() throws IOException, InterruptedException {
+
+    	// clickElement("Business_Support_Document_PAge");
+    	 scrollToElement("ScrollTo_Dropdown");
+    	 waitForElementClickable("Click_FI_RowSelection_Dropdown1");
+    	 scrollToElement("Click_FI_RowSelection_Dropdown1");
+    	 WebElement FIrowselection = getElement("Click_FI_RowSelection_Dropdown1");
+         js = (JavascriptExecutor)driver;
+         js.executeScript("arguments[0].value='2023-11-15';",FIrowselection);
+     	clickElement("Click_FI_RowSelection_Dropdown_Value");
+     	scrollToElement("Search_FIname");
+    	//clickElement("searchTextBox");
+ 		type("searchTextBox", config.getProperty("searchText_support_Resource"));
+
+     }
+     public boolean verify_Added_Document() {
+		 return verifyDialogHeader(getElement("Document_Name"), config.getProperty("searchText_support_Resource"));
+	}
+
+     public void Navigate_Fi_Support_Document_PAge(){
+    	 clickElement("Fi_Support_Document_PAge");
+      }
+
+     public void Navigate_Business_Support_Document_PAge(){
+    		 clickElement("Business_Support_Document_PAge");
+      }
+     public void Verify_Cancel_Flow() throws IOException, InterruptedException {
+    	 clickElement("Add_Document_Button");
+    	 Thread.sleep(3000);
+    	 Runtime.getRuntime().exec("D:\\AutoIt\\Upload.exe");
+    	 Thread.sleep(3000);
+    	 clickElement("Document_Visible_for_Financial_Institution");
+    	 clickElement("Document_Cancel_Btn");
+     }
+
+
+	public void Download_Support_Document() {
+		scrollToElement("ScrollTo_Dropdown");
+		waitForElementClickable("Click_FI_RowSelection_Dropdown1");
+		clickElement("Click_FI_RowSelection_Dropdown1");
+		clickElement("Click_FI_RowSelection_Dropdown_Value");
+		scrollToElement("Search_FIname");
+		type("searchTextBox", config.getProperty("searchText_support_Resource"));
+		clickElement("Download_Supportt_Document");
+	}
+
+	public void Delete_Support_Document() {
+		scrollToElement("ScrollTo_Dropdown");
+		scrollToElement("Click_FI_RowSelection_Dropdown1");
+		waitForElementClickable("Click_FI_RowSelection_Dropdown1");
+		 WebElement ClickFIRowSelectionDropdown1 = getElement("Click_FI_RowSelection_Dropdown1");
+         JavascriptExecutor js = (JavascriptExecutor)driver;
+         js.executeScript("arguments[0].click();", ClickFIRowSelectionDropdown1);
+		//clickElement("Click_FI_RowSelection_Dropdown1");
+		clickElement("Click_FI_RowSelection_Dropdown_Value");
+		scrollToElement("Search_FIname");
+		type("searchTextBox", config.getProperty("searchText_support_Resource"));
+		clickElement("Delete_Support_Document");
+		clickElement("Toast_Container");
+	}
+	public void Navigate_To_Communication_Center_Page() {
+		waitForElementClickable("toogleButton_FiAdmin");
+		clickElement("toogleButton_FiAdmin");
+		waitForElementClickable("More_Value");
+		clickElement("More_Value");
+		waitForElementClickable("Communication_Center_Page");
+		clickElement("Communication_Center_Page");
+		clickElement("toogleButton_FiAdmin");
+	}
+	public void Mail_Intiate_Flow() throws IOException, InterruptedException{
+		scrollToElement("Input_To");
+		waitForElementClickable("Input_To");
+		clickElement("Input_To");
+		type("Input_To", config.getProperty("To_Mail"));
+		//waitForElementClickable("Input_To_option");
+		waitForPageGetsLoad();
+		clickElement("Input_To_option");
+		waitForElementClickable("Input_CC");
+		clickElement("Input_CC");
+		type("Input_CC", config.getProperty("Cc_Mail"));
+		waitForElementClickable("Input_To_option");
+		clickElement("Input_To_option");
+		clickElement("Subject_CC");
+		type("Subject_CC", config.getProperty("Subject_mail"));
+		clickElement("Mail_body");
+		type("Mail_body", config.getProperty("Mail_body"));
+		clickElement("Mail_Attachment");
+		Thread.sleep(3000);
+		Runtime.getRuntime().exec("D:\\AutoIt\\Upload.exe");
+		Thread.sleep(3000);
+		clickElement("Image_attachment");
+		Thread.sleep(3000);
+		Runtime.getRuntime().exec("D:\\AutoIt\\Image.exe");
+		Thread.sleep(3000);
+		clickElement("video_attachment");
+		Thread.sleep(3000);
+		Runtime.getRuntime().exec("D:\\AutoIt\\Video.exe");
+		Thread.sleep(3000);
+	}
+	public void Send_mail_cc() {
+		scrollToElement("Send_Button_CC");
+		clickElement("Send_Button_CC");
+		scrollToElement("Toast_Container");
+		clickElement("Toast_Container");
+	}
+
+	public void click_BusinessAdmin(){
+		scrollToElement("Business_Admin_Tab");
+		clickElement("Business_Admin_Tab");
+	}
+
+	public boolean verify_BusinessStatusDropdownIsDisplayed(){
+		return getElement("dropdown_FilterByBusinessStatus").isDisplayed();
+	}
+
+	public void click_BusinessStatusDropdown() throws InterruptedException {
+		waitForPageGetsLoad();
+		clickElementJs("dropdown_FilterByBusinessStatus");
+		//JavascriptExecutor jse= (JavascriptExecutor) driver;
+		//jse.executeScript("document.querySelector(\"div#mat-select-value-5\").click()");
+	}
+
+	public boolean verify_BusinessStatusDropdownList(){
+		ArrayList<String> actual= new ArrayList<>();
+		ArrayList<String> expected= new ArrayList<>();
+		expected.add(config.getProperty("businessStatus_Active"));
+		expected.add(config.getProperty("businessStatus_InActive"));
+		expected.add(config.getProperty("businessStatus_PendingActive"));
+		for(WebElement element: getElements("dropdownList_BusinessStatus")){
+			actual.add(element.getText());
+		}
+		return actual.equals(expected);
+	}
+
+	public void update_BusinessAdminStatusAsActive(){
+		waitUntilElementGetsDisplayed(("button_LendovativeBusinessTable_Edit1"));
+		clickElementJs("button_LendovativeBusinessTable_Edit1");
+		scrollToElement("dropdown_BusinessStatus");
+		selectDropdownByVisibleTxt("dropdown_BusinessStatus", config.getProperty("businessStatus_Active"));
+		waitUntilElementGetsDisplayed(("Save_Button"));
+		scrollToElement("Save_Button");
+		 WebElement savebutton = getElement("Save_Button");
+         JavascriptExecutor js = (JavascriptExecutor)driver;
+         js.executeScript("arguments[0].click();", savebutton);
+       //clickElement("Save_Button");
+		waitUntilElementGetsDisplayed(("toast_UserUpdatedSuccessfully"));
+		clickElement("toast_UserUpdatedSuccessfully");
+	}
+
+	public void update_BusinessAdminStatusAsInactive() throws InterruptedException {
+		waitUntilElementGetsDisplayed(("button_LendovativeBusinessTable_Edit2"));
+		clickElementJs("button_LendovativeBusinessTable_Edit2");
+		scrollToElement("dropdown_BusinessStatus");
+		selectDropdownByVisibleTxt("dropdown_BusinessStatus", config.getProperty("businessStatus_InActive"));
+		waitUntilElementGetsDisplayed(("Save_Button"));
+		waitForPageGetsLoad();
+		scrollToElement("Save_Button");
+		clickElementJs("Save_Button");
+		waitUntilElementGetsDisplayed(("toast_UserUpdatedSuccessfully"));
+		clickElement("toast_UserUpdatedSuccessfully");
+	}
+
+	public void update_BusinessAdminStatusAsPendingActive() throws InterruptedException {
+		waitUntilElementGetsDisplayed(("button_LendovativeBusinessTable_Edit3"));
+		clickElementJs("button_LendovativeBusinessTable_Edit3");
+		scrollToElement("dropdown_BusinessStatus");
+		selectDropdownByVisibleTxt("dropdown_BusinessStatus", config.getProperty("businessStatus_PendingActive"));
+		waitUntilElementGetsDisplayed(("Save_Button"));
+		waitForPageGetsLoad();
+		scrollToElement("Save_Button");
+		clickElementJs("Save_Button");
+		waitUntilElementGetsDisplayed(("toast_UserUpdatedSuccessfully"));
+		clickElement("toast_UserUpdatedSuccessfully");
+	}
+
+	public boolean getBusinessAdminStatus(String expected){
+		boolean flag= true;
+		JavascriptExecutor js= (JavascriptExecutor) driver;
+		selectDropdownByValue("rowsToDisplayDropdown", config.getProperty("rowsPerPage"));
+		String rowsCount= getElement("totalRowsCount").getText();
+		String[] splitTotalRowsCount= rowsCount.split(" ", 2);
+		int totalRows= Integer.parseInt(splitTotalRowsCount[0]);
+		//System.out.println("TotalRows: "+ totalRows);
+		int pageCount;
+		if(totalRows%10==0){
+			pageCount= totalRows/10;
+		}else{
+			pageCount= (totalRows/10)+1;
+		}
+		//System.out.println("pageCount: "+ pageCount);
+		for(int i=1; i<=pageCount; i++) {
+			int j=0;
+			if(i>1) {
+				js.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.page-count>ul>li:nth-of-type(5)>a")));
+			}
+			//js.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.page-count>ul>li:nth-of-type("+i+")>a")));
+			List<WebElement> elements= getElements("table_BusinessAdminStatus");
+			for(WebElement element: elements) {
+				j++;
+				js.executeScript("arguments[0].scrollIntoView();", element);
+				String businessStatus= element.getText();
+				//System.out.println(businessStatus);
+				if(!(businessStatus.equalsIgnoreCase(expected))) {
+					flag= false;
+					break;
+					//String num= String.valueOf(j);
+					//scrollToElement(("fi_Table"));
+					//js.executeScript("arguments[0].click();", getElement("fi_Table_Parametrized",num));
+					//js.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.table-responsive>table>tbody>tr:nth-of-type("+j+")>td:nth-of-type(9)>a>i")));
+				}
+			}
+			if(!flag){
+				break;
+			}
+
+		}
+		return flag;
+	}
+
+	public boolean verifyBusinessAdminStatusIsDisplayingAsActive(){
+
+		return getBusinessAdminStatus(config.getProperty("businessStatus_Active"));
+	}
+
+	public boolean verifyBusinessAdminStatusIsDisplayingAsPendingActive(){
+
+		return getBusinessAdminStatus(config.getProperty("businessStatus_PendingActive"));
+	}
+
+	public boolean verifyBusinessAdminStatusIsDisplayingAsInActive(){
+
+		return getBusinessAdminStatus(config.getProperty("businessStatus_InActive"));
+	}
+
+	public void setFilterAsActive(){
+
+		waitUntilElementGetsDisplayed(("button_LendovativeBusinessTable_Edit1"));
+		clickElementJs("dropdown_FilterByBusinessStatus");
+		clickElement("dropdown_BusinessStatusOptions", "1");
+	}
+
+	public void setFilterAsInActive(){
+
+		waitUntilElementGetsDisplayed(("button_LendovativeBusinessTable_Edit1"));
+		clickElementJs("dropdown_FilterByBusinessStatus");
+		clickElementJs("checkBox_SelectAll");
+		clickElementJs("checkBox_SelectAll");
+		clickElement("dropdown_BusinessStatusOptions", "2");
+	}
+
+	public void setFilterAsPendingActive(){
+
+		waitUntilElementGetsDisplayed(("button_LendovativeBusinessTable_Edit1"));
+		clickElementJs("dropdown_FilterByBusinessStatus");
+		clickElementJs("checkBox_SelectAll");
+		clickElementJs("checkBox_SelectAll");
+		clickElement("dropdown_BusinessStatusOptions", "3");
+	}
+
+	public void setFilterAsSelectAll(){
+		waitUntilElementGetsDisplayed(("button_LendovativeBusinessTable_Edit1"));
+		clickElementJs("dropdown_FilterByBusinessStatus");
+		clickElementJs("checkBox_SelectAll");
+	}
+
+	public boolean verifyBusinessAdminStatusWhenApplySelectAllFilter() throws InterruptedException{
+
+		boolean flag= true;
+		ArrayList<String>expected= new ArrayList<String>();
+		expected.add(config.getProperty("businessStatus_Active"));
+		expected.add(config.getProperty("businessStatus_InActive"));
+		expected.add(config.getProperty("businessStatus_PendingActive"));
+		JavascriptExecutor js= (JavascriptExecutor) driver;
+		selectDropdownByValue("rowsToDisplayDropdown", config.getProperty("rowsPerPage"));
+		String rowsCount= getElement("totalRowsCount").getText();
+		String[] splitTotalRowsCount= rowsCount.split(" ", 2);
+		int totalRows= Integer.parseInt(splitTotalRowsCount[0]);
+		//System.out.println("TotalRows: "+ totalRows);
+		int pageCount;
+		if(totalRows%10==0){
+			pageCount= totalRows/10;
+		}else{
+			pageCount= (totalRows/10)+1;
+		}
+		//System.out.println("pageCount: "+ pageCount);
+		for(int i=1; i<=pageCount; i++) {
+			int j=0;
+			if(i>1) {
+				//js.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.page-count>ul>li:nth-of-type(5)>a")));
+			}
+			//js.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.page-count>ul>li:nth-of-type("+i+")>a")));
+			List<WebElement> elements= getElements("table_BusinessAdminStatus");
+			for(WebElement element: elements) {
+				j++;
+				js.executeScript("arguments[0].scrollIntoView();", element);
+				String businessStatus= element.getText();
+				//System.out.println(businessStatus);
+				if(!(businessStatus.equalsIgnoreCase(expected.get(0))|| businessStatus.equalsIgnoreCase(expected.get(1))|| businessStatus.equalsIgnoreCase(expected.get(2)))) {
+					flag= false;
+					break;
+					//String num= String.valueOf(j);
+					//scrollToElement(("fi_Table"));
+					//js.executeScript("arguments[0].click();", getElement("fi_Table_Parametrized",num));
+					//js.executeScript("arguments[0].click();", driver.findElement(By.cssSelector("div.table-responsive>table>tbody>tr:nth-of-type("+j+")>td:nth-of-type(9)>a>i")));
+				}
+			}
+			if(!flag){
+				break;
+			}
+
+
+   }
+		return flag;
+	}
+		public void LV_Add_Business_FI_void_Information() throws InterruptedException {  
+        // LV Add Business(FI Information)
+        scrollToElement("Financial_Institution");
+        waitForElementClickable("Financial_Institution");
+        clickElement("Financial_Institution");
+        clickElement("Choose_FI_Field");
+        waitForPageGetsLoad2();
+        waitForElementClickable("Assigned_FI_Lender");
+        clickElement("Assigned_FI_Lender");
+        waitForElementClickable("Choose_Assigned_FI_Lender");
+        clickElement("Choose_Assigned_FI_Lender");
+       waitForElementClickable("FI_Lender_Assigned_Date");
+        waitForPageGetsLoad1();
+        WebElement filenderassigneddate = getElement("FI_Lender_Assigned_Date");
+        js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].value='2023-07-20';",filenderassigneddate);
+        waitForElementClickable("FI_Portfolio");
+        clickElement("FI_Portfolio");
+        clickElement("Choose_FI_Portfolio1");
+        waitForPageGetsLoad2();
+        clickElement("Line_Limit");
+        type("Line_Limit", config.getProperty("Line_Limit"));
+        clickElement("Funded_Balance");
+        type("Funded_Balance", config.getProperty("Funded_Balance"));
+        waitForElementClickable("Line_Begin_Date");
+        waitForPageGetsLoad2();
+        WebElement filinebegindate = getElement("Line_Begin_Date");
+        js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].value='2023-10-15';",filinebegindate);
+       // type("Line_Begin_Date", config.getProperty("Line_Begin_Date"));
+        waitForElementClickable("Line_Maturity_Date");
+        WebElement linematuritydate = getElement("Line_Maturity_Date");
+        js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].value='2023-07-15';",linematuritydate);
+        //type("Line_Maturity_Date", config.getProperty("Line_Maturity_Date"));
+        clickElement("Commercial_Loan_Number");
+        type("Commercial_Loan_Number", config.getProperty("Commercial_Loan_Number"));
+        clickElement("Note_Number");
+        type("Note_Number", config.getProperty("Note_Number"));
+        scrollToElement("AR_Aging_Date");
+        waitForElementClickable("AR_Aging_Date");
+        WebElement lineagingdate= getElement("AR_Aging_Date");
+        js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].value='2023-07-15';",lineagingdate);
+
+
+        // LV Add Business(Service Level)&(Other details)
+        waitForPageGetsLoad2();
+        scrollToElement("Service_Level");
+        waitForElementClickable("Service_Level");
+        clickElement("Service_Level");
+        clickElement("Choose_Sevice_Level");
+        waitForElementClickable("Business_Fee");
+        clickElement("Business_Fee");
+        type("Business_Fee", config.getProperty("Business_Fee"));
+        waitForElementClickable("Fee_Start_Date");
+        clickElement("Fee_Start_Date");
+        type("Fee_Start_Date", config.getProperty("Fee_Start_Date"));
+        clickElement("Fee_End_Date");
+        type("Fee_End_Date", config.getProperty("Fee_End_Date"));
+        waitForPageGetsLoad2();
+        scrollToElement("Business_Status");
+        waitForElementClickable("Business_Status");
+        clickElement("Business_Status");
+        clickElement("Choose_Business_Status");
+        waitForPageGetsLoad2();
+        scrollToElement("Argos_Risk_Details");
+        clickElement("Argos_Risk_Details");
+        clickElement("Choose_Argos_Risk_Details");
+        scrollToElement("Save_Business_Admin");
+        waitForElementClickable("Save_Business_Admin");
+        //clickElement("Save_Business_Admin");
+
+		}
+
       
-      
-      public void LV_Business_Add_New_User() throws InterruptedException {  
-          clickElement("Sidebar_Icon");
-          scrollToElement("Business_Admin_Menu");
-          waitForElementClickable("Business_Admin_Menu");
-          clickElement("Business_Admin_Menu");
-          clickElement("Sidebar_Icon");
-          waitForPageGetsLoad2();
-          scrollToElement("Edit_Button");
-          clickElement("Edit_Button");
-          scrollToElement("homePage_Title");
-          //clickElement("homePage_Title");
-          scrollToElement("Business_Add_User_Tab");
-          waitForElementClickable("Business_Add_User_Tab");
-          
-//          clickElement("Business_Add_User_Tab"); 
-          
-          WebElement businessAddUserTab = getElement("Business_Add_User_Tab");
-          JavascriptExecutor js = (JavascriptExecutor)driver; 
-          js.executeScript("arguments[0].click();", businessAddUserTab);
-          clickElement("Business_First_Name");
-          type("Business_First_Name", config.getProperty("Business_First_Name"));
-          clickElement("Business_Last_Name");
-          type("Business_Last_Name", config.getProperty("Business_Last_Name"));
-          waitForElementClickable("Business_Contact_Name");
-          clickElement("Business_Contact_Name");
-          type("Business_Contact_Name", config.getProperty("Business_Contact_Name"));
-          waitForElementClickable("Country_code");
-          clickElement("Country_code");
-          clickElement("Choose_Country_code");
-          waitForElementClickable("Business_Contact_Number");
-          clickElement("Business_Contact_Number");
-          type("Business_Contact_Number", config.getProperty("Business_Contact_Number")); 
-          clickElement("Business_Email_Address");
-          type("Business_Email_Address", config.getProperty("Business_Email_Address"));
-          waitForElementClickable("Business_Contact_Title");
-          clickElement("Business_Contact_Title");
-          type("Business_Contact_Title", config.getProperty("Business_Contact_Title")); 
-          clickElement("Business_Choose_Security_Role");
-          clickElement("Choose_Business_Choose_Security_Role");
-          waitForElementClickable("Business_Primary_Admin");
-          clickElement("Business_Primary_Admin");
-          clickElement("Choose_Business_Primary_Admin");
-          waitForElementClickable("Business_User_Status");
-          clickElement("Business_User_Status");
-          clickElement("Choose_Business_User_Status");
-          
-      }  
-      public void Edit_Business_Details() throws InterruptedException {  
+
+	
+      public void Edit_Business_Details() throws InterruptedException {
           clickElement("Sidebar_Icon");
           scrollToElement("Business_Admin_Menu");
             waitForElementClickable("Business_Admin_Menu");
           clickElement("Business_Admin_Menu");
           clickElement("Sidebar_Icon");
           waitForPageGetsLoad2();
-          scrollToElement("Edit_Button");
-          clickElement("Edit_Button10");
-          type("Edit_Business_Name", config.getProperty("Edit_Business_Name"));
+          scrollToElement("Edit_Button10");
+          waitForElementClickable("Edit_Button10");
+          WebElement editsavebutton = getElement("Edit_Button10");
+          JavascriptExecutor js1 = (JavascriptExecutor)driver;
+          js1.executeScript("arguments[0].click();", editsavebutton);
+          // type("Edit_Business_Name", config.getProperty("Edit_Business_Name"));
+          scrollToElement("Edit_Business_Phone");
+          WebElement EditBusinessPhone = getElement("Edit_Business_Phone");
+          JavascriptExecutor js3 = (JavascriptExecutor)driver;
+          js3.executeScript("arguments[0].click();", EditBusinessPhone);
+          clickElement("Edit_Business_Phone");
           type("Edit_Business_Phone", config.getProperty("Edit_Business_Phone"));
           type("Edit_Business_Email", config.getProperty("Edit_Business_Email"));
           type("Edit_Business_Address_Line1", config.getProperty("Edit_Business_Address_Line1"));
@@ -1664,28 +2375,25 @@ public void click_Open_credits_field() throws InterruptedException {
           type("Edit_Business_State", config.getProperty("Edit_Business_State"));
           type("Edit_Zipcode", config.getProperty("Edit_Zipcode"));
           type("Edit_NAICS_Industry_Code", config.getProperty("Edit_NAICS_Industry_Code"));
-          
-          // LV Add Business(FI Information) 
+
+          // LV Add Business(FI Information)
           scrollToElement("Financial_Institution");
-          waitForElementClickable("Financial_Institution");
           clickElement("Financial_Institution");
-          clickElement("Edit_Choose_Assigned_FI_Lender");
+          clickElement("Choose_FI_Field");
           waitForPageGetsLoad2();
           waitForElementClickable("Edit_FI_Lender_Assigned_Date");
           clickElement("Assigned_FI_Lender");
-          waitForElementClickable("Edit_Choose_Assigned_FI_Lender");
-          clickElement("Edit_Choose_Assigned_FI_Lender");
-         waitForElementClickable("Edit_FI_Lender_Assigned_Date");
-          waitForPageGetsLoad2();
-          clickElement("Edit_FI_Lender_Assigned_Date");
+          waitForElementClickable("Edit_Choose_Assigned_FI_Lender_SK");
+          clickElement("Edit_Choose_Assigned_FI_Lender_SK");
+          //clickElement("Edit_FI_Lender_Assigned_Date");
           waitForPageGetsLoad2();
           //type("FI_Lender_Assigned_Date", config.getProperty("FI_Lender_Assigned_Date"));
-          WebElement editfilenderassigneddate = driver.findElement(By.id("Edit_FI_Lender_Assigned_Date"));
-
-          js.executeScript("arguments[0].value='02-6-2023';", editfilenderassigneddate);
-          waitForElementClickable("FI_Portfolio");
+          WebElement editfilenderassigneddate = getElement("Edit_FI_Lender_Assigned_Date");
+          js = (JavascriptExecutor)driver;
+          js.executeScript("arguments[0].value='2023-11-15';",editfilenderassigneddate);
+           waitForElementClickable("FI_Portfolio");
           clickElement("FI_Portfolio");
-          clickElement("Choose_FI_Portfolio");
+          clickElement("Choose_FI_Portfolio1");
           waitForPageGetsLoad2();
           clickElement("Edit_Line_Limit");
           type("Edit_Line_Limit", config.getProperty("Edit_Line_Limit"));
@@ -1696,7 +2404,7 @@ public void click_Open_credits_field() throws InterruptedException {
           waitForPageGetsLoad2();
           type("Edit_Line_Begin_Date", config.getProperty("Edit_Line_Begin_Date"));
           waitForElementClickable("Edit_Line_Maturity_Date");
-          clickElement("Edit_Line_Maturity_Date");  
+          clickElement("Edit_Line_Maturity_Date");
           type("Edit_Line_Maturity_Date", config.getProperty("Edit_Line_Maturity_Date"));
           clickElement("Edit_Commercial_Loan_Number");
           type("Edit_Commercial_Loan_Number", config.getProperty("Edit_Commercial_Loan_Number"));
@@ -1706,8 +2414,8 @@ public void click_Open_credits_field() throws InterruptedException {
           waitForElementClickable("Edit_AR_Aging_Date");
           clickElement("Edit_AR_Aging_Date");
           type("Edit_AR_Aging_Date", config.getProperty("Edit_AR_Aging_Date"));
-          
-          
+
+
           // LV Add Business(Service Level)&(Other details)
           waitForPageGetsLoad2();
           scrollToElement("Service_Level");
@@ -1723,106 +2431,116 @@ public void click_Open_credits_field() throws InterruptedException {
           clickElement("Fee_End_Date");
           type("Fee_End_Date", config.getProperty("Fee_End_Date"));
           scrollToElement("Business_Status");
-          clickElement("Business_Status");
+          WebElement Businesstatus = getElement("Business_Status");
+          JavascriptExecutor js = (JavascriptExecutor)driver;
+          js.executeScript("arguments[0].click();", Businesstatus);
+        //  //clickElement("Business_Status");
           clickElement("Choose_Business_Status");
           scrollToElement("Argos_Risk_Details");
+          
           clickElement("Argos_Risk_Details");
           clickElement("Choose_Argos_Risk_Details");
-          
+          scrollToElement("lsSaveButton");
+          WebElement editbutton = getElement("lsSaveButton");
+          JavascriptExecutor js2 = (JavascriptExecutor)driver;
+          js2.executeScript("arguments[0].click();", editbutton);
+          clickElement("Successful_popup");
  }
-      
-      public void LV_Business_Status_Dropdown() throws InterruptedException {  
+      public void LV_Business_Status_Dropdown() throws InterruptedException {
     	  clickElement("Sidebar_Icon");
           scrollToElement("Business_Admin_Menu");
-            waitForElementClickable("Business_Admin_Menu");
-          clickElement("Business_Admin_Menu");
+           clickElement("Business_Admin_Menu");
           clickElement("Sidebar_Icon");
           waitForPageGetsLoad2();
           clickElement("Business_Status_Dropdown");
           scrollToElement("Active_Dropdown");
           clickElement("Active_Dropdown");
-          clickElement("Close_Dropdown_header");
-          clickElement("Business_Status_Dropdown");
-          clickElement("Inactive_Dropdown");
-          clickElement("Close_Dropdown_header");
-          clickElement("Business_Status_Dropdown");
-          clickElement("Pending_Active_Dropdown");
-          clickElement("Close_Dropdown_header");
-          clickElement("Business_Status_Dropdown");
-          clickElement("SelectAll_Dropdown");
-          clickElement("Close_Dropdown_header");
- }     
-          
-          public void Edit_Save_LV_Account_Debtor_Admin() throws InterruptedException {  
-        	  clickElement("Sidebar_Icon");
-              scrollToElement("Account_Debtor_Admin_Menu");
-              waitForPageGetsLoad2();
-               clickElement("Account_Debtor_Admin_Menu");
-              clickElement("Sidebar_Icon");
-              waitForPageGetsLoad2();
-              waitForElementClickable("AD_Down_Arrow");
-              clickElement("AD_Down_Arrow");
-              waitForPageGetsLoad2();
-              scrollToElement("Edit_AD_Button");
-              waitForElementClickable("Edit_AD_Button");
-            clickElement("Edit_AD_Button");
-            waitForPageGetsLoad2();
-            waitForElementClickable("Account_Debtor_Name");
-            clickElement("Account_Debtor_Name");
-            type("Account_Debtor_Name", config.getProperty("Account_Debtor_Name"));
-            waitForElementClickable("Account_Number");
-            clickElement("Account_Number");
-            type("Account_Number", config.getProperty("Account_Number")); 
-            waitForElementClickable("Contact_Name");
-            clickElement("Contact_Name");
-            type("Contact_Name", config.getProperty("Contact_Name")); 
-            waitForElementClickable("Phone_Number");
-            clickElement("Phone_Number");
-            type("Phone_Number", config.getProperty("Phone_Number")); 
-            waitForElementClickable("Email");
-            clickElement("Email");
-            type("Email", config.getProperty("Email")); 
-            waitForElementClickable("Address_Line1");
-            clickElement("Address_Line1");
-            type("Address_Line1", config.getProperty("Address_Line1"));  
-            waitForElementClickable("Address_Line2");
-            clickElement("Address_Line2");
-            type("Address_Line2", config.getProperty("Address_Line2"));  
-            waitForElementClickable("City");
-            clickElement("City");
-            type("City", config.getProperty("City"));  
-            waitForElementClickable("State");
-            clickElement("State");
-            type("State", config.getProperty("State"));  
-            waitForElementClickable("Zip_Code");
-            clickElement("Zip_Code");
-            type("Zip_Code", config.getProperty("Zip_Code"));
-            waitForElementClickable("Unique_ID");
-            clickElement("Unique_ID");
-            type("Unique_ID", config.getProperty("Unique_ID"));
-            clickElement("Status_Dropdown");
-            clickElement("Choose_Active_Status");
-            
-            waitForElementClickable("Company_ID");
-            clickElement("Company_ID");
-            type("Company_ID", config.getProperty("Company_ID"));
-            
-            waitForElementClickable("Insured_Limit");
-            clickElement("Insured_Limit");
-            type("Insured_Limit", config.getProperty("Insured_Limit"));
-            
-            WebElement expirationdate = getElement("Expiration_Date");
-            js = (JavascriptExecutor)driver; 
-            js.executeScript("arguments[0].value='2023-11-15';",expirationdate);
-            scrollToElement("Save_Button");
-            waitForElementClickable("Save_Button");
-            clickElement("Save_Button");
-         
+         clickElement("Inactive_Dropdown");
+         clickElement("Pending_Active_Dropdown");
+         clickElement("SelectAll_Dropdown");
+         WebElement closeheader = getElement("Close_Dropdown_header");
+         JavascriptExecutor js = (JavascriptExecutor)driver;
+         js.executeScript("arguments[0].click();", closeheader);
+        
+ }
 
-            
-}   
-          
-          public void Edit_Cancel_LV_Account_Debtor_Admin() throws InterruptedException {  
+          public void Edit_Save_LV_Account_Debtor_Admin() throws InterruptedException {
+        	  clickElement("Sidebar_Icon");
+              scrollToElement("Account_Debtor_Admin_Menu");
+              waitForPageGetsLoad2();
+               clickElement("Account_Debtor_Admin_Menu");
+              clickElement("Sidebar_Icon");
+              waitForPageGetsLoad2();
+              waitForElementClickable("AD_Down_Arrow");
+              clickElement("AD_Down_Arrow");
+              waitForPageGetsLoad2();
+              scrollToElement("Edit_AD_Button");
+              waitForElementClickable("Edit_AD_Button");
+            //clickElement("Edit_AD_Button");
+              WebElement editadbutton = getElement("Edit_AD_Button");
+              JavascriptExecutor js = (JavascriptExecutor)driver;
+              js.executeScript("arguments[0].click();", editadbutton);
+              waitForPageGetsLoad2();
+            waitForElementClickable("Account_Debtor_Name");
+            clickElement("Account_Debtor_Name");
+            type("Account_Debtor_Name", config.getProperty("Account_Debtor_Name"));
+            waitForElementClickable("Account_Number");
+            clickElement("Account_Number");
+            type("Account_Number", config.getProperty("Account_Number"));
+            waitForElementClickable("Contact_Name");
+            clickElement("Contact_Name");
+            type("Contact_Name", config.getProperty("Contact_Name"));
+            waitForElementClickable("Phone_Number");
+            clickElement("Phone_Number");
+            type("Phone_Number", config.getProperty("Phone_Number"));
+            waitForElementClickable("Email");
+            clickElement("Email");
+            type("Email", config.getProperty("Email"));
+            waitForElementClickable("Address_Line1");
+            clickElement("Address_Line1");
+            type("Address_Line1", config.getProperty("Address_Line1"));
+            waitForElementClickable("Address_Line2");
+            clickElement("Address_Line2");
+            type("Address_Line2", config.getProperty("Address_Line2"));
+            waitForElementClickable("City");
+            clickElement("City");
+            type("City", config.getProperty("City"));
+            waitForElementClickable("State");
+            clickElement("State");
+            type("State", config.getProperty("State"));
+            waitForElementClickable("Zip_Code");
+            clickElement("Zip_Code");
+            type("Zip_Code", config.getProperty("Zip_Code"));
+            waitForElementClickable("Unique_ID");
+            clickElement("Unique_ID");
+            type("Unique_ID", config.getProperty("Unique_ID"));
+            clickElement("Status_Dropdown");
+            clickElement("Choose_Active_Status");
+
+            waitForElementClickable("Company_ID");
+            clickElement("Company_ID");
+            type("Company_ID", config.getProperty("Company_ID"));
+            scrollToElement("Insured_Limit");
+            waitForElementClickable("Insured_Limit");
+            WebElement InsuredLimit = getElement("Insured_Limit");
+            JavascriptExecutor js1 = (JavascriptExecutor)driver;
+            js1.executeScript("arguments[0].click();", InsuredLimit);
+            //clickElement("Insured_Limit");
+            type("Insured_Limit", config.getProperty("Insured_Limit"));
+
+            WebElement expirationdate = getElement("Expiration_Date");
+            js = (JavascriptExecutor)driver;
+            js.executeScript("arguments[0].value='2023-11-15';",expirationdate);
+            scrollToElement("Edit_AD_Save_Button");
+            WebElement SaveButton = getElement("Edit_AD_Save_Button");
+            JavascriptExecutor js2 = (JavascriptExecutor)driver;
+            js2.executeScript("arguments[0].click();", SaveButton);
+            clickElement("Successful_popup");
+
+
+}
+
+          public void Edit_Cancel_LV_Account_Debtor_Admin() throws InterruptedException {
         	  clickElement("Sidebar_Icon");
               scrollToElement("Account_Debtor_Admin_Menu");
               waitForPageGetsLoad2();
@@ -1841,28 +2559,28 @@ public void click_Open_credits_field() throws InterruptedException {
             type("Account_Debtor_Name", config.getProperty("Account_Debtor_Name"));
             waitForElementClickable("Account_Number");
             clickElement("Account_Number");
-            type("Account_Number", config.getProperty("Account_Number")); 
+            type("Account_Number", config.getProperty("Account_Number"));
             waitForElementClickable("Contact_Name");
             clickElement("Contact_Name");
-            type("Contact_Name", config.getProperty("Contact_Name")); 
+            type("Contact_Name", config.getProperty("Contact_Name"));
             waitForElementClickable("Phone_Number");
             clickElement("Phone_Number");
-            type("Phone_Number", config.getProperty("Phone_Number")); 
+            type("Phone_Number", config.getProperty("Phone_Number"));
             waitForElementClickable("Email");
             clickElement("Email");
-            type("Email", config.getProperty("Email")); 
+            type("Email", config.getProperty("Email"));
             waitForElementClickable("Address_Line1");
             clickElement("Address_Line1");
-            type("Address_Line1", config.getProperty("Address_Line1"));  
+            type("Address_Line1", config.getProperty("Address_Line1"));
             waitForElementClickable("Address_Line2");
             clickElement("Address_Line2");
-            type("Address_Line2", config.getProperty("Address_Line2"));  
+            type("Address_Line2", config.getProperty("Address_Line2"));
             waitForElementClickable("City");
             clickElement("City");
-            type("City", config.getProperty("City"));  
+            type("City", config.getProperty("City"));
             waitForElementClickable("State");
             clickElement("State");
-            type("State", config.getProperty("State"));  
+            type("State", config.getProperty("State"));
             waitForElementClickable("Zip_Code");
             clickElement("Zip_Code");
             type("Zip_Code", config.getProperty("Zip_Code"));
@@ -1871,28 +2589,31 @@ public void click_Open_credits_field() throws InterruptedException {
             type("Unique_ID", config.getProperty("Unique_ID"));
             clickElement("Status_Dropdown");
             clickElement("Choose_Active_Status");
-            
+
             waitForElementClickable("Company_ID");
             clickElement("Company_ID");
             type("Company_ID", config.getProperty("Company_ID"));
-            
+
             waitForElementClickable("Insured_Limit");
             clickElement("Insured_Limit");
             type("Insured_Limit", config.getProperty("Insured_Limit"));
-            
+
             WebElement expirationdate = getElement("Expiration_Date");
-            js = (JavascriptExecutor)driver; 
+            js = (JavascriptExecutor)driver;
             js.executeScript("arguments[0].value='2023-11-15';",expirationdate);
             scrollToElement("Cancel_Button");
             waitForElementClickable("Cancel_Button");
             clickElement("Cancel_Button");
           }
-          
-          public void User_Add_New_FI_Notes() throws InterruptedException {  
+
+          public void User_Add_New_FI_Notes1() throws InterruptedException {
         	  clickElement("Sidebar_Icon");
               scrollToElement("Communication_Center");
               waitForPageGetsLoad2();
-               clickElement("Communication_Center");
+              WebElement communicationcenter = getElement("Communication_Center");
+              JavascriptExecutor js = (JavascriptExecutor)driver;
+              js.executeScript("arguments[0].click();", communicationcenter);
+               //clickElement("Communication_Center");
               clickElement("Sidebar_Icon");
               waitForPageGetsLoad2();
               scrollToElement("Add_FI_Note_Tab");
@@ -1906,12 +2627,150 @@ public void click_Open_credits_field() throws InterruptedException {
               scrollToElement("Add_Notes");
               waitForElementClickable("Add_Notes");
               clickElement("Add_Notes");
-              type("Add_Notes", config.getProperty("Add_Notes")); 
+              type("Add_Notes", config.getProperty("Add_Notes"));
               scrollToElement("Add_Button");
               waitForElementClickable("Add_Button");
-              clickElement("Add_Button");
-              
-              
-              
-   }
-}       	
+              WebElement addbutton = getElement("Add_Button");
+              JavascriptExecutor js1 = (JavascriptExecutor)driver;
+              js1.executeScript("arguments[0].click();", addbutton);
+              //clickElement("Add_Button");
+              clickElement("Successful_popup");
+
+}
+	
+	public void Edit_Cancel_LV_Account_Debtor_Admin1() throws InterruptedException {
+		// TODO Auto-generated method stub
+		clickElement("Sidebar_Icon");
+        scrollToElement("Account_Debtor_Admin_Menu");
+        waitForPageGetsLoad2();
+         clickElement("Account_Debtor_Admin_Menu");
+        clickElement("Sidebar_Icon");
+        waitForPageGetsLoad2();
+        waitForElementClickable("AD_Down_Arrow");
+        clickElement("AD_Down_Arrow");
+        waitForPageGetsLoad2();
+        scrollToElement("Active_text_scroll_purpose");
+         //scrollToElement("button_text_scroll_purpose");
+        scrollToElement("Edit_AD_Button");
+        WebElement editADbutton = getElement("Edit_AD_Button");
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].click();", editADbutton);
+     // clickElement("Edit_AD_Button");
+      waitForPageGetsLoad2();
+      //waitForElementClickable("Account_Debtor_Name");
+      scrollToElement("Account_Debtor_Name");
+      clickElement("Account_Debtor_Name");
+      type("Account_Debtor_Name", config.getProperty("Account_Debtor_Name"));
+      waitForElementClickable("Account_Number");
+      clickElement("Account_Number");
+      type("Account_Number", config.getProperty("Account_Number"));
+      waitForElementClickable("Contact_Name");
+      clickElement("Contact_Name");
+      type("Contact_Name", config.getProperty("Contact_Name"));
+      waitForElementClickable("Phone_Number");
+      clickElement("Phone_Number");
+      type("Phone_Number", config.getProperty("Phone_Number"));
+      waitForElementClickable("Email");
+      clickElement("Email");
+      type("Email", config.getProperty("Email"));
+      waitForElementClickable("Address_Line1");
+      clickElement("Address_Line1");
+      type("Address_Line1", config.getProperty("Address_Line1"));
+      waitForElementClickable("Address_Line2");
+      clickElement("Address_Line2");
+      type("Address_Line2", config.getProperty("Address_Line2"));
+      waitForElementClickable("City");
+      clickElement("City");
+      type("City", config.getProperty("City"));
+      waitForElementClickable("State");
+      clickElement("State");
+      type("State", config.getProperty("State"));
+      waitForElementClickable("Zip_Code");
+      clickElement("Zip_Code");
+      type("Zip_Code", config.getProperty("Zip_Code"));
+      waitForElementClickable("Unique_ID");
+      clickElement("Unique_ID");
+      type("Unique_ID", config.getProperty("Unique_ID"));
+      clickElement("Status_Dropdown");
+      clickElement("Choose_Active_Status");
+
+      waitForElementClickable("Company_ID");
+      clickElement("Company_ID");
+      type("Company_ID", config.getProperty("Company_ID"));
+     scrollToElement("Insured_Limit");
+      clickElement("Insured_Limit");
+      type("Insured_Limit", config.getProperty("Insured_Limit"));
+
+      WebElement expirationdate = getElement("Expiration_Date");
+      js = (JavascriptExecutor)driver;
+      js.executeScript("arguments[0].value='2023-11-15';",expirationdate);
+      scrollToElement("Cancel_Button");
+      waitForElementClickable("Cancel_Button");
+      clickElement("Cancel_Button");
+	}
+
+	
+		
+		
+		
+	
+
+	public void LV_Business_Add_New_User_1() throws InterruptedException {
+		// TODO Auto-generated method stub
+		clickElement("Sidebar_Icon");
+        scrollToElement("Business_Admin_Menu");
+        waitForElementClickable("Business_Admin_Menu");
+        clickElement("Business_Admin_Menu");
+        clickElement("Sidebar_Icon");
+        waitForPageGetsLoad2();
+        scrollToElement("Edit_Button");
+        WebElement editbutton = getElement("Edit_Button");
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].click();", editbutton);
+      //  clickElement("Edit_Button");
+        scrollToElement("homePage_Title");
+        //clickElement("homePage_Title");
+        scrollToElement("Business_Add_User_Tab");
+        waitForElementClickable("Business_Add_User_Tab");
+
+//        clickElement("Business_Add_User_Tab");
+        waitForPageGetsLoad();
+
+        WebElement businessAddUserTab = getElement("Business_Add_User_Tab");
+        JavascriptExecutor js1 = (JavascriptExecutor)driver;
+        js1.executeScript("arguments[0].click();", businessAddUserTab);
+        clickElement("Business_First_Name");
+        type("Business_First_Name", config.getProperty("Business_First_Name"));
+        clickElement("Business_Last_Name");
+        type("Business_Last_Name", config.getProperty("Business_Last_Name"));
+        waitForElementClickable("Business_Contact_Name");
+        clickElement("Business_Contact_Name");
+        type("Business_Contact_Name", config.getProperty("Business_Contact_Name"));
+        waitForElementClickable("Country_code");
+        clickElement("Country_code");
+        clickElement("Choose_Country_code");
+        waitForElementClickable("Business_Contact_Number");
+        clickElement("Business_Contact_Number");
+        type("Business_Contact_Number", config.getProperty("Business_Contact_Number"));
+        clickElement("Business_Email_Address");
+        waitForPageGetsLoad2();
+        type("Business_Email_Address", config.getProperty("Business_Email_Address"));
+        waitForElementClickable("Business_Contact_Title");
+        clickElement("Business_Contact_Title");
+        type("Business_Contact_Title", config.getProperty("Business_Contact_Title"));
+        clickElement("Business_Choose_Security_Role");
+        clickElement("Choose_Business_Choose_Security_Role");
+       // waitForElementClickable("Business_Primary_Admin");
+        //clickElement("Business_Primary_Admin");
+        //clickElement("Choose_Business_Primary_Admin");
+        waitForElementClickable("Business_User_Status");
+        clickElement("Business_User_Status");
+        clickElement("Choose_Business_User_Status");
+        WebElement adduserbutton = getElement("Add_User_Save_Button");
+        JavascriptExecutor js11 = (JavascriptExecutor)driver;
+        js11.executeScript("arguments[0].click();", adduserbutton);
+        
+	}
+
+}
+

@@ -64,6 +64,17 @@ public class BaseClass extends WebDriverRoot {
 
 	}
 
+//	@AfterMethod
+//	public void tearDowns() {
+//	   Reporting.testReport.get().info(MarkupHelper.createLabel("Test ID: " + testname, ExtentColor.BLUE));
+//	}
+	
+	
+	
+	
+	
+	
+	
 	@AfterSuite
 	public void tearDown() {
 		Reporting.testReport.get().info(MarkupHelper.createLabel("Test ID: " + testname, ExtentColor.BLUE));
