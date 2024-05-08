@@ -713,6 +713,9 @@ public class WebDriverRoot {
 			Thread.sleep(7000);
 		}
 
+	  public void waitForPageGetsLoad3() throws InterruptedException {
+			Thread.sleep(20000);
+		}
 		public static void clickElementJs(String locator) {
 		try {
 			JavascriptExecutor jse= (JavascriptExecutor) driver;
